@@ -21,6 +21,10 @@ body{background:#060608;color:var(--text);font:15px/1.4 -apple-system,"Segoe UI"
 .note h1{font-size:20px;color:var(--text);margin:0 0 10px}
 .phone{width:390px;height:820px;max-height:calc(100vh - 48px);background:var(--bg);border-radius:44px;
   border:10px solid #1d1d22;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;display:flex;flex-direction:column}
+body.inmax{padding:0;display:block;background:var(--bg)}
+body.inmax .note{display:none}
+body.inmax .phone{width:100%;height:100vh;max-height:none;border:0;border-radius:0;box-shadow:none}
+body.inmax .maxbar{display:none}
 @media (max-width:760px){
   body{padding:0;display:block;background:var(--bg)}
   .note{display:none}
@@ -157,6 +161,7 @@ label.inp input{display:block;width:100%;margin-top:6px;padding:12px;border-radi
   <div class="toast" id="toast"></div>
 </div>
 
+<script src="https://st.max.ru/js/max-web-app.js"></script>
 <script>
 const LEVELS = {
   top:    {name:'топ-барбер',     k:1.4,  cls:'top',    icon:'👑'},
@@ -244,8 +249,17 @@ function go(name, push = true){
   setBottom(null);
   SCREENS[name]();
   app.scrollTop = 0;
+  syncBack();
 }
-$('#back').onclick = () => { hist.pop(); go(hist[hist.length-1], false); };
+const goBack = () => { if (hist.length > 1){ hist.pop(); go(hist[hist.length-1], false); } };
+$('#back').onclick = goBack;
+
+// Внутри настоящего MAX: без нарисованного чата и рамки телефона, «Назад» — системная кнопка MAX
+const MAX = window.WebApp && window.WebApp.initData ? window.WebApp : null;
+function syncBack(){
+  if (!MAX || !MAX.BackButton) return;
+  $('#back').hidden ? MAX.BackButton.hide() : MAX.BackButton.show();
+}
 
 $('#open').onclick = () => {
   $('#chat').hidden = true; app.hidden = false;
@@ -372,7 +386,7 @@ const SCREENS = {
         <div class="line"><span>Длительность</span><b>≈ ${s.min} мин</b></div>
         <div class="line"><span>Цена</span><b class="price">${price(s,m)} ₽</b></div>
       </div>
-      <label class="inp">Как к вам обращаться<input id="nm" placeholder="Имя" autocomplete="off"></label>
+      <label class="inp">Как к вам обращаться<input id="nm" placeholder="Имя" autocomplete="off" value="${(MAX && MAX.initDataUnsafe && MAX.initDataUnsafe.user && MAX.initDataUnsafe.user.first_name) || ''}"></label>
       <label class="inp">Телефон<input id="ph" placeholder="+7" inputmode="tel" autocomplete="off"></label>
       <label class="check"><input type="checkbox" id="rem" checked> Напомнить за день и за 2 часа</label>
       <p class="demo">В настоящем приложении имя и телефон MAX подставит сам — с разрешения клиента.</p>
@@ -403,6 +417,14 @@ const SCREENS = {
     app.querySelectorAll('[data-mv]').forEach(b => b.onclick = () => { const x = bookings.splice(+b.dataset.mv,1)[0]; st = {service:x.service, master:x.master}; go('time'); });
   },
 };
+
+// Запуск внутри MAX — после того как все экраны объявлены
+if (MAX){
+  document.body.classList.add('inmax');
+  if (MAX.BackButton) MAX.BackButton.onClick(goBack);
+  $('#chat').hidden = true; app.hidden = false; $('#sub').textContent = 'онлайн-запись';
+  hist = []; go('home');
+}
 </script>
 </body>
 </html>
