@@ -77,6 +77,15 @@ h2{font-size:18px;margin:18px 0 10px}
 .row .info b{display:block;font-size:15px}
 .row .info span{font-size:12px;color:var(--muted)}
 .price{font-weight:700;white-space:nowrap;color:var(--gold2)}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer}
+.pcard .pic{aspect-ratio:16/10;background-size:cover;background-position:center;position:relative}
+.pcard .pic.none{display:grid;place-items:center;font-size:40px}
+.pcard .pic.none span{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
+.pcard .cred{position:absolute;right:6px;bottom:6px;font-size:9px;color:#fff;background:rgba(0,0,0,.55);padding:2px 6px;border-radius:6px}
+.pcard .body{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.pcard .body .info{flex:1;min-width:0}
+.pcard .body b{display:block;font-size:16px}
+.pcard .body span{font-size:12px;color:var(--muted)}
 .row.sel{border-color:var(--gold)}
 .days{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
 .days::-webkit-scrollbar{display:none}
@@ -281,7 +290,9 @@ const SCREENS = {
     const list = SERVICES.filter(s => s.cat === st.cat);
     app.innerHTML = `<div class="screen"><h2>${cat.icon} ${cat.name}</h2><div class="list">${list.map(s=>{
       const pr = m ? `${price(s,m)} ₽` : `${price(s,{lvl:'junior'})}–${price(s,{lvl:'top'})} ₽`;
-      return `<div class="row" data-s="${s.id}"><div class="ph" style="background:${cat.bg}">${cat.icon}</div><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин${m?' · у '+m.name:' · цена зависит от мастера'}</span></div><div class="price">${pr}</div></div>`;
+      const pic = s.img ? `<div class="pic" style="background-image:url('${s.img}')"><div class="cred">${s.cred}</div></div>`
+                        : `<div class="pic none" style="background:${cat.bg}">${cat.icon}<span>здесь будет фото работы</span></div>`;
+      return `<div class="pcard" data-s="${s.id}">${pic}<div class="body"><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин${m?' · у '+m.name:' · цена зависит от мастера'}</span></div><div class="price">${pr}</div></div></div>`;
     }).join('')}</div></div>`;
     app.querySelectorAll('[data-s]').forEach(b => b.onclick = () => { st.service = b.dataset.s; go(st.master ? 'time' : 'pickMaster'); });
   },
