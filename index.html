@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Барбершоп — демо мини-приложения</title>
+<style>
+:root{
+  --bg:#0f0f12; --card:#1a1a20; --card2:#22222a; --line:#2c2c36;
+  --text:#f2f0ea; --muted:#9b98a6; --gold:#d9a650; --gold2:#f0c878;
+  --ok:#4cc38a; --danger:#e5646a; --max:#7b5cff;
+  --r:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:#060608;color:var(--text);font:15px/1.4 -apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:40px;padding:24px}
+.note{max-width:300px;color:var(--muted);font-size:14px}
+.note b{color:var(--text)}
+.note h1{font-size:20px;color:var(--text);margin:0 0 10px}
+.phone{width:390px;height:820px;max-height:calc(100vh - 48px);background:var(--bg);border-radius:44px;
+  border:10px solid #1d1d22;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;display:flex;flex-direction:column}
+@media (max-width:760px){
+  body{padding:0;display:block;background:var(--bg)}
+  .note{display:none}
+  .phone{width:100%;height:100vh;max-height:none;border:0;border-radius:0;box-shadow:none}
+}
+/* верхняя полоса MAX */
+.maxbar{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;background:#141418;border-bottom:1px solid var(--line);flex:none}
+.maxbar .back{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--text);background:transparent;border:0;font-size:20px;cursor:pointer}
+.maxbar .back[hidden]{visibility:hidden;display:grid}
+.maxbar .ttl{flex:1;min-width:0}
+.maxbar .ttl b{display:block;font-size:15px}
+.maxbar .ttl span{font-size:12px;color:var(--muted)}
+.maxbar .close{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:none;cursor:pointer}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#8a5a1c);display:grid;place-items:center;font-weight:800;color:#1a1206}
+/* чат */
+.chat[hidden],.app[hidden],.bottom[hidden]{display:none!important}
+.chat{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0c0c10}
+.msg{max-width:85%;background:var(--card2);border-radius:16px 16px 16px 4px;padding:10px 12px}
+.msg small{display:block;color:var(--muted);font-size:11px;margin-top:4px;text-align:right}
+.openbtn{margin-top:8px;width:100%;padding:11px;border-radius:12px;border:0;background:var(--max);color:#fff;font-weight:600;font-size:15px;cursor:pointer}
+/* приложение */
+.app{flex:1;overflow:auto;padding:0 16px 110px;scroll-behavior:smooth}
+.screen{animation:in .22s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:18px;margin:18px 0 10px}
+.hero{margin-top:14px;border-radius:var(--r);padding:16px;background:linear-gradient(135deg,#2a2016,#16131a);border:1px solid #3a2e1e}
+.hero b{font-size:20px;display:block}
+.hero span{color:var(--muted);font-size:13px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.qbtn{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:left;color:var(--text);cursor:pointer;font-size:14px}
+.qbtn i{font-style:normal;font-size:20px;display:block;margin-bottom:4px}
+.qbtn.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--gold),#a8732a);color:#1a1206;border:0;font-weight:700}
+.hscroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.mcard{flex:none;width:118px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;cursor:pointer;text-align:center}
+.ava{width:72px;height:72px;border-radius:50%;margin:2px auto 8px;display:grid;place-items:center;font-size:24px;font-weight:800;color:#fff;position:relative}
+.ava.sm{width:52px;height:52px;font-size:18px;margin:0}
+.mcard b{display:block;font-size:14px}
+.lvl{display:inline-block;font-size:11px;border-radius:999px;padding:2px 8px;margin-top:3px}
+.lvl.top{background:#3b2c12;color:var(--gold2)}
+.lvl.senior{background:#2b2440;color:#c4b5ff}
+.lvl.mid{background:#1d2c38;color:#8fd0ff}
+.lvl.junior{background:#1c3226;color:#8fe0b2}
+.rate{font-size:12px;color:var(--muted);margin-top:4px}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center}
+.cat .ph{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:20px;flex:none}
+.cat b{font-size:14px;display:block}
+.cat span{font-size:12px;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:10px}
+.row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center;cursor:pointer}
+.row .ph{width:56px;height:56px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:24px}
+.row .info{flex:1;min-width:0}
+.row .info b{display:block;font-size:15px}
+.row .info span{font-size:12px;color:var(--muted)}
+.price{font-weight:700;white-space:nowrap;color:var(--gold2)}
+.row.sel{border-color:var(--gold)}
+.days{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day{flex:none;width:54px;border-radius:14px;background:var(--card);border:1px solid var(--line);padding:8px 0;text-align:center;cursor:pointer}
+.day small{display:block;font-size:11px;color:var(--muted)}
+.day b{font-size:17px}
+.day.on{background:var(--gold);color:#1a1206;border-color:var(--gold)}
+.day.on small{color:#3b2a10}
+.day.off{opacity:.35;cursor:default}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.slot{padding:10px 0;border-radius:12px;background:var(--card);border:1px solid var(--line);text-align:center;cursor:pointer;font-weight:600;font-size:14px;color:var(--text)}
+.slot.on{background:var(--gold);color:#1a1206;border-color:var(--gold)}
+.empty{color:var(--muted);font-size:14px;padding:14px;background:var(--card);border-radius:14px;margin-top:12px}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.summary .line{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.summary .line:last-child{border:0}
+.summary .line span{color:var(--muted)}
+label.inp{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
+label.inp input{display:block;width:100%;margin-top:6px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:16px}
+.check{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:14px;color:var(--muted)}
+.check input{width:20px;height:20px;accent-color:var(--gold)}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 22px;background:linear-gradient(transparent,var(--bg) 30%);pointer-events:none}
+.bottom button{pointer-events:auto;width:100%;padding:15px;border-radius:14px;border:0;background:var(--gold);color:#1a1206;font-weight:800;font-size:16px;cursor:pointer}
+.bottom button:disabled{background:#3a3a44;color:#777}
+.bottom .hint{text-align:center;font-size:12px;color:var(--muted);margin-bottom:8px}
+.tabs{display:flex;gap:8px;margin-top:14px}
+.tab{flex:1;padding:9px;border-radius:12px;background:var(--card);border:1px solid var(--line);text-align:center;cursor:pointer;font-size:14px;color:var(--muted)}
+.tab.on{color:var(--text);border-color:var(--gold)}
+.done{text-align:center;padding-top:30px}
+.done .big{width:84px;height:84px;border-radius:50%;background:#173326;color:var(--ok);display:grid;place-items:center;font-size:42px;margin:0 auto 14px}
+.bookcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:10px}
+.bookcard b{display:block}
+.bookcard span{font-size:13px;color:var(--muted)}
+.bookcard .acts{display:flex;gap:8px;margin-top:10px}
+.bookcard .acts button{flex:1;padding:9px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer;font-size:13px}
+.bookcard .acts .red{color:var(--danger)}
+.toast{position:absolute;left:16px;right:16px;top:70px;background:#26262e;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);transform:translateY(-20px);opacity:0;transition:.25s;pointer-events:none;z-index:5}
+.toast.show{transform:none;opacity:1}
+.demo{font-size:11px;color:var(--muted);text-align:center;margin-top:24px}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.gal div{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;font-size:26px}
+</style>
+</head>
+<body>
+
+<div class="note">
+  <h1>Демо: запись в барбершоп через MAX</h1>
+  <p>Так выглядело бы <b>мини-приложение</b> внутри MAX: клиент открывает его из чата с ботом и сам записывается.</p>
+  <p>Потыкай: выбери услугу или мастера, день и время. Цена меняется от уровня мастера.</p>
+  <p>Всё выдумано для примера: название, мастера, цены. Фото — заглушки.</p>
+</div>
+
+<div class="phone">
+  <div class="maxbar">
+    <button class="back" id="back" hidden aria-label="Назад">‹</button>
+    <div class="logo">Б</div>
+    <div class="ttl"><b>Барбершоп «Борода»</b><span id="sub">бот · онлайн</span></div>
+    <button class="close" id="close" hidden>Закрыть</button>
+  </div>
+  <div class="chat" id="chat">
+    <div class="msg">Привет! 👋 Я бот барбершопа «Борода». Здесь можно записаться к мастеру, посмотреть цены и работы.
+      <button class="openbtn" id="open">✂️ Открыть запись</button>
+      <small>12:01</small>
+    </div>
+  </div>
+  <div class="app" id="app" hidden></div>
+  <div class="bottom" id="bottom" hidden></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+const LEVELS = {
+  top:    {name:'топ-барбер',     k:1.4,  cls:'top',    icon:'👑'},
+  senior: {name:'старший барбер', k:1.2,  cls:'senior', icon:'⭐'},
+  mid:    {name:'барбер',         k:1.0,  cls:'mid',    icon:'✂️'},
+  junior: {name:'начинающий',     k:0.65, cls:'junior', icon:'🌱'},
+};
+const MASTERS = [
+  {id:'artem',  name:'Артём',  lvl:'top',    exp:'8 лет',  rate:4.9, n:312, color:'#b5772a', off:[0]},
+  {id:'kirill', name:'Кирилл', lvl:'senior', exp:'5 лет',  rate:4.9, n:198, color:'#6a4fc4', off:[1]},
+  {id:'denis',  name:'Денис',  lvl:'mid',    exp:'3 года', rate:4.8, n:141, color:'#2f7fb5', off:[3]},
+  {id:'maxim',  name:'Максим', lvl:'junior', exp:'полгода',rate:4.7, n:37,  color:'#2f9a66', off:[5]},
+];
+const CATS = [
+  {id:'hair',  name:'Стрижки',      icon:'💇', bg:'#2a2233'},
+  {id:'beard', name:'Борода и бритьё', icon:'🧔', bg:'#33281e'},
+  {id:'combo', name:'Комплексы',    icon:'🔥', bg:'#3a1f1f'},
+  {id:'kids',  name:'Детские',      icon:'👦', bg:'#1e2d33'},
+  {id:'color', name:'Окрашивание',  icon:'🎨', bg:'#1f3326'},
+  {id:'care',  name:'Уход',         icon:'🧴', bg:'#2e2e1e'},
+];
+const SERVICES = [
+  {id:'classic', cat:'hair',  name:'Мужская классическая', base:1000, min:45},
+  {id:'fade',    cat:'hair',  name:'Фейд / андеркат',      base:1100, min:45},
+  {id:'machine', cat:'hair',  name:'Под машинку',          base:600,  min:20},
+  {id:'long',    cat:'hair',  name:'Удлинённая стрижка',   base:1300, min:60},
+  {id:'beardm',  cat:'beard', name:'Моделирование бороды', base:600,  min:30},
+  {id:'shave',   cat:'beard', name:'Бритьё опасной бритвой',base:800, min:30},
+  {id:'combo1',  cat:'combo', name:'Стрижка + борода',     base:1500, min:75},
+  {id:'combo2',  cat:'combo', name:'Отец + сын',           base:1800, min:90},
+  {id:'kid',     cat:'kids',  name:'Детская (до 12 лет)',  base:700,  min:30},
+  {id:'grey',    cat:'color', name:'Камуфляж седины',      base:900,  min:30},
+  {id:'tone',    cat:'color', name:'Тонирование бороды',   base:700,  min:30},
+  {id:'mask',    cat:'care',  name:'Чёрная маска + распаривание', base:500, min:20},
+];
+const WD = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const MON = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+
+const $ = s => document.querySelector(s);
+const app = $('#app'), bottom = $('#bottom');
+let st = {};       // текущий выбор: service, master, day, time
+let hist = [];     // стек экранов для «Назад»
+let bookings = [];
+
+const price = (svc, m) => Math.round(svc.base * LEVELS[m.lvl].k / 50) * 50;
+const master = id => MASTERS.find(m => m.id === id);
+const service = id => SERVICES.find(s => s.id === id);
+const fmtDay = d => `${WD[d.getDay()]}, ${d.getDate()} ${MON[d.getMonth()]}`;
+const ava = (m, sm) => `<div class="ava${sm?' sm':''}" style="background:linear-gradient(135deg,${m.color},#111)">${m.name[0]}</div>`;
+const lvl = m => `<span class="lvl ${LEVELS[m.lvl].cls}">${LEVELS[m.lvl].icon} ${LEVELS[m.lvl].name}</span>`;
+
+function days(){
+  const out = [], t = new Date(); t.setHours(0,0,0,0);
+  for (let i = 0; i < 14; i++){ const d = new Date(t); d.setDate(t.getDate()+i); out.push(d); }
+  return out;
+}
+// Свободные окна: детерминированно «занятые» часы, чтобы у мастеров было по-разному
+function slots(m, d, svc){
+  if (m.off.includes(d.getDay())) return [];
+  const res = [], now = new Date();
+  const seed = d.getDate()*7 + m.id.length*13;
+  for (let h = 10; h <= 20; h++){
+    for (const mm of [0,30]){
+      if (h === 20 && mm === 30) continue;
+      if (svc && (h*60+mm+svc.min) > 21*60) continue;
+      const busy = ((h*3 + mm + seed) % 5) < 2;
+      const t = new Date(d); t.setHours(h,mm);
+      if (!busy && t > now) res.push(`${h}:${mm?'30':'00'}`);
+    }
+  }
+  return res;
+}
+
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 2200); }
+function setBottom(label, enabled, fn, hint){
+  if (!label){ bottom.hidden = true; return; }
+  bottom.hidden = false;
+  bottom.innerHTML = (hint?`<div class="hint">${hint}</div>`:'') + `<button ${enabled?'':'disabled'}>${label}</button>`;
+  bottom.querySelector('button').onclick = fn;
+}
+function go(name, push = true){
+  if (push && hist.length && hist[hist.length-1] !== name) hist.push(name);
+  if (!hist.length) hist.push(name);
+  $('#back').hidden = hist.length <= 1;
+  setBottom(null);
+  SCREENS[name]();
+  app.scrollTop = 0;
+}
+$('#back').onclick = () => { hist.pop(); go(hist[hist.length-1], false); };
+
+$('#open').onclick = () => {
+  $('#chat').hidden = true; app.hidden = false;
+  $('#close').hidden = false; $('#sub').textContent = 'мини-приложение';
+  hist = []; go('home');
+};
+$('#close').onclick = () => {
+  $('#chat').hidden = false; app.hidden = true; bottom.hidden = true;
+  $('#close').hidden = true; $('#back').hidden = true; $('#sub').textContent = 'бот · онлайн';
+};
+
+const SCREENS = {
+  home(){
+    st = {};
+    app.innerHTML = `<div class="screen">
+      <div class="hero"><b>Запишитесь за минуту</b><span>Ежедневно 10:00–21:00 · адрес появится у настоящего клиента</span></div>
+      <div class="quick">
+        <button class="qbtn wide" data-go="cats"><i>✂️</i>Записаться</button>
+        <button class="qbtn" data-go="masters"><i>👤</i>Выбрать мастера</button>
+        <button class="qbtn" data-go="nearest"><i>⚡</i>Ближайшее время</button>
+        <button class="qbtn" data-go="prices"><i>💰</i>Все цены</button>
+        <button class="qbtn" data-go="mine"><i>📋</i>Мои записи${bookings.length?` (${bookings.length})`:''}</button>
+      </div>
+      <h2>Мастера</h2>
+      <div class="hscroll">${MASTERS.map(m=>`<div class="mcard" data-m="${m.id}">${ava(m)}<b>${m.name}</b>${lvl(m)}<div class="rate">★ ${m.rate} · ${m.n} отзывов</div></div>`).join('')}</div>
+      <h2>Услуги</h2>
+      <div class="cats">${CATS.map(c=>`<div class="cat" data-c="${c.id}"><div class="ph" style="background:${c.bg}">${c.icon}</div><div><b>${c.name}</b><span>от ${Math.min(...SERVICES.filter(s=>s.cat===c.id).map(s=>price(s,{lvl:'junior'})))} ₽</span></div></div>`).join('')}</div>
+      <div class="demo">Демо-пример. Название, мастера и цены выдуманы.</div>
+    </div>`;
+    app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
+    app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { st.master = b.dataset.m; go('masterPage'); });
+    app.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { st.cat = b.dataset.c; go('services'); });
+  },
+  cats(){
+    app.innerHTML = `<div class="screen"><h2>Что делаем?</h2>
+      <div class="cats">${CATS.map(c=>`<div class="cat" data-c="${c.id}"><div class="ph" style="background:${c.bg}">${c.icon}</div><div><b>${c.name}</b><span>${SERVICES.filter(s=>s.cat===c.id).length} услуг</span></div></div>`).join('')}</div></div>`;
+    app.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { st.cat = b.dataset.c; go('services'); });
+  },
+  services(){
+    const cat = CATS.find(c=>c.id===st.cat);
+    const m = st.master && master(st.master);
+    const list = SERVICES.filter(s => s.cat === st.cat);
+    app.innerHTML = `<div class="screen"><h2>${cat.icon} ${cat.name}</h2><div class="list">${list.map(s=>{
+      const pr = m ? `${price(s,m)} ₽` : `${price(s,{lvl:'junior'})}–${price(s,{lvl:'top'})} ₽`;
+      return `<div class="row" data-s="${s.id}"><div class="ph" style="background:${cat.bg}">${cat.icon}</div><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин${m?' · у '+m.name:' · цена зависит от мастера'}</span></div><div class="price">${pr}</div></div>`;
+    }).join('')}</div></div>`;
+    app.querySelectorAll('[data-s]').forEach(b => b.onclick = () => { st.service = b.dataset.s; go(st.master ? 'time' : 'pickMaster'); });
+  },
+  pickMaster(){
+    const s = service(st.service);
+    app.innerHTML = `<div class="screen"><h2>${s.name} — к кому?</h2><div class="list">
+      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${m.name} · ${m.exp}</b>${lvl(m)} <span>★ ${m.rate}</span></div><div class="price">${price(s,m)} ₽</div></div>`).join('')}
+      <div class="row" data-m="any"><div class="ph" style="background:#26262e">🎲</div><div class="info"><b>Любой свободный</b><span>подберём ближайшее окно</span></div><div class="price">от ${price(s,{lvl:'junior'})} ₽</div></div>
+    </div></div>`;
+    app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => {
+      if (b.dataset.m === 'any'){ go('nearest'); return; }
+      st.master = b.dataset.m; st.day = null; st.time = null; go('time');
+    });
+  },
+  masters(){
+    app.innerHTML = `<div class="screen"><h2>Наши мастера</h2><div class="list">
+      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${m.name} · ${m.exp}</b>${lvl(m)} <span>★ ${m.rate} · ${m.n} отзывов</span></div><div class="price">›</div></div>`).join('')}
+    </div><p class="demo">Цена у мастеров разная: топ-барбер дороже, начинающий дешевле.</p></div>`;
+    app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { st.master = b.dataset.m; go('masterPage'); });
+  },
+  masterPage(){
+    const m = master(st.master);
+    const icons = ['💈','✂️','🧔','💇','🔥','⭐'];
+    app.innerHTML = `<div class="screen" style="text-align:center">
+      <div style="margin-top:18px">${ava(m)}</div><h2 style="margin:6px 0 4px">${m.name}</h2>${lvl(m)}
+      <div class="rate">Опыт ${m.exp} · ★ ${m.rate} · ${m.n} отзывов</div>
+      <div class="gal">${icons.map((i,k)=>`<div style="background:linear-gradient(${k*60}deg,${m.color}55,#1a1a20)">${i}</div>`).join('')}</div>
+      <p class="demo" style="margin-top:6px">Здесь будут фото работ мастера</p>
+      <h2 style="text-align:left">Услуги у ${m.name}а</h2>
+      <div class="list" style="text-align:left">${SERVICES.slice(0,8).map(s=>`<div class="row" data-s="${s.id}"><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин</span></div><div class="price">${price(s,m)} ₽</div></div>`).join('')}</div>
+    </div>`;
+    app.querySelectorAll('[data-s]').forEach(b => b.onclick = () => { st.service = b.dataset.s; st.day = null; st.time = null; go('time'); });
+  },
+  time(){
+    const m = master(st.master), s = service(st.service);
+    const ds = days();
+    if (st.day == null){ st.day = ds.findIndex(d => slots(m,d,s).length); }
+    const d = ds[st.day], sl = slots(m, d, s);
+    app.innerHTML = `<div class="screen">
+      <div class="row" style="margin-top:14px;cursor:default">${ava(m,true)}<div class="info"><b>${s.name}</b><span>${m.name} · ${LEVELS[m.lvl].name} · ≈ ${s.min} мин</span></div><div class="price">${price(s,m)} ₽</div></div>
+      <h2>Когда удобно?</h2>
+      <div class="days">${ds.map((x,i)=>{const free = slots(m,x,s).length; return `<div class="day ${i===st.day?'on':''} ${free?'':'off'}" data-d="${i}"><small>${i===0?'сег.':i===1?'завтра':WD[x.getDay()]}</small><b>${x.getDate()}</b></div>`;}).join('')}</div>
+      ${sl.length ? `<div class="slots">${sl.map(t=>`<div class="slot ${st.time===t?'on':''}" data-t="${t}">${t}</div>`).join('')}</div>`
+                  : `<div class="empty">${m.off.includes(d.getDay())?`У ${m.name}а выходной.`:'На этот день всё занято.'} Выберите другой день.</div>`}
+    </div>`;
+    app.querySelectorAll('.day:not(.off)').forEach(b => b.onclick = () => { st.day = +b.dataset.d; st.time = null; go('time', false); });
+    app.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { st.time = b.dataset.t; go('time', false); });
+    setBottom(st.time ? `Дальше · ${fmtDay(d)}, ${st.time}` : 'Выберите время', !!st.time, () => go('confirm'));
+  },
+  nearest(){
+    const s = st.service ? service(st.service) : service('classic');
+    const opts = [];
+    days().slice(0,3).forEach((d,di) => MASTERS.forEach(m => slots(m,d,s).slice(0,2).forEach(t => opts.push({m,d,di,t}))));
+    opts.sort((a,b) => a.di-b.di || parseFloat(a.t.replace(':','.'))-parseFloat(b.t.replace(':','.')));
+    app.innerHTML = `<div class="screen"><h2>⚡ Ближайшие окна</h2>
+      <p class="rate">Услуга: ${s.name}${st.service?'':' (можно поменять на главной)'}</p>
+      <div class="list">${opts.slice(0,8).map((o,i)=>`<div class="row" data-i="${i}">${ava(o.m,true)}<div class="info"><b>${o.di===0?'Сегодня':o.di===1?'Завтра':fmtDay(o.d)}, ${o.t}</b><span>${o.m.name} · ${LEVELS[o.m.lvl].name}</span></div><div class="price">${price(s,o.m)} ₽</div></div>`).join('')}</div></div>`;
+    const top = opts.slice(0,8);
+    app.querySelectorAll('[data-i]').forEach(b => b.onclick = () => { const o = top[+b.dataset.i]; st.service = s.id; st.master = o.m.id; st.day = o.di; st.time = o.t; go('confirm'); });
+  },
+  prices(){
+    app.innerHTML = `<div class="screen"><h2>Цены</h2>
+      <p class="rate">Цена зависит от уровня мастера</p>
+      <div class="summary" style="margin-top:10px">
+        <div class="line" style="font-size:12px"><span>Услуга</span><span>🌱 · ✂️ · ⭐ · 👑</span></div>
+        ${SERVICES.map(s=>`<div class="line"><b style="font-weight:500">${s.name}</b><span style="white-space:nowrap">${['junior','mid','senior','top'].map(l=>price(s,{lvl:l})).join(' · ')}</span></div>`).join('')}
+      </div>
+      <p class="demo">🌱 начинающий · ✂️ барбер · ⭐ старший · 👑 топ</p></div>`;
+  },
+  confirm(){
+    const m = master(st.master), s = service(st.service), d = days()[st.day];
+    app.innerHTML = `<div class="screen"><h2>Проверьте запись</h2>
+      <div class="summary">
+        <div class="line"><span>Услуга</span><b>${s.name}</b></div>
+        <div class="line"><span>Мастер</span><b>${m.name}, ${LEVELS[m.lvl].name}</b></div>
+        <div class="line"><span>Когда</span><b>${fmtDay(d)}, ${st.time}</b></div>
+        <div class="line"><span>Длительность</span><b>≈ ${s.min} мин</b></div>
+        <div class="line"><span>Цена</span><b class="price">${price(s,m)} ₽</b></div>
+      </div>
+      <label class="inp">Как к вам обращаться<input id="nm" placeholder="Имя" autocomplete="off"></label>
+      <label class="inp">Телефон<input id="ph" placeholder="+7" inputmode="tel" autocomplete="off"></label>
+      <label class="check"><input type="checkbox" id="rem" checked> Напомнить за день и за 2 часа</label>
+      <p class="demo">В настоящем приложении имя и телефон MAX подставит сам — с разрешения клиента.</p>
+    </div>`;
+    setBottom('Записаться', true, () => {
+      bookings.push({...st, name: ($('#nm').value||'Гость').trim()});
+      go('done');
+    }, 'Оплата на месте');
+  },
+  done(){
+    const b = bookings[bookings.length-1], m = master(b.master), s = service(b.service), d = days()[b.day];
+    hist = ['home','done']; $('#back').hidden = true;
+    app.innerHTML = `<div class="screen done">
+      <div class="big">✓</div><h2>Вы записаны!</h2>
+      <p class="rate">${s.name} · ${m.name}<br>${fmtDay(d)}, ${b.time} · ${price(s,m)} ₽</p>
+      <div class="bookcard" style="text-align:left"><b>Что дальше</b><span>Бот пришлёт напоминание за день и за 2 часа с кнопками «Приду» и «Перенести». Мастер уже видит запись.</span></div>
+    </div>`;
+    setBottom('Готово', true, () => { hist = []; go('home'); });
+    setTimeout(() => toast(`🔔 Мастеру ${m.name}у: новая запись на ${b.time}`), 700);
+  },
+  mine(){
+    app.innerHTML = `<div class="screen"><h2>Мои записи</h2>${bookings.length ? bookings.map((b,i)=>{
+      const m = master(b.master), s = service(b.service), d = days()[b.day];
+      return `<div class="bookcard"><b>${fmtDay(d)}, ${b.time}</b><span>${s.name} · ${m.name} · ${price(s,m)} ₽</span>
+        <div class="acts"><button data-mv="${i}">Перенести</button><button class="red" data-cn="${i}">Отменить</button></div></div>`;
+    }).join('') : `<div class="empty">Пока записей нет.</div>`}</div>`;
+    app.querySelectorAll('[data-cn]').forEach(b => b.onclick = () => { bookings.splice(+b.dataset.cn,1); toast('Запись отменена — окно освободилось для других'); go('mine', false); });
+    app.querySelectorAll('[data-mv]').forEach(b => b.onclick = () => { const x = bookings.splice(+b.dataset.mv,1)[0]; st = {service:x.service, master:x.master}; go('time'); });
+  },
+};
+</script>
+</body>
+</html>
