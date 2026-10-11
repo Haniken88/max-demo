@@ -169,13 +169,13 @@ const LEVELS = {
   mid:    {name:'барбер',         k:1.0,  cls:'mid',    icon:'✂️'},
   junior: {name:'начинающий',     k:0.65, cls:'junior', icon:'🌱'},
 };
-const MASTERS = [
+let MASTERS = [
   {id:'artem',  name:'Артём',  lvl:'top',    exp:'8 лет',  rate:4.9, n:312, color:'#b5772a', off:[0]},
   {id:'kirill', name:'Кирилл', lvl:'senior', exp:'5 лет',  rate:4.9, n:198, color:'#6a4fc4', off:[1]},
   {id:'denis',  name:'Денис',  lvl:'mid',    exp:'3 года', rate:4.8, n:141, color:'#2f7fb5', off:[3]},
   {id:'maxim',  name:'Максим', lvl:'junior', exp:'полгода',rate:4.7, n:37,  color:'#2f9a66', off:[5]},
 ];
-const CATS = [
+let CATS = [
   {id:'hair',  name:'Стрижки',      icon:'💇', bg:'#2a2233'},
   {id:'beard', name:'Борода и бритьё', icon:'🧔', bg:'#33281e'},
   {id:'combo', name:'Комплексы',    icon:'🔥', bg:'#3a1f1f'},
@@ -183,7 +183,7 @@ const CATS = [
   {id:'color', name:'Окрашивание',  icon:'🎨', bg:'#1f3326'},
   {id:'care',  name:'Уход',         icon:'🧴', bg:'#2e2e1e'},
 ];
-const SERVICES = [
+let SERVICES = [
   {id:'classic', cat:'hair',  name:'Мужская классическая', base:1000, min:45},
   {id:'fade',    cat:'hair',  name:'Фейд / андеркат',      base:1100, min:45},
   {id:'machine', cat:'hair',  name:'Под машинку',          base:600,  min:20},
@@ -206,6 +206,35 @@ let st = {};       // текущий выбор: service, master, day, time
 let hist = [];     // стек экранов для «Назад»
 let bookings = [];
 
+// ---------- сервер записи (если он есть — данные настоящие; на GitHub демо работает само по себе) ----------
+let ONLINE = false;
+const AV = {};      // свободные окна: 'мастер|услуга' → {день: [время]}
+const NEAR = {};    // ближайшие окна по услуге
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const fromIso = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const dayIndex = s => Math.round((fromIso(s) - days()[0]) / 864e5);
+const guestId = (() => { try { let g = localStorage.getItem('gid'); if (!g){ g = (Math.random().toString(36) + Math.random().toString(36)).replace(/[^a-z0-9]/g,'').slice(0,24); localStorage.setItem('gid', g); } return g; } catch(e){ return 'guest' + Date.now(); } })();
+async function api(path, opts = {}){
+  const h = {'Content-Type':'application/json'};
+  if (window.WebApp && window.WebApp.initData) h['X-Max-Init-Data'] = window.WebApp.initData; else h['X-Guest-Id'] = guestId;
+  const r = await fetch(path, {...opts, headers:h});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok){ const e = new Error(j.error || 'Нет связи с сервером'); e.status = r.status; throw e; }
+  return j;
+}
+const resetAvail = () => { for (const k in AV) delete AV[k]; for (const k in NEAR) delete NEAR[k]; };
+const fromServer = b => ({ id:b.id, master:b.master, service:b.service, dayIso:b.day, time:b.time, price:b.price, name:b.name });
+async function loadMine(){ if (ONLINE) bookings = (await api('/api/my')).items.map(fromServer); }
+async function boot(){
+  try {
+    const c = await api('/api/catalog');
+    MASTERS = c.masters; CATS = c.cats; SERVICES = c.services; ONLINE = true;
+    await loadMine().catch(() => {});
+  } catch(e){ /* сервера нет — остаёмся на встроенных демо-данных */ }
+}
+const bDate = b => b.dayIso ? fromIso(b.dayIso) : days()[b.day];
+const loading = t => { app.innerHTML = `<div class="screen"><div class="empty" style="margin-top:18px">${t || 'Загружаю…'}</div></div>`; };
+
 const price = (svc, m) => Math.round(svc.base * LEVELS[m.lvl].k / 50) * 50;
 const master = id => MASTERS.find(m => m.id === id);
 const service = id => SERVICES.find(s => s.id === id);
@@ -220,6 +249,7 @@ function days(){
 }
 // Свободные окна: детерминированно «занятые» часы, чтобы у мастеров было по-разному
 function slots(m, d, svc){
+  if (ONLINE) return ((AV[m.id + '|' + (svc ? svc.id : '')] || {})[iso(d)]) || [];
   if (m.off.includes(d.getDay())) return [];
   const res = [], now = new Date();
   const seed = d.getDate()*7 + m.id.length*13;
@@ -358,15 +388,21 @@ const SCREENS = {
   },
   time(){
     const m = master(st.master), s = service(st.service);
+    const key = m.id + '|' + s.id;
+    if (ONLINE && !AV[key]){
+      loading('Смотрю свободное время…');
+      api(`/api/availability?master=${m.id}&service=${s.id}`).then(j => { AV[key] = j.days; go('time', false); }).catch(e => toast(e.message));
+      return;
+    }
     const ds = days();
-    if (st.day == null){ st.day = ds.findIndex(d => slots(m,d,s).length); }
+    if (st.day == null || st.day < 0){ st.day = Math.max(0, ds.findIndex(d => slots(m,d,s).length)); }
     const d = ds[st.day], sl = slots(m, d, s);
     app.innerHTML = `<div class="screen">
       <div class="row" style="margin-top:14px;cursor:default">${ava(m,true)}<div class="info"><b>${s.name}</b><span>${m.name} · ${LEVELS[m.lvl].name} · ≈ ${s.min} мин</span></div><div class="price">${price(s,m)} ₽</div></div>
       <h2>Когда удобно?</h2>
       <div class="days">${ds.map((x,i)=>{const free = slots(m,x,s).length; return `<div class="day ${i===st.day?'on':''} ${free?'':'off'}" data-d="${i}"><small>${i===0?'сег.':i===1?'завтра':WD[x.getDay()]}</small><b>${x.getDate()}</b></div>`;}).join('')}</div>
       ${sl.length ? `<div class="slots">${sl.map(t=>`<div class="slot ${st.time===t?'on':''}" data-t="${t}">${t}</div>`).join('')}</div>`
-                  : `<div class="empty">${m.off.includes(d.getDay())?`У ${m.name}а выходной.`:'На этот день всё занято.'} Выберите другой день.</div>`}
+                  : `<div class="empty">${(m.off||[]).includes(d.getDay())?`У ${m.name}а выходной.`:ONLINE?'В этот день свободного времени нет.':'На этот день всё занято.'} Выберите другой день.</div>`}
     </div>`;
     app.querySelectorAll('.day:not(.off)').forEach(b => b.onclick = () => { st.day = +b.dataset.d; st.time = null; go('time', false); });
     app.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { st.time = b.dataset.t; go('time', false); });
@@ -374,8 +410,14 @@ const SCREENS = {
   },
   nearest(){
     const s = st.service ? service(st.service) : service('classic');
-    const opts = [];
-    days().slice(0,3).forEach((d,di) => MASTERS.forEach(m => slots(m,d,s).slice(0,2).forEach(t => opts.push({m,d,di,t}))));
+    if (ONLINE && !NEAR[s.id]){
+      loading('Ищу ближайшие окна…');
+      api(`/api/nearest?service=${s.id}`).then(j => { NEAR[s.id] = j.items; go('nearest', false); }).catch(e => toast(e.message));
+      return;
+    }
+    let opts = [];
+    if (ONLINE) opts = NEAR[s.id].map(x => ({ m:master(x.master), d:fromIso(x.day), di:dayIndex(x.day), t:x.time })).filter(o => o.m);
+    else days().slice(0,3).forEach((d,di) => MASTERS.forEach(m => slots(m,d,s).slice(0,2).forEach(t => opts.push({m,d,di,t}))));
     opts.sort((a,b) => a.di-b.di || parseFloat(a.t.replace(':','.'))-parseFloat(b.t.replace(':','.')));
     app.innerHTML = `<div class="screen"><h2>⚡ Ближайшие окна</h2>
       <p class="rate">Услуга: ${s.name}${st.service?'':' (можно поменять на главной)'}</p>
@@ -407,13 +449,24 @@ const SCREENS = {
       <label class="check"><input type="checkbox" id="rem" checked> Напомнить за день и за 2 часа</label>
       <p class="demo">В настоящем приложении имя и телефон MAX подставит сам — с разрешения клиента.</p>
     </div>`;
-    setBottom('Записаться', true, () => {
-      bookings.push({...st, name: ($('#nm').value||'Гость').trim()});
-      go('done');
+    setBottom('Записаться', true, async () => {
+      const name = ($('#nm').value || 'Гость').trim();
+      if (!ONLINE){ bookings.push({...st, name}); go('done'); return; }
+      const btn = bottom.querySelector('button'); btn.disabled = true; btn.textContent = 'Записываю…';
+      try {
+        const r = await api('/api/bookings', { method:'POST', body: JSON.stringify({ master:st.master, service:st.service,
+          day: iso(days()[st.day]), time:st.time, name, phone:$('#ph').value, remind:$('#rem').checked, replace:st.replace || null }) });
+        resetAvail(); await loadMine().catch(() => {});
+        if (!bookings.some(b => b.id === r.booking.id)) bookings.push(fromServer(r.booking));
+        st.last = r.booking.id; go('done');
+      } catch(e){
+        toast(e.message); btn.disabled = false; btn.textContent = 'Записаться';
+        if (e.status === 409){ resetAvail(); st.time = null; setTimeout(() => go('time'), 900); }
+      }
     }, 'Оплата на месте');
   },
   done(){
-    const b = bookings[bookings.length-1], m = master(b.master), s = service(b.service), d = days()[b.day];
+    const b = (st.last && bookings.find(x => x.id === st.last)) || bookings[bookings.length-1], m = master(b.master), s = service(b.service), d = bDate(b);
     hist = ['home','done']; $('#back').hidden = true;
     app.innerHTML = `<div class="screen done">
       <div class="big">✓</div><h2>Вы записаны!</h2>
@@ -425,23 +478,38 @@ const SCREENS = {
     setTimeout(() => toast(`🔔 Мастеру ${m.name}у: новая запись на ${b.time}`), 700);
   },
   mine(){
+    if (ONLINE && !st.mineLoaded){
+      loading(); loadMine().then(() => { st.mineLoaded = true; go('mine', false); }).catch(e => toast(e.message));
+      return;
+    }
+    st.mineLoaded = false;
     app.innerHTML = `<div class="screen"><h2>Мои записи</h2>${bookings.length ? bookings.map((b,i)=>{
-      const m = master(b.master), s = service(b.service), d = days()[b.day];
+      const m = master(b.master), s = service(b.service), d = bDate(b);
       return `<div class="bookcard"><b>${fmtDay(d)}, ${b.time}</b><span>${s.name} · ${m.name} · ${price(s,m)} ₽</span>
         <div class="acts"><button data-mv="${i}">Перенести</button><button class="red" data-cn="${i}">Отменить</button></div></div>`;
     }).join('') : `<div class="empty">Пока записей нет.</div>`}</div>`;
-    app.querySelectorAll('[data-cn]').forEach(b => b.onclick = () => { bookings.splice(+b.dataset.cn,1); toast('Запись отменена — окно освободилось для других'); go('mine', false); });
-    app.querySelectorAll('[data-mv]').forEach(b => b.onclick = () => { const x = bookings.splice(+b.dataset.mv,1)[0]; st = {service:x.service, master:x.master}; go('time'); });
+    app.querySelectorAll('[data-cn]').forEach(b => b.onclick = async () => {
+      const x = bookings[+b.dataset.cn];
+      if (ONLINE){ try { await api(`/api/bookings/${x.id}/cancel`, {method:'POST'}); resetAvail(); } catch(e){ toast(e.message); return; } }
+      bookings.splice(+b.dataset.cn,1); toast('Запись отменена — окно освободилось для других'); st.mineLoaded = true; go('mine', false);
+    });
+    app.querySelectorAll('[data-mv]').forEach(b => b.onclick = () => {
+      const x = bookings[+b.dataset.mv];
+      if (!ONLINE) bookings.splice(+b.dataset.mv,1);
+      st = {service:x.service, master:x.master, replace: ONLINE ? x.id : null}; go('time');
+    });
   },
 };
 
-// Запуск внутри MAX — после того как все экраны объявлены
-if (MAX){
+// Запуск — после того как все экраны объявлены и данные загружены
+boot().then(() => { if (MAX){
   document.body.classList.add('inmax');
   if (MAX.BackButton) MAX.BackButton.onClick(goBack);
   $('#chat').hidden = true; app.hidden = false; $('#sub').textContent = 'онлайн-запись';
   hist = []; go('home');
-}
+  const sp = MAX.initDataUnsafe && MAX.initDataUnsafe.start_param;
+  if (sp === 'mine') go('mine');
+}});
 </script>
 </body>
 </html>
