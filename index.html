@@ -259,7 +259,23 @@ const MAX = window.WebApp && window.WebApp.initData ? window.WebApp : null;
 function syncBack(){
   if (!MAX || !MAX.BackButton) return;
   $('#back').hidden ? MAX.BackButton.hide() : MAX.BackButton.show();
+  // посреди записи MAX переспросит «Закрыть?», на спокойных экранах — нет
+  const calm = ['home','done','mine','prices','masters'].includes(hist[hist.length-1]);
+  try { calm ? MAX.disableClosingConfirmation() : MAX.enableClosingConfirmation(); } catch(e){}
 }
+// лёгкая вибрация на нажатия (только внутри MAX)
+function haptic(kind){
+  if (!MAX || !MAX.HapticFeedback) return;
+  try {
+    if (kind === 'select') MAX.HapticFeedback.selectionChanged();
+    else if (kind === 'success') MAX.HapticFeedback.notificationOccurred('success');
+    else MAX.HapticFeedback.impactOccurred('light');
+  } catch(e){}
+}
+document.addEventListener('click', e => {
+  if (e.target.closest('#bottom button, .qbtn, .acts button')) haptic('tap');
+  else if (e.target.closest('[data-m],[data-c],[data-s],[data-t],[data-d],[data-i],.day,.slot,.mcard,.row,.pcard,.cat')) haptic('select');
+}, true);
 
 $('#open').onclick = () => {
   $('#chat').hidden = true; app.hidden = false;
@@ -405,6 +421,7 @@ const SCREENS = {
       <div class="bookcard" style="text-align:left"><b>Что дальше</b><span>Бот пришлёт напоминание за день и за 2 часа с кнопками «Приду» и «Перенести». Мастер уже видит запись.</span></div>
     </div>`;
     setBottom('Готово', true, () => { hist = []; go('home'); });
+    haptic('success');
     setTimeout(() => toast(`🔔 Мастеру ${m.name}у: новая запись на ${b.time}`), 700);
   },
   mine(){
