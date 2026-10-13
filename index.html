@@ -469,6 +469,51 @@ h2 .mon{font-size:13px;font-weight:700;color:var(--ink);margin-left:6px}
 .tools button{width:100%;display:flex;align-items:center;gap:12px;min-height:52px;padding:0 14px;border:0;border-top:1px solid var(--line);background:none;
   color:var(--text);font-size:15px;font-weight:600;cursor:pointer;text-align:left}
 .tools button:first-child{border-top:0}.tools svg.i{color:var(--ink)}.tools .ch{margin-left:auto;color:var(--muted);width:18px;height:18px}
+/* «Нужно перенести» и «Перенести запись» (вариант 1, mockups/resched-1.html) */
+.rbanner{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin:4px 0 14px;padding:14px;border-radius:18px;cursor:pointer;color:var(--text);
+  background:color-mix(in srgb,var(--gold) 20%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 50%,var(--line));box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.rbanner .ic{width:44px;height:44px;border-radius:12px;background:var(--gold);color:var(--on-acc);display:grid;place-items:center;flex:none}
+.rbanner .ic svg.i{width:22px;height:22px;stroke-width:2}
+.rbanner .tx{flex:1;min-width:0}.rbanner b{display:block;font-size:18px;font-weight:800;line-height:1.2}.rbanner .tx span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.rbanner .ch{color:var(--ink)}
+.awl{display:flex;align-items:center;gap:8px;margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(233,184,106,.08);color:#e9b86a;font-size:13.5px;font-weight:600}
+.awl svg.i{width:18px;height:18px}
+.rbtn{min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--card2);display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14.5px;font-weight:700;color:var(--text);text-decoration:none;cursor:pointer;padding:0 12px}
+.rbtn svg.i{width:18px;height:18px;color:var(--ink)}
+.rbtn.pri{background:var(--gold);border-color:var(--gold);color:var(--on-acc)}.rbtn.pri svg.i{color:var(--on-acc)}
+.rbtn.dng{background:transparent;color:var(--danger)}.rbtn.dng svg.i{color:var(--danger)}
+.rbtn.gh{background:transparent;color:var(--muted)}.rbtn.gh svg.i{color:var(--muted)}
+.rbtn.wide{width:100%;margin-top:10px}
+.rlead{margin:-4px 2px 14px;font-size:14px;color:var(--muted);line-height:1.5}.rlead b{color:var(--text)}
+.rprog{display:flex;gap:4px;margin:0 2px 6px}.rprog i{flex:1;height:6px;border-radius:3px;background:var(--line)}.rprog i.w{background:#e9b86a}
+.rgrp{display:flex;align-items:baseline;justify-content:space-between;margin:20px 4px 10px;font-size:16px;font-weight:800}.rgrp span{font-size:13px;font-weight:500;color:var(--muted)}
+.rcl{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.rcl.w{border-color:color-mix(in srgb,#e9b86a 35%,var(--line))}
+.rclh{display:flex;gap:12px;align-items:flex-start}
+.rcl .tm{width:58px;flex:none;font-size:20px;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums}.rcl .tm span{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.rcl .wh{flex:1;min-width:0}.rcl .wh b{font-size:15px}.rcl .wh .sv{display:block;font-size:13px;color:var(--muted);margin-top:1px}
+.rcl .ph{display:block;margin-top:6px;font-size:14px;font-weight:600;color:var(--ink)}
+.rmk{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.mk.max{background:color-mix(in srgb,var(--ink) 14%,transparent);color:var(--ink)}
+.rst{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.rst svg.i{width:14px;height:14px;stroke-width:2}.rst.none{background:rgba(239,125,125,.12);color:#f29a9a}.rst.wait{background:rgba(233,184,106,.14);color:#e9b86a}
+.rsent{font-size:12.5px;color:var(--muted);margin-top:6px}
+.rbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.rwho{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;gap:12px;align-items:center;margin-top:14px}
+.rwho .tx{flex:1;min-width:0}.rwho b{display:block;font-size:16px;font-weight:800}.rwho .tx span{display:block;font-size:13px;color:var(--muted)}
+.rcall{width:48px;height:48px;border-radius:14px;background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);flex:none}
+.rhint{display:flex;gap:10px;align-items:flex-start;margin:12px 0 4px;padding:12px;border-radius:14px;background:rgba(233,184,106,.08);
+  border:1px solid color-mix(in srgb,#e9b86a 30%,var(--line));font-size:13.5px;line-height:1.45}
+.rhint svg.i{color:#e9b86a;margin-top:1px}
+.rsec{margin:22px 2px 10px}.rsec h3{font-size:17px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}.rsec p{margin:3px 0 0;font-size:13px;color:var(--muted)}
+.ropt{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px 14px;margin-bottom:10px}
+.ropt .oh{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:700}.ropt .oh .pr{font-weight:600;color:var(--muted);font-size:13px;margin-left:auto;white-space:nowrap}
+.ropt .slots{margin-top:10px}.slot.same{border-color:var(--ink)}
+.rsame{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:var(--ink);font-weight:600}.rsame svg.i{width:15px;height:15px}
+.rbusy{margin-top:8px;font-size:13px;color:var(--muted)}
+.rcancel{width:100%;min-height:48px;border-radius:12px;border:1px solid color-mix(in srgb,var(--danger) 40%,var(--line));background:transparent;color:var(--danger);
+  font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
 html,body{touch-action:manipulation}   /* двойной тап не приближает страницу */
 .ask{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:60;padding:16px}
 .ask .box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
@@ -711,6 +756,7 @@ const ICON = {
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
   noon:'<path d="M3 17.5h18M7.5 17.5a4.5 4.5 0 0 1 9 0"/><path d="M12 6.5v3M6.3 9.8l1.6 1.6M17.7 9.8l-1.6 1.6"/>',
   moon:'<path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/>',
+  warn:'<path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.2v.3"/>', send:'<path d="M20.5 3.5 10 14M20.5 3.5 14 20.5l-4-6.5-6.5-4z"/>',
   phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
   users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.9-3.4 3.4-5 6.5-5s5.6 1.6 6.5 5M16 4.6a3.5 3.5 0 0 1 0 6.8M18 15.3c1.8.7 3 2.300 3.5 4.700"/>',
   brush:'<path d="M14.5 4.5l5 5L10 19l-5.5.5L5 14z"/><path d="M12.5 6.5l5 5"/>',
@@ -839,11 +885,14 @@ function bookRow(b){
 }
 function masterCard(m, one){
   const lv = (master(m.id) || {}).lvl, L = LEVELS[lv], color = m.color || '#8a7a5a', st2 = m.status;
+  const left = (st.rs || []).filter(x => x.master === m.id).length;   // его записи в «Нужно перенести»
   const head = `<div class="mcd-r"><div class="mcd-a" style="color:${onColor(color)}">${esc(initial(m.name))}</div>
     <div class="mcd-n"><b>${esc(m.name)}</b>${L ? `<span>${L.icon} ${esc(L.name)}</span>` : ''}</div>`;
   if (!m.hours) return `<div class="mcd away" style="--m:${esc(color)}"><div class="mcd-h">${head}
     ${st2 === 'sick' ? `<button class="mact back" data-back="${m.id}">${ic('check')}Вышел</button>` : ''}</div>
-    <p class="note2" style="margin:-4px 0 0 58px">${st2 === 'sick' ? 'Не работает' + (m.note ? ' · ' + esc(m.note) : '') : 'Выходной'}</p></div></div>`;
+    <p class="note2" style="margin:-4px 0 0 58px">${st2 === 'sick' ? 'Не работает' + (m.note ? ' · ' + esc(m.note) : '') : 'Выходной'}</p>
+    ${left ? `<div class="awl">${ic('clock')}${left} ${plural(left, 'запись ещё не перенесена', 'записи ещё не перенесены', 'записей ещё не перенесены')}</div>
+      <button class="rbtn pri wide" data-go="resched">${ic('arrow')}Перенести клиентов</button>` : ''}</div></div>`;
   const h = m.hours, gaps = dayGaps(m), free = gaps.reduce((n, [a, b]) => n + b - a, 0);
   const rows = m.bookings.map(bookRow);
   if (one){
@@ -858,6 +907,18 @@ function masterCard(m, one){
     <div class="mcd-f"><span class="ld"><b>${n} ${plural(n, 'запись', 'записи', 'записей')}</b> · свободно ${dur(free)}</span>
       <button class="mact" data-sick="${m.id}">${ic('therm')}Заболел</button></div></div>
     <div class="bl">${rows.map(r => r.html).join('') || '<div class="bnone">Записей нет</div>'}</div></div>`;
+}
+// «Нужно перенести»: записи к мастерам, которые в этот день не работают (сервер считает список каждый раз заново)
+const sentTxt = v => { const d = new Date(v); return isNaN(d) ? '' : (iso(d) === iso(new Date()) ? 'сегодня' : fmtDay(d)) + ` в ${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`; };
+function reschLead(items){
+  const by = {}; items.forEach(x => by[x.master] = by[x.master] || x);
+  return Object.values(by).map(x => `<b>${esc(x.masterName)}</b> не работает${x.backDay ? `, выходит ${fmtDay(fromIso(x.backDay))}` : ''}`).join('; ');
+}
+function reschBanner(items){
+  if (!items || !items.length) return '';
+  const wait = items.filter(x => x.offered).length;
+  return `<button class="rbanner" data-go="resched"><span class="ic">${ic('warn')}</span><span class="tx"><b>Нужно перенести: ${items.length}</b>
+    <span>${reschLead(items).replace(/<\/?b>/g, '')}${wait ? ` · ${wait} ждёт ответа в MAX` : ''}</span></span>${ic('chev', 'ch')}</button>`;
 }
 function phoneInput(el){
   if (el) el.addEventListener('input', () => { if (/^9/.test(el.value)) el.value = '+7 ' + el.value; });
@@ -887,7 +948,7 @@ function syncBack(){
   if (!MAX || !MAX.BackButton) return;
   $('#back').hidden ? MAX.BackButton.hide() : MAX.BackButton.show();
   // посреди записи MAX переспросит «Закрыть?», на спокойных экранах — нет
-  const calm = ['home','done','mine','prices','masters','admin','amasters','aservices'].includes(hist[hist.length-1]);
+  const calm = ['home','done','mine','prices','masters','admin','amasters','aservices','resched'].includes(hist[hist.length-1]);
   try { calm ? MAX.disableClosingConfirmation() : MAX.enableClosingConfirmation(); } catch(e){}
 }
 // лёгкая вибрация на нажатия (только внутри MAX)
@@ -985,7 +1046,7 @@ const SCREENS = {
   pickMaster(){
     const s = service(st.service);
     app.innerHTML = `<div class="screen"><h2>${s.name} — к кому?</h2><div class="list">
-      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${esc(m.name)}</b>${lvl(m)}${m.exp ? ` <span>стаж ${esc(m.exp)}</span>` : ''}</div><div class="price">${price(s,m)} ₽</div></div>`).join('')}
+      ${MASTERS.filter(m => m.id !== st.excl).map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${esc(m.name)}</b>${lvl(m)}${m.exp ? ` <span>стаж ${esc(m.exp)}</span>` : ''}</div><div class="price">${price(s,m)} ₽</div></div>`).join('')}
       <div class="row" data-m="any"><div class="ph" style="background:#26262e">🎲</div><div class="info"><b>Любой свободный</b><span>подберём ближайшее окно</span></div><div class="price">от ${minP(s)} ₽</div></div>
     </div></div>`;
     app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => {
@@ -1140,9 +1201,10 @@ const SCREENS = {
   admin(){
     if (st.aday == null) st.aday = 0;
     const ds = days(), d = ds[st.aday];
-    if (!st.adayData || st.adayData.day !== iso(d)){
+    if (!st.adayData || st.adayData.day !== iso(d) || !st.rs){
       loading('Загружаю расписание…');
-      api(`/api/admin/day?day=${iso(d)}`).then(j => { st.adayData = j; go('admin', false); }).catch(e => toast(e.message));
+      Promise.all([api(`/api/admin/day?day=${iso(d)}`), api('/api/admin/resched')])
+        .then(([j, r]) => { st.adayData = j; st.rs = r.items; go('admin', false); }).catch(e => toast(e.message));
       return;
     }
     const dv = st.adayData;
@@ -1152,6 +1214,7 @@ const SCREENS = {
     const T = [['aphone','phone','Запись по телефону'], ['aweek','cal','График и отпуска'], ['amasters','users','Мастера'], ['aservices','tag','Услуги и цены'], ['abrand','brush','Оформление']];
     app.innerHTML = `<div class="screen">
       <h2>Админка</h2>
+      ${reschBanner(st.rs)}
       <div class="days">${ds.map((x,i)=>`<div class="day ${i===st.aday?'on':''}" data-ad="${i}"><small>${i===0?'сег.':i===1?'завтра':WD[x.getDay()]}</small><b>${x.getDate()}</b></div>`).join('')}</div>
       <p class="dvsum">${fmtDay(d)} · <b>${total} ${plural(total,'запись','записи','записей')}</b> · работают ${working} из ${dv.masters.length}</p>
       <div class="dvc"><button class="all ${st.am==='all'?'on':''}" data-am="all">Все <em>${total}</em></button>${dv.masters.map(m => `<button class="${st.am===m.id?'on':''} ${m.hours?'':'away'}" data-am="${m.id}"><span class="dvdot" style="background:${esc(m.color)};color:${onColor(m.color || '#8a7a5a')}">${esc(initial(m.name))}</span>${esc(m.name)} <em>${m.hours ? m.bookings.length : '—'}</em></button>`).join('')}</div>
@@ -1169,15 +1232,106 @@ const SCREENS = {
     });
     app.querySelectorAll('[data-back]').forEach(b => b.onclick = async () => {
       try { const r = await post('/api/admin/back', {master: b.dataset.back, from: iso(d)});
-        resetAvail(); st.adayData = null; ADM = null; await reloadCatalog();
+        resetAvail(); st.adayData = null; st.rs = null; ADM = null; await reloadCatalog();
+        const sent = r.offered || [];
+        if (sent.length){
+          const yes = await ask(`${sent.length} ${plural(sent.length, 'клиенту', 'клиентам', 'клиентам')} уже написали в MAX, что мастер не сможет.\nОтправить им «Всё в силе, ждём вас»?`, 'Отправить');
+          await post('/api/admin/still', {ids: sent.map(x => x.id), notify: yes});
+        }
         toast(r.removed ? `Снова работает — открыто дней: ${r.removed}` : 'Снова работает'); go('admin', false);
       } catch(e){ toast(e.message); }
     });
     app.querySelectorAll('[data-cx]').forEach(b => b.onclick = async () => {
       const bk = dv.masters.flatMap(m => m.bookings).find(x => x.id === +b.dataset.cx);
       if (!await ask(`Отменить запись: ${bk.name}, ${bk.time}?${bk.online ? '\nКлиенту придёт сообщение в MAX.' : '\nКлиент без MAX — позвоните ему сами.'}`, 'Отменить запись', true)) return;
-      try { await post('/api/admin/cancel', {id: bk.id, notify: true}); toast('Запись отменена'); resetAvail(); st.adayData = null; go('admin', false); } catch(e){ toast(e.message); }
+      try { await post('/api/admin/cancel', {id: bk.id, notify: true}); toast('Запись отменена'); resetAvail(); st.adayData = null; st.rs = null; go('admin', false); } catch(e){ toast(e.message); }
     });
+  },
+  resched(){
+    if (!st.rs){ loading(); api('/api/admin/resched').then(r => { st.rs = r.items; go('resched', false); }).catch(e => toast(e.message)); return; }
+    const items = st.rs;
+    if (!items.length){
+      app.innerHTML = `<div class="screen"><h2>Нужно перенести</h2><div class="empty">Всех перенесли — больше переносить некого.</div></div>`;
+      setBottom('К расписанию', true, goBack); return;
+    }
+    const days2 = [...new Set(items.map(x => x.day))];
+    const card = x => {
+      const wait = !!x.offered, end = hm(toMinJs(x.time) + x.minutes);
+      const btns = [x.phone ? `<a class="rbtn" href="tel:${esc(x.phone)}">${ic('phone')}Позвонить</a>` : '',
+        `<button class="rbtn pri" data-rm="${x.id}">${ic('arrow')}Перенести</button>`,
+        x.online ? `<button class="rbtn ${wait ? 'gh' : ''}" data-of="${x.id}">${ic('send')}${wait ? 'Ещё раз' : 'Написать в MAX'}</button>` : '',
+        `<button class="rbtn dng" data-rc="${x.id}">${ic('x')}Отменить</button>`].filter(Boolean);
+      return `<div class="rcl ${wait ? 'w' : ''}"><div class="rclh"><div class="tm">${x.time}<span>до ${end}</span></div>
+        <div class="wh"><b>${esc(x.name)}</b><span class="sv">${esc(x.serviceName)} · ${x.price} ₽</span>
+          ${x.phone ? `<a class="ph" href="tel:${esc(x.phone)}">${esc(x.phone)}</a>` : ''}
+          <div class="rmk">${x.online ? `<span class="mk max">в MAX</span>` : '<span class="mk nomax">без MAX</span>'}
+            ${wait ? `<span class="rst wait">${ic('clock')}ждём ответа в MAX</span>` : '<span class="rst none">не связались</span>'}</div>
+          ${wait ? `<div class="rsent">Отправлено ${sentTxt(x.offered)}</div>` : ''}</div></div>
+        <div class="rbtns">${btns.join('')}</div></div>`;
+    };
+    app.innerHTML = `<div class="screen"><h2>Нужно перенести</h2>
+      <p class="rlead">${reschLead(items)}. Сначала спросите клиента — запись меняется только после его ответа.</p>
+      <div class="rprog">${items.map(x => `<i class="${x.offered ? 'w' : ''}"></i>`).join('')}</div>
+      ${days2.map(d => { const list = items.filter(x => x.day === d);
+        return `<div class="rgrp">${fmtDay(fromIso(d))}<span>${list.length} ${plural(list.length, 'клиент', 'клиента', 'клиентов')}</span></div>${list.map(card).join('')}`; }).join('')}
+    </div>`;
+    const refresh = msg => { if (msg) toast(msg); st.rs = null; st.adayData = null; resetAvail(); go('resched', false); };
+    app.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { st.rmId = +b.dataset.rm; st.rmSel = null; go('rmove'); });
+    app.querySelectorAll('[data-of]').forEach(b => b.onclick = async () => {
+      const x = items.find(i => i.id === +b.dataset.of);
+      if (!await ask(`Отправить ${x.name} в MAX сообщение с выбором: дождаться мастера, к другому мастеру или отменить?\nЗапись поменяется, только когда клиент сам нажмёт.`, 'Отправить')) return;
+      try { await post('/api/admin/offer', {ids: [x.id]}); refresh('Отправлено — ждём ответа'); } catch(e){ toast(e.message); }
+    });
+    app.querySelectorAll('[data-rc]').forEach(b => b.onclick = async () => {
+      const x = items.find(i => i.id === +b.dataset.rc);
+      if (!await ask(`Отменить запись: ${x.name}, ${fmtDay(fromIso(x.day))}, ${x.time}?${x.online ? '\nКлиенту придёт сообщение в MAX.' : ''}`, 'Отменить запись', true)) return;
+      try { await post('/api/admin/cancel', {id: x.id, notify: true}); refresh('Запись отменена'); } catch(e){ toast(e.message); }
+    });
+  },
+  rmove(){
+    const x = (st.rs || []).find(i => i.id === st.rmId);
+    if (!x){ goBack(); return; }
+    const s = service(x.service), others = MASTERS.filter(m => m.id !== x.master);
+    if (st.rmAvFor !== x.id){ st.rmAv = {}; st.rmAvFor = x.id; }
+    const miss = s ? [x.master, ...others.map(m => m.id)].filter(id => master(id) && !st.rmAv[id]) : [];
+    if (miss.length){
+      loading('Смотрю свободное время…');
+      Promise.all(miss.map(id => api(`/api/availability?master=${id}&service=${x.service}`).then(j => { st.rmAv[id] = j.days; })))
+        .then(() => go('rmove', false)).catch(e => toast(e.message));
+      return;
+    }
+    const sel = st.rmSel, on = (m, d, t) => sel && sel.m === m && sel.d === d && sel.t === t ? 'on' : '';
+    const slotBtn = (m, d, t, same) => `<button class="slot ${on(m, d, t)} ${same ? 'same' : ''}" data-rs="${m}|${d}|${t}">${t}</button>`;
+    // 1) свой мастер, когда выйдет: первые 2 дня с окнами начиная с дня выхода
+    const own = st.rmAv[x.master] || {}, ownDays = Object.keys(own).sort().filter(d => (!x.backDay || d >= x.backDay) && own[d].length).slice(0, 2);
+    const ownHtml = ownDays.length ? ownDays.map((d, i) => `<div class="ropt"><div class="oh">${fmtDay(fromIso(d))}<span class="pr">${i === 0 && d === x.backDay ? 'первый день после' : own[d].length + ' ' + plural(own[d].length, 'окно', 'окна', 'окон')}</span></div>
+      <div class="slots">${own[d].slice(0, 8).map(t => slotBtn(x.master, d, t, t === x.time)).join('')}</div></div>`).join('')
+      : '<div class="ropt"><div class="rbusy">В ближайшие 2 недели свободных окон нет.</div></div>';
+    // 2) другие мастера в тот же день — у каждого своя цена
+    const othHtml = others.map(m => { const sl = (st.rmAv[m.id] || {})[x.day] || [], same = sl.includes(x.time), L = LEVELS[m.lvl];
+      return `<div class="ropt"><div class="oh"><span class="dvdot" style="background:${esc(m.color)};color:${onColor(m.color || '#8a7a5a')}">${esc(initial(m.name))}</span>${esc(m.name)}${L ? ` · ${esc(L.name)}` : ''}<span class="pr">${s ? price(s, m) : x.price} ₽</span></div>
+        ${sl.length ? `${same ? `<div class="rsame">${ic('check')}В то же время свободен</div>` : `<div class="rbusy">В ${x.time} занят — другое время:</div>`}
+          <div class="slots">${(same ? [x.time, ...sl.filter(t => t !== x.time)] : sl).slice(0, 8).map(t => slotBtn(m.id, x.day, t, t === x.time)).join('')}</div>`
+          : '<div class="rbusy">В этот день свободного времени нет.</div>'}</div>`; }).join('');
+    app.innerHTML = `<div class="screen"><h2>Перенести запись</h2>
+      <div class="rwho"><div class="tx"><b>${esc(x.name)}</b><span>${fmtDay(fromIso(x.day))}, ${x.time} · ${esc(x.masterName)}</span><span>${esc(x.serviceName)} · ${x.price} ₽</span></div>
+        ${x.phone ? `<a class="rcall" href="tel:${esc(x.phone)}" aria-label="Позвонить">${ic('phone')}</a>` : ''}</div>
+      <div class="rhint">${ic('phone')}<div><b>Сначала спросите клиента.</b> Нажмите кнопку внизу, только когда он согласился.</div></div>
+      ${s ? `<div class="rsec"><h3>К мастеру ${esc(x.masterName)}, когда выйдет</h3><p>Цена прежняя — ${x.price} ₽</p></div>${ownHtml}
+      ${others.length ? `<div class="rsec"><h3>К другому мастеру</h3><p>${fmtDay(fromIso(x.day))} · цена — как у этого мастера</p></div>${othHtml}` : ''}` : ''}
+      <div class="rsec"><h3>Клиент не хочет переносить</h3></div>
+      <button class="rcancel" id="rcx">${ic('x')}Отменить запись</button><div style="height:48px"></div></div>`;   // место под подсказку над нижней кнопкой
+    app.querySelectorAll('[data-rs]').forEach(b => b.onclick = () => { const [m, d, t] = b.dataset.rs.split('|'); st.rmSel = {m, d, t}; const y = app.scrollTop; go('rmove', false); app.scrollTop = y; });
+    $('#rcx').onclick = async () => {
+      if (!await ask(`Отменить запись: ${x.name}, ${fmtDay(fromIso(x.day))}, ${x.time}?${x.online ? '\nКлиенту придёт сообщение в MAX.' : ''}`, 'Отменить запись', true)) return;
+      try { await post('/api/admin/cancel', {id: x.id, notify: true}); toast('Запись отменена'); st.rs = null; st.adayData = null; resetAvail(); goBack(); } catch(e){ toast(e.message); }
+    };
+    const mm = sel && master(sel.m);
+    setBottom(sel ? `Перенести: ${fmtDay(fromIso(sel.d))}, ${sel.t} · ${esc(mm ? mm.name : '')}` : 'Выберите время', !!sel, async () => {
+      try { await post('/api/admin/move', {id: x.id, master: sel.m, day: sel.d, time: sel.t});
+        toast(x.online ? 'Перенесено — клиенту ушло сообщение в MAX' : 'Перенесено'); st.rs = null; st.adayData = null; st.rmSel = null; resetAvail(); goBack();
+      } catch(e){ toast(e.message); if (/занял/.test(e.message)){ st.rmAvFor = null; st.rmSel = null; go('rmove', false); } }
+    }, x.online ? 'Клиенту придёт сообщение в MAX' : 'Клиент без MAX — скажите ему новое время по телефону');
   },
   asick(){
     const m = master(st.amaster) || {name:'Мастер'}, d = days()[st.aday || 0];
@@ -1199,23 +1353,11 @@ const SCREENS = {
     setBottom(`Закрыть ${n} ${plural(n,'день','дня','дней')}`, true, async () => {
       try {
         const r = await post('/api/admin/exception', {master: st.amaster, from: iso(d), days: n, kind:'off', note: st.sickWhy});
-        st.affected = r.affected; st.sickN = null; resetAvail(); st.adayData = null; ADM = null; await reloadCatalog(); go('asickDone');
+        st.sickN = null; resetAvail(); st.adayData = null; st.rs = null; ADM = null; await reloadCatalog();
+        if (r.affected.length){ toast(`Дни закрыты. Перенесите клиентов: ${r.affected.length}`); hist = ['home', 'admin']; go('resched'); }
+        else { toast('Дни закрыты — записей на них не было'); hist = ['home']; go('admin'); }
       } catch(e){ toast(e.message); }
     });
-  },
-  asickDone(){
-    const m = master(st.amaster) || {name:''}, list = st.affected || [];
-    const online = list.filter(b => b.online);
-    app.innerHTML = `<div class="screen"><h2>Готово: ${esc(m.name)} — дни закрыты</h2>
-      ${list.length ? `<p class="rate">Под это попали записи (${list.length}):</p>
-        ${list.map(b => `<div class="brow"><div class="tm">${b.time}</div><div class="who">${esc(b.name)}<span>${fmtDay(fromIso(b.day))} · ${esc(b.serviceName)}${b.online?' · в MAX':b.phone?' · ☎️ '+esc(b.phone):' · без MAX'}</span></div></div>`).join('')}
-        <p class="note2">Клиентам в MAX бот предложит: к другому свободному мастеру в то же время (цена прежняя), выбрать другое время или отменить. Клиентам без MAX позвоните сами.</p>`
-        : `<div class="empty">Записей на эти дни не было — никого предупреждать не надо.</div>`}
-    </div>`;
-    if (online.length) setBottom(`📩 Предложить варианты (${online.length})`, true, async () => {
-      try { const r = await post('/api/admin/offer', {ids: online.map(b => b.id)}); toast(`Отправлено клиентам: ${r.sent}`); hist = ['home','admin']; go('admin', false); } catch(e){ toast(e.message); }
-    });
-    else setBottom('К расписанию', true, () => { hist = ['home','admin']; go('admin', false); });
   },
   amasters(){
     if (!ADM){ loading(); loadAdm().then(() => go('amasters', false)).catch(e => toast(e.message)); return; }
@@ -1269,7 +1411,7 @@ const SCREENS = {
     };
     setBottom('Сохранить', true, async () => {
       try { await post('/api/admin/master', {id: st.em, name: $('#fn').value, lvl: st.elvl, exp: $('#fe').value, active: $('#fa').checked});
-        await loadAdm(); await reloadCatalog(); st.adayData = null; st.elvlFor = null; toast('Сохранено'); goBack(); } catch(e){ toast(e.message); }
+        await loadAdm(); await reloadCatalog(); st.adayData = null; st.rs = null; st.elvlFor = null; toast('Сохранено'); goBack(); } catch(e){ toast(e.message); }
     });
   },
   abrand(){
@@ -1419,9 +1561,9 @@ const SCREENS = {
     app.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const i = +b.dataset.t; const w = read();
       if (w[i]) delete w[i]; else w[i] = {start:'10:00', end:'20:00', breakStart:'14:00', breakEnd:'14:30'};
       m.week = w; go('aweek', false); });
-    app.querySelectorAll('[data-de]').forEach(b => b.onclick = async () => { try { await post('/api/admin/exception/delete', {id: +b.dataset.de}); await loadAdm(); resetAvail(); st.adayData = null; go('aweek', false); } catch(e){ toast(e.message); } });
+    app.querySelectorAll('[data-de]').forEach(b => b.onclick = async () => { try { await post('/api/admin/exception/delete', {id: +b.dataset.de}); await loadAdm(); resetAvail(); st.adayData = null; st.rs = null; go('aweek', false); } catch(e){ toast(e.message); } });
     setBottom('Сохранить график', true, async () => {
-      try { await post('/api/admin/week', {master: st.wm, week: read()}); await loadAdm(); resetAvail(); st.adayData = null; toast('График сохранён'); } catch(e){ toast(e.message); }
+      try { await post('/api/admin/week', {master: st.wm, week: read()}); await loadAdm(); resetAvail(); st.adayData = null; st.rs = null; toast('График сохранён'); } catch(e){ toast(e.message); }
     });
   },
   aphone(){
@@ -1450,7 +1592,7 @@ const SCREENS = {
     setBottom(st.pt ? `Записать на ${st.pt}` : 'Выберите время', !!st.pt, async () => {
       keep();
       try { await post('/api/admin/booking', {master: m.id, service: s.id, day: iso(ds[st.pday]), time: st.pt, name: st.pname, phone: st.pphone});
-        toast('Записано'); resetAvail(); st.adayData = null; st.pt = null; st.pname = st.pphone = ''; hist = ['home','admin']; go('admin', false);
+        toast('Записано'); resetAvail(); st.adayData = null; st.rs = null; st.pt = null; st.pname = st.pphone = ''; hist = ['home','admin']; go('admin', false);
       } catch(e){ toast(e.message); }
     });
   },
@@ -1566,6 +1708,8 @@ boot().then(() => { if (MAX){
   hist = []; go('home');
   const sp = MAX.initDataUnsafe && MAX.initDataUnsafe.start_param;
   if (sp === 'mine') go('mine');
+  const other = /^other_(\d+)$/.exec(sp || ''), ob = other && bookings.find(b => b.id === +other[1]);
+  if (ob){ st = {service: ob.service, replace: ob.id, excl: ob.master}; go('pickMaster'); }
 }});
 </script>
 </body>
