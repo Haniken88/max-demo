@@ -3,18 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Барбершоп — демо мини-приложения</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700&family=Cormorant+Garamond:ital,wght@0,600;1,600;1,700&family=Fira+Sans+Extra+Condensed:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0f0f12; --card:#1a1a20; --card2:#22222a; --line:#2c2c36;
   --text:#f2f0ea; --muted:#9b98a6; --gold:#d9a650; --gold2:#f0c878;
   --ok:#4cc38a; --danger:#e5646a; --max:#7b5cff;
+  --on-acc:#1a1206; --tint:#2a2316; --plate:#18161a; --gold-deep:#a8732a; --ink:#d9a650;
   --r:16px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+::selection{background:color-mix(in srgb,var(--gold) 45%,transparent);color:#fff}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 html,body{margin:0;height:100%}
-body{background:#060608;color:var(--text);font:15px/1.4 -apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+body{background:#060608;color:var(--text);font:15px/1.4 Manrope,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   display:flex;align-items:center;justify-content:center;gap:40px;padding:24px}
 .note{max-width:300px;color:var(--muted);font-size:14px}
 .note b{color:var(--text)}
@@ -31,14 +39,14 @@ body.inmax .maxbar{display:none}
   .phone{width:100%;height:100vh;max-height:none;border:0;border-radius:0;box-shadow:none}
 }
 /* верхняя полоса MAX */
-.maxbar{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;background:#141418;border-bottom:1px solid var(--line);flex:none}
-.maxbar .back{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--text);background:transparent;border:0;font-size:20px;cursor:pointer}
+.maxbar{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;background:var(--bg);border-bottom:1px solid var(--line);flex:none}
+.maxbar .back{width:44px;height:44px;margin:-6px 0 -6px -10px;border-radius:50%;display:grid;place-items:center;color:var(--text);background:transparent;border:0;font-size:20px;cursor:pointer}
 .maxbar .back[hidden]{visibility:hidden;display:grid}
 .maxbar .ttl{flex:1;min-width:0}
 .maxbar .ttl b{display:block;font-size:15px}
 .maxbar .ttl span{font-size:12px;color:var(--muted)}
 .maxbar .close{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:none;cursor:pointer}
-.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#8a5a1c);display:grid;place-items:center;font-weight:800;color:#1a1206}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--gold);display:grid;place-items:center;font-weight:800;color:var(--on-acc)}
 /* чат */
 .chat[hidden],.app[hidden],.bottom[hidden]{display:none!important}
 .chat{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0c0c10}
@@ -56,18 +64,26 @@ h2{font-size:18px;margin:18px 0 10px}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .qbtn{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:left;color:var(--text);cursor:pointer;font-size:14px}
 .qbtn i{font-style:normal;font-size:20px;display:block;margin-bottom:4px}
-.qbtn.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--gold),#a8732a);color:#1a1206;border:0;font-weight:700}
-.hscroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
-.hscroll::-webkit-scrollbar{display:none}
+.qbtn.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:var(--on-acc);border:0;font-weight:700}
 .mcard{flex:none;width:118px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;cursor:pointer;text-align:center}
 .ava{width:72px;height:72px;border-radius:50%;margin:2px auto 8px;display:grid;place-items:center;font-size:24px;font-weight:800;color:#fff;position:relative}
 .ava.sm{width:52px;height:52px;font-size:18px;margin:0}
 .mcard b{display:block;font-size:14px}
 .lvl{display:inline-block;font-size:11px;border-radius:999px;padding:2px 8px;margin-top:3px}
 .lvl.top{background:#3b2c12;color:var(--gold2)}
-.lvl.senior{background:#2b2440;color:#c4b5ff}
+.lvl.senior{background:#26292e;color:#c9d1dc}
 .lvl.mid{background:#1d2c38;color:#8fd0ff}
 .lvl.junior{background:#1c3226;color:#8fe0b2}
+.lvl.l5{background:#33221c;color:#ffb38f}.lvl.l6{background:#2c2c2c;color:#d0d0d0}
+.mchips2{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 12px;padding:0 16px 2px;scrollbar-width:none}.mchips2::-webkit-scrollbar{display:none}
+.mchips2 .mc{flex:none;display:flex;gap:7px;align-items:center;padding:6px 12px 6px 6px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:14px;cursor:pointer}
+.mchips2 .mc.all{padding-left:12px}.mchips2 .mc i{font-style:normal;color:var(--muted);font-size:12px}
+.mchips2 .mc.on{border-color:var(--ink);background:var(--tint)}.mchips2 .mc.on i{color:var(--gold2)}
+.mchips2 .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:12px}
+.free{border:1px dashed var(--line);border-radius:12px;padding:8px 12px;margin-bottom:8px;color:var(--muted);font-size:13px}
+.icons{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:6px}
+.icons div{aspect-ratio:1;border-radius:12px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;font-size:22px;cursor:pointer}
+.icons div.on{border-color:var(--ink);background:var(--tint)}
 .rate{font-size:12px;color:var(--muted);margin-top:4px}
 .cats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center}
@@ -90,18 +106,18 @@ h2{font-size:18px;margin:18px 0 10px}
 .pcard .body .info{flex:1;min-width:0}
 .pcard .body b{display:block;font-size:16px}
 .pcard .body span{font-size:12px;color:var(--muted)}
-.row.sel{border-color:var(--gold)}
+.row.sel{border-color:var(--ink)}
 .days{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
 .days::-webkit-scrollbar{display:none}
 .day{flex:none;width:54px;border-radius:14px;background:var(--card);border:1px solid var(--line);padding:8px 0;text-align:center;cursor:pointer}
 .day small{display:block;font-size:11px;color:var(--muted)}
 .day b{font-size:17px}
-.day.on{background:var(--gold);color:#1a1206;border-color:var(--gold)}
-.day.on small{color:#3b2a10}
+.day.on{background:var(--gold);color:var(--on-acc);border-color:var(--ink)}
+.day.on small{color:inherit;opacity:.8}
 .day.off{opacity:.35;cursor:default}
 .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
-.slot{padding:10px 0;border-radius:12px;background:var(--card);border:1px solid var(--line);text-align:center;cursor:pointer;font-weight:600;font-size:14px;color:var(--text)}
-.slot.on{background:var(--gold);color:#1a1206;border-color:var(--gold)}
+.slot{padding:12px 0;min-height:46px;border-radius:12px;background:var(--card);border:1px solid var(--line);text-align:center;cursor:pointer;font-weight:600;font-size:14px;color:var(--text)}
+.slot.on{background:var(--gold);color:var(--on-acc);border-color:var(--ink)}
 .empty{color:var(--muted);font-size:14px;padding:14px;background:var(--card);border-radius:14px;margin-top:12px}
 .summary{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
 .summary .line{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
@@ -109,7 +125,7 @@ h2{font-size:18px;margin:18px 0 10px}
 .summary .line span{color:var(--muted)}
 label.inp{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
 label.inp select{display:block;width:100%;margin-top:6px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:16px}
-.adminbtn{margin-top:14px;width:100%;padding:12px;border-radius:14px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-weight:700;font-size:15px;cursor:pointer}
+.adminbtn{margin-top:14px;width:100%;padding:12px;border-radius:14px;border:1px solid var(--ink);background:transparent;color:var(--ink);font-weight:700;font-size:15px;cursor:pointer}
 .mhead{display:flex;align-items:center;gap:10px;margin:16px 0 8px}
 .mhead b{font-size:16px;flex:1}
 .chipst{font-size:12px;border-radius:999px;padding:3px 10px;background:var(--card2);color:var(--muted)}
@@ -119,7 +135,7 @@ label.inp select{display:block;width:100%;margin-top:6px;padding:12px;border-rad
 .brow .tm{font-weight:800;min-width:46px}
 .brow .who{flex:1;min-width:0;font-size:14px}
 .brow .who span{display:block;font-size:12px;color:var(--muted)}
-.brow .x{border:0;background:transparent;color:var(--danger);font-size:18px;cursor:pointer;padding:4px 6px}
+.brow .x{border:0;background:transparent;color:var(--danger);font-size:18px;cursor:pointer;min-width:44px;min-height:44px;margin:-8px -8px -8px 0}
 .ok{color:#5fd39a;font-size:12px}
 .agrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 .wrow{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
@@ -127,32 +143,30 @@ label.inp select{display:block;width:100%;margin-top:6px;padding:12px;border-rad
 .wrow .tms{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 .wrow .tsel{padding:7px 6px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:15px}
 .tgl{border:1px solid var(--line);background:var(--card2);color:var(--muted);border-radius:9px;padding:6px 10px;font-size:13px;cursor:pointer}
-.tgl.on{border-color:var(--gold);color:var(--gold)}
+.tgl.on{border-color:var(--ink);color:var(--ink)}
 .lvls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
 .lvls div{padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--card);text-align:center;cursor:pointer;font-size:14px;color:var(--text)}
-.lvls div.on{border-color:var(--gold);background:#2a2a1e}
+.lvls div.on{border-color:var(--ink);background:var(--tint)}
 .mchips{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 8px;scrollbar-width:none}
 .mchips::-webkit-scrollbar{display:none}
 .mchips div{flex:none;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);cursor:pointer;font-size:14px}
-.mchips div.on{border-color:var(--gold);color:var(--gold)}
+.mchips div.on{border-color:var(--ink);color:var(--ink)}
 .note2{font-size:12px;color:var(--muted);margin-top:8px}
 label.inp input{display:block;width:100%;margin-top:6px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:16px}
 .check{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:14px;color:var(--muted)}
 .check input{width:20px;height:20px;accent-color:var(--gold)}
-.bottom{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 22px;background:linear-gradient(transparent,var(--bg) 30%);pointer-events:none}
-.bottom button{pointer-events:auto;width:100%;padding:15px;border-radius:14px;border:0;background:var(--gold);color:#1a1206;font-weight:800;font-size:16px;cursor:pointer}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:12px 16px calc(22px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 30%);pointer-events:none}
+.bottom button{pointer-events:auto;width:100%;padding:15px;border-radius:14px;border:0;background:var(--gold);color:var(--on-acc);font-weight:800;font-size:16px;cursor:pointer}
 .bottom button:disabled{background:#3a3a44;color:#777}
 .bottom .hint{text-align:center;font-size:12px;color:var(--muted);margin-bottom:8px}
 .tabs{display:flex;gap:8px;margin-top:14px}
 .tab{flex:1;padding:9px;border-radius:12px;background:var(--card);border:1px solid var(--line);text-align:center;cursor:pointer;font-size:14px;color:var(--muted)}
-.tab.on{color:var(--text);border-color:var(--gold)}
-.done{text-align:center;padding-top:30px}
-.done .big{width:84px;height:84px;border-radius:50%;background:#173326;color:var(--ok);display:grid;place-items:center;font-size:42px;margin:0 auto 14px}
+.tab.on{color:var(--text);border-color:var(--ink)}
 .bookcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:10px}
 .bookcard b{display:block}
 .bookcard span{font-size:13px;color:var(--muted)}
 .bookcard .acts{display:flex;gap:8px;margin-top:10px}
-.bookcard .acts button{flex:1;padding:9px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer;font-size:13px}
+.bookcard .acts button{flex:1;padding:12px 9px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer;font-size:13px}
 .bookcard .acts .red{color:var(--danger)}
 .toast{position:absolute;left:16px;right:16px;top:70px;background:#26262e;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px;
   box-shadow:0 10px 30px rgba(0,0,0,.5);transform:translateY(-20px);opacity:0;transition:.25s;pointer-events:none;z-index:5}
@@ -160,6 +174,265 @@ label.inp input{display:block;width:100%;margin-top:6px;padding:12px;border-radi
 .demo{font-size:11px;color:var(--muted);text-align:center;margin-top:24px}
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
 .gal div{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;font-size:26px}
+.gal .ph{background-size:cover;background-position:center;position:relative;cursor:pointer}
+.gal .ph .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:#000a;color:#fff;font-size:13px;cursor:pointer}
+.gal .add{border:1px dashed var(--gold);color:var(--ink);font-size:30px;cursor:pointer}
+.phedit .pic{aspect-ratio:16/10;border-radius:14px;background-size:cover;background-position:center;background-color:var(--card2);display:grid;place-items:center;color:var(--muted);font-size:13px}
+.btn2{display:flex;gap:8px}.btn2 .adminbtn{flex:1}
+.adminbtn.red{border-color:#5a2a2e;color:#ff9aa0}
+.lb{position:fixed;inset:0;background:#000e;display:grid;place-items:center;z-index:50;padding:16px}.lb img{max-width:100%;max-height:100%;border-radius:12px}
+.stepper{display:flex;align-items:center;justify-content:center;gap:18px;margin:16px 0 6px}
+.stepper button{width:56px;height:56px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:28px;cursor:pointer}
+.stepper div{min-width:110px;text-align:center}.stepper b{display:block;font-size:40px;line-height:1}.stepper span{color:var(--muted);font-size:14px}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.chips div{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:14px;cursor:pointer}
+.chips div.on{border-color:var(--ink);color:var(--gold2)}
+/* кабинет владельца сервиса: верх как макет B, салоны карточками как макет A */
+.money{background:linear-gradient(135deg,var(--tint),var(--card) 70%);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:6px}
+.money small{color:var(--gold2);font-size:13px}.money .big{font-size:34px;font-weight:800;margin:2px 0 10px}
+.money .stats{display:flex;gap:18px;color:var(--muted);font-size:13px}.money .stats b{display:block;color:var(--text);font-size:18px}
+.alert{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:3px solid #e6b84a;border-radius:12px;padding:12px;margin-bottom:8px}
+.alert.r{border-left-color:#e0605e}.alert b{display:block;font-size:14px}.alert span{color:var(--muted);font-size:13px}.alert i{font-style:normal;font-size:20px}
+.alert button{margin-left:auto;flex:none;background:none;border:1px solid var(--ink);color:var(--ink);border-radius:10px;padding:7px 10px;font-weight:700;font-size:13px;cursor:pointer}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;cursor:pointer}
+.scard.off{opacity:.55}
+.scard .top{display:flex;gap:12px;align-items:center}.scard .top>div:nth-child(2){min-width:0}.scard .top b{font-size:16px;display:block}
+.scard .top span{color:var(--muted);font-size:13px}.scard .top .chip{margin-left:auto}
+.sava{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:18px;color:#fff}
+.chip{font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.chip.ok{background:#1f3a2b;color:#4fbf7f}.chip.warn{background:#3a3020;color:#e6b84a}.chip.bad{background:#3a2022;color:#e0605e}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.nums div{background:var(--card2);border-radius:10px;padding:8px 10px}.nums small{color:var(--muted);font-size:12px;display:block}.nums b{font-size:15px}
+.steps{margin:6px 0 4px 18px;color:var(--muted);font-size:13px}.steps li{margin-bottom:4px}
+.real .demo,.real .demoonly{display:none}
+.themed .lvl{background:var(--tint) !important;color:var(--ink) !important}   /* уровни — в тон салона, без разноцветья */
+/* ---------- оформление салона: 4 стиля (Вывеска, Клуб, Кожа и медь, Студия) — как mockups/imp-7-styles.html ---------- */
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;display:block}
+.sign{position:relative;overflow:hidden;margin:0 -16px}
+.sign .wall,.sign .wall svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sign .wall .ov{position:absolute;inset:0}
+.sign .wall.photo{background-size:cover;background-position:center}
+.sign::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(0,0,0,.2),transparent 26%,transparent 60%,var(--bg) 99%),radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.3))}
+.plate{position:relative;z-index:2;text-align:center;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 48px)}
+.plate .mark{margin:0 auto;display:block;color:var(--ink)}
+.plate img.mark,.cd img.mark{border-radius:50%;object-fit:cover}
+.mark.letter{display:grid;place-items:center;border:1.5px solid currentColor;border-radius:50%;font:700 19px/1 "Playfair Display",Georgia,serif}
+.plate .nm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:balance;overflow-wrap:anywhere}
+.plate .kind{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.plate.f-serif .nm,.cd.f-serif .top .nm{font-family:"Playfair Display",Georgia,serif;font-weight:700}
+.f-fine .nm{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-style:italic}.plate.f-fine .nm{font-size:36px}.cd.f-fine .top .nm{font-size:28px}
+.f-cond .nm{font-family:"Fira Sans Extra Condensed","Arial Narrow",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em}.plate.f-cond .nm{font-size:33px}.cd.f-cond .top .nm{font-size:24px}
+.hbody{position:relative;z-index:3}
+.where{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);justify-content:center;margin-bottom:14px;text-align:center}
+.where svg.i{width:15px;height:15px;color:var(--ink)}
+.cta{width:100%;min-height:60px;display:flex;align-items:center;gap:12px;text-align:left;padding:9px 18px 9px 20px;background:var(--gold);color:var(--on-acc);border:0;cursor:pointer}
+.cta .tx{flex:1;line-height:1.2}.cta b{display:block;font-weight:800;font-size:17px}.cta small{display:block;font-weight:600;font-size:13px;opacity:.86}
+.cta>svg.i{width:22px;height:22px}.cta .ci{display:none}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.qk{background:var(--card);border:1px solid var(--line);color:var(--text);cursor:pointer;font-weight:600}
+.qk svg.i{color:var(--ink)}
+.sec{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 10px}.sec h2{margin:0;font-size:17px;font-weight:800}
+.sec a{font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;padding:6px 0}
+.strip{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}
+.strip>*{cursor:pointer}
+.lst{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.li{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 12px;border-top:1px solid var(--line);cursor:pointer}
+.li:first-child{border-top:0}
+.li .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--card2);font-size:18px}
+.li .tx{flex:1;min-width:0;line-height:1.25}.li .tx b{display:block;font-weight:700;font-size:15px}.li .tx span{font-size:12.5px;color:var(--muted)}
+.li .chev{width:18px;height:18px;color:var(--muted)}
+.owner{display:flex;gap:8px;margin-top:22px}
+.owner button{flex:1;min-height:44px;border-radius:12px;border:1px dashed var(--line);background:transparent;color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.owner svg.i{width:17px;height:17px;color:var(--ink)}
+/* 1. Вывеска */
+.st-sign .sign{min-height:250px;padding:34px 0 70px}
+.st-sign .plate{min-width:236px;padding:16px 30px 14px;border-radius:6px;background:var(--plate);color:var(--text);--screw:#7d776e;
+  box-shadow:inset 0 0 0 5px var(--plate),inset 0 0 0 6px color-mix(in srgb,var(--ink) 55%,transparent),0 1px 0 rgba(255,255,255,.06),0 14px 30px rgba(0,0,0,.45),0 3px 6px rgba(0,0,0,.3)}
+.st-sign .plate::before,.st-club .plate::before,.cd-sign::before{content:"";position:absolute;inset:0;border-radius:6px;pointer-events:none;
+  background:radial-gradient(circle at 12px 12px,var(--screw) 0 2.2px,transparent 2.8px),radial-gradient(circle at calc(100% - 12px) 12px,var(--screw) 0 2.2px,transparent 2.8px),
+    radial-gradient(circle at 12px calc(100% - 12px),var(--screw) 0 2.2px,transparent 2.8px),radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),var(--screw) 0 2.2px,transparent 2.8px)}
+.st-sign .plate .mark{width:46px;height:46px;margin-bottom:6px}
+.st-sign .plate .nm{font-size:31px;line-height:1.05;letter-spacing:.01em}
+.st-sign .plate .kind{margin-top:6px}
+.st-sign .hbody{margin-top:-34px}
+.st-sign .cta{border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 20px rgba(0,0,0,.35)}
+.st-sign .qk{min-height:64px;border-radius:12px;padding:10px 11px;font-size:13.5px;text-align:left;line-height:1.2}
+.st-sign .qk svg.i{margin-bottom:6px}
+.st-sign .mm{flex:none;width:128px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 8px 10px;text-align:center}
+.st-sign .av{width:60px;height:60px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px color-mix(in srgb,var(--ink) 60%,transparent)}
+.st-sign .mm b{display:block;font-size:14px}
+.st-sign .mm em{display:block;font-style:normal;font-size:12px;color:var(--ink);font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-sign .mm span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+/* 2. Клуб */
+.st-club .sign{min-height:214px;padding:26px 0 58px}
+.st-club .plate{min-width:230px;padding:15px 30px 13px;border-radius:6px;background:var(--plate);color:var(--text);--screw:#857c6f;
+  box-shadow:inset 0 0 0 5px var(--plate),inset 0 0 0 6px color-mix(in srgb,var(--ink) 55%,transparent),0 1px 0 rgba(255,255,255,.06),0 14px 30px rgba(0,0,0,.5),0 3px 6px rgba(0,0,0,.35)}
+.st-club .plate .mark{width:40px;height:40px;margin-bottom:5px}
+.st-club .plate .nm{font:700 31px/1.08 "Playfair Display",Georgia,serif;letter-spacing:.01em}
+.st-club .plate .kind{margin-top:6px}
+.st-club .hbody{margin-top:-30px}
+.st-club .cta{border-radius:15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.18),0 10px 22px rgba(0,0,0,.45)}
+.st-club .qk{min-height:56px;display:flex;align-items:center;gap:11px;padding:0 12px;border-radius:13px;font-weight:700;font-size:14px;line-height:1.2;text-align:left}
+.st-club .qk .ib2{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;
+  background:color-mix(in srgb,var(--gold) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 30%,transparent)}
+.st-club .qk svg.i{width:19px;height:19px}
+.st-club .mm{flex:none;width:118px;padding:14px 8px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;text-align:center}
+.medal{position:relative;width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:var(--plate);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 55%,transparent),inset 0 0 0 4px var(--plate),inset 0 0 0 5px color-mix(in srgb,var(--ink) 18%,transparent),0 4px 10px rgba(0,0,0,.35)}
+.medal b{font:700 27px/1 "Playfair Display",Georgia,serif;color:var(--ink)}
+.medal i,.lvb{position:absolute;right:-3px;bottom:-2px;width:24px;height:24px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-style:normal;font-size:12.5px;box-shadow:0 0 0 2px var(--bg)}
+.st-club .mm .n{font-weight:800;font-size:15px;margin-top:10px}
+.st-club .mm .lv,.st-studio .mm .lv{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.st-club .mm .ex,.st-studio .mm .ex{font-size:12px;color:var(--muted);margin-top:2px}
+/* 3. Кожа и медь */
+.st-leather .sign{min-height:168px;padding:26px 0 44px}
+.stitch{position:absolute;left:10px;right:10px;top:10px;height:0;border-top:1.5px dashed rgba(230,190,150,.28);z-index:1}
+.brass{background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),linear-gradient(100deg,#9c763c 0%,#e3c98f 24%,#b48e52 46%,#e3c98f 66%,#6f5226 100%)}
+.st-leather .plate{min-width:232px;padding:14px 30px 12px;border-radius:5px;
+  box-shadow:inset 0 1px 0 rgba(255,245,215,.6),inset 0 -1px 0 rgba(60,40,10,.5),0 14px 28px rgba(0,0,0,.5),0 2px 5px rgba(0,0,0,.4)}
+.st-leather .plate::before{content:"";position:absolute;inset:6px;border-radius:2px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(58,38,12,.55),0 1px 0 rgba(255,240,205,.45)}
+.st-leather .plate::after{content:"";position:absolute;inset:0;border-radius:5px;pointer-events:none;--s:#5a4220;
+  background:radial-gradient(circle at 13px 50%,#f0dcae 0 1px,var(--s) 1.2px 2.6px,transparent 3.2px),radial-gradient(circle at calc(100% - 13px) 50%,#f0dcae 0 1px,var(--s) 1.2px 2.6px,transparent 3.2px)}
+.st-leather .engr,.st-leather .plate .mark,.st-leather .plate .kind{color:#3b2810;text-shadow:0 1px 0 rgba(255,241,206,.55),0 -1px 0 rgba(40,24,6,.35)}
+.st-leather .plate .mark{width:30px;height:30px;margin-bottom:3px}.st-leather .plate .mark.letter{font-size:15px}
+.st-leather .plate .nm{font:italic 700 33px/1.02 "Cormorant Garamond",Georgia,serif}
+.st-leather .plate .kind{margin-top:6px;font-size:10px;letter-spacing:.22em}
+.st-leather .hbody{margin-top:-20px}
+.st-leather .cta{border-radius:15px;padding:9px 18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.18),0 10px 22px rgba(0,0,0,.4)}
+.st-leather .quick{grid-template-columns:repeat(4,1fr)}
+.st-leather .qk{min-height:76px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 4px;font-size:12px;font-weight:700;line-height:1.15;text-align:center}
+.st-leather .qk svg.i{width:22px;height:22px}
+.st-leather .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px;margin:0;padding:0;overflow:visible}
+.chair{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
+.chback{position:relative;width:70px;height:78px;border-radius:35px 35px 12px 12px;overflow:hidden;
+  background:radial-gradient(circle,rgba(0,0,0,.55) 0 1.4px,transparent 2.2px) 0 0/14px 14px,radial-gradient(circle,rgba(0,0,0,.55) 0 1.4px,transparent 2.2px) 7px 7px/14px 14px,
+    radial-gradient(90% 70% at 40% 20%,rgba(255,215,175,.22),transparent 70%),linear-gradient(#5b3a26,#3a2418);
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,220,180,.18),0 6px 14px rgba(0,0,0,.45)}
+.chback::before{content:"";position:absolute;inset:5px 5px auto;height:calc(100% - 10px);border-radius:30px 30px 8px 8px;border:1.5px dashed rgba(240,200,160,.22)}
+.chback .mono{position:absolute;inset:0;display:grid;place-items:center;font:italic 700 34px/1 "Cormorant Garamond",Georgia,serif;color:#ecd4a4;text-shadow:0 1px 0 rgba(0,0,0,.6)}
+.chback .chl{position:absolute;right:3px;bottom:3px;width:24px;height:24px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:12px;box-shadow:0 0 0 1px var(--line)}
+.chair .n{font-weight:800;font-size:14px;margin-top:7px;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chair .lv{font-size:12px;color:var(--muted);line-height:1.2;margin-top:1px}
+/* 4. Студия */
+.st-studio .sign{min-height:196px;padding:20px 0;display:grid;place-items:center}
+.st-studio .plate{left:auto;transform:none;width:236px;padding:16px 18px 14px;background:var(--plate);border-radius:6px;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 12px 26px rgba(0,0,0,.5),0 2px 5px rgba(0,0,0,.4)}
+.st-studio .plate::before{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb,var(--ink) 45%,transparent);border-radius:3px;pointer-events:none}
+.st-studio .plate .mark{width:34px;height:34px;margin-bottom:4px}
+.st-studio .plate .nm{font:italic 600 40px/1 "Cormorant Garamond",Georgia,serif;color:var(--text)}
+.st-studio .plate .kind{margin-top:7px}
+.st-studio .where{margin:2px 0 16px}
+.st-studio .cta{min-height:66px;border-radius:18px;gap:14px;padding:0 18px;box-shadow:0 10px 22px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.12) inset}
+.st-studio .cta .ci{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.st-studio .cta .ci svg.i{width:22px;height:22px}.st-studio .cta b{font-size:19px}.st-studio .cta small{font-size:12.5px}
+.st-studio .quick{gap:10px}
+.st-studio .qk{min-height:50px;border-radius:14px;display:flex;align-items:center;gap:10px;padding:0 12px;font-size:14px;font-weight:700;text-align:left}
+.st-studio .sec h2{font-size:18px}
+.st-studio .mm{width:118px;flex:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 10px 10px;text-align:center;position:relative}
+.stav{position:relative;width:58px;height:58px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;font:italic 600 28px/1 "Cormorant Garamond",Georgia,serif;color:#f3ebe8;
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c) 70%,#fff 10%),color-mix(in srgb,var(--c) 45%,#120e0f));box-shadow:0 0 0 1px var(--line)}
+.st-studio .mm b{display:block;font-size:15px}
+/* длинное название — чуть мельче, до 2 строк */
+.st-sign .plate.long .nm,.st-club .plate.long .nm{font-size:25px}
+.plate.long.f-fine .nm{font-size:29px}.plate.long.f-cond .nm{font-size:26px}
+.st-leather .plate.long .nm{font-size:27px}.st-studio .plate.long .nm{font-size:31px}
+/* «Вы записаны» — карточка салона по стилю */
+.dhead{display:flex;gap:12px;align-items:center;margin:18px 0 14px}
+.dhead .okc{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--tint);color:var(--ink);flex:none}
+.dhead h2{margin:0;font-size:22px}.dhead span{font-size:13px;color:var(--muted)}
+.cd{position:relative;width:336px;max-width:100%;margin:0 auto;padding:18px 20px 16px;border-radius:4px;transform:rotate(-1.3deg)}
+.cd .grain{position:absolute;inset:0;pointer-events:none;border-radius:4px;overflow:hidden}
+.cd .grain svg{width:100%;height:100%;display:block}
+.cd .top{display:flex;align-items:center;gap:10px;padding-bottom:12px;position:relative}
+.cd .top .mark{width:30px;height:30px;flex:none}.cd .top .mark.letter{font-size:15px}
+.cd .top .nm{font-size:25px;line-height:1.05;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:balance}
+.cd .top .kind{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-left:auto;text-align:right;line-height:1.5;flex:none;max-width:45%}
+.cd .ttl{font-size:13px;line-height:1;letter-spacing:.22em;text-transform:uppercase;text-align:center;margin:15px 0 4px;position:relative}
+.cd .fld{display:grid;grid-template-columns:70px 1fr;align-items:end;gap:8px;padding-top:10px;position:relative}
+.cd .fld>span{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-bottom:5px}
+.cd .fld>b{font:700 25px/1.05 Caveat,cursive;padding:0 2px 3px;min-height:30px}
+.cd .fld.big>b{font-size:31px}
+.cd .foot{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding-top:10px;font-size:12px;position:relative}
+.cd.long .top .nm{font-size:20px}
+.cd-sign{transform:none;border-radius:6px;background:var(--plate);color:var(--text);--screw:#7d776e;
+  box-shadow:inset 0 0 0 5px var(--plate),inset 0 0 0 6px color-mix(in srgb,var(--ink) 55%,transparent),0 14px 30px rgba(0,0,0,.45);padding:22px 26px 18px}
+.cd-sign .top{border-bottom:1px solid var(--line)}
+.cd-sign .top .mark,.cd-sign .ttl{color:var(--ink)}
+.cd-sign .top .kind,.cd-sign .fld>span,.cd-sign .foot{color:var(--muted)}
+.cd-sign .ttl{font-weight:800}
+.cd-sign .fld>b{font:800 20px/1.1 Manrope,sans-serif;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.cd-sign .fld.big>b{font-size:24px}
+.cd-sign .foot{border-top:1px solid var(--line)}
+.cd-club{background:#f6efe1;color:#2a241c;box-shadow:0 1px 1px rgba(0,0,0,.25),0 16px 34px rgba(0,0,0,.6),0 3px 6px rgba(0,0,0,.35)}
+.cd-club .grain{opacity:.4;mix-blend-mode:multiply}
+.cd-club .top{border-bottom:1.5px solid var(--foil)}
+.cd-club .top .mark,.cd-club .ttl{color:var(--foil)}
+.cd-club .top .nm,.cd-club .ttl{font-family:"Playfair Display",Georgia,serif;font-weight:700}
+.cd-club .top .kind,.cd-club .fld>span,.cd-club .foot{color:#5f5547}
+.cd-club .fld>b{color:#1f3a63;border-bottom:1px dotted rgba(42,36,28,.5)}
+.cd-club .foot{border-top:1px dashed rgba(42,36,28,.3)}
+.cd-leather{background:#241c16;color:#f3ead9;box-shadow:inset 0 0 0 1px rgba(255,230,200,.06),0 1px 1px rgba(0,0,0,.4),0 14px 30px rgba(0,0,0,.55);transform:rotate(-1.2deg)}
+.cd-leather .grain{opacity:.5;mix-blend-mode:screen}
+.cd-leather .top{border-bottom:1.5px solid color-mix(in srgb,var(--ink) 70%,transparent)}
+.cd-leather .top .mark,.cd-leather .top .nm,.cd-leather .ttl{color:var(--ink)}
+.cd-leather .top .nm{font:italic 700 27px/1.05 "Cormorant Garamond",Georgia,serif}
+.cd-leather .ttl{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700}
+.cd-leather .top .kind,.cd-leather .fld>span,.cd-leather .foot{color:#b3a594}
+.cd-leather .fld>b{color:#f3ead9;border-bottom:1px dotted rgba(243,234,217,.4)}
+.cd-leather .foot{border-top:1px dashed rgba(243,234,217,.22)}
+.cd-studio{background:#1f191a;color:#f3ebe8;box-shadow:0 1px 0 rgba(255,240,236,.07) inset,0 14px 30px rgba(0,0,0,.55),0 2px 5px rgba(0,0,0,.45)}
+.cd-studio .grain{opacity:.5;mix-blend-mode:soft-light}
+.cd-studio .top{border-bottom:1.5px solid color-mix(in srgb,var(--ink) 75%,transparent)}
+.cd-studio .top .mark{color:var(--ink)}
+.cd-studio .top .nm{font:italic 600 28px/1 "Cormorant Garamond",Georgia,serif}
+.cd-studio .ttl{font:600 13px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.26em;color:#d7c9c6}
+.cd-studio .top .kind,.cd-studio .fld>span,.cd-studio .foot{color:#b0a19e}
+.cd-studio .fld>b{color:#f1d9d4;border-bottom:1px dotted rgba(240,220,215,.38)}
+.cd-studio .foot{border-top:1px dashed rgba(240,220,215,.22)}
+.dnote{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;color:var(--text);line-height:1.35}
+.dnote svg.i{color:var(--ink);margin-top:1px}.dnote span{display:block;font-size:13px;color:var(--muted)}
+/* время: утро / день / вечер */
+.sgrp{display:flex;align-items:center;gap:7px;margin:16px 0 0;font-size:13px;font-weight:700;color:var(--muted)}
+.sgrp svg.i{width:16px;height:16px;color:var(--ink)}
+.sgrp+.slots{margin-top:8px}
+h2 .mon{font-size:13px;font-weight:700;color:var(--ink);margin-left:6px}
+/* цены: ровные колонки по уровням */
+.ptab{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 12px;margin-top:10px}
+.prow{display:grid;grid-template-columns:1fr repeat(var(--n),minmax(40px,54px));gap:4px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.prow:first-child{border-top:0}.prow>span{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.prow.hd>span{font-size:18px;text-align:right}.prow.hd>b{font-size:12px;color:var(--muted);font-weight:600}
+.prow.pcat{grid-template-columns:1fr;font-size:13px;font-weight:800;color:var(--ink);padding:12px 0 2px}
+.prow small{display:block;font-size:12px;color:var(--muted);font-weight:500}
+/* экран «Оформление» */
+.texs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 8px;margin-top:6px}
+.texs div{cursor:pointer;text-align:center;font-size:12px;color:var(--muted);line-height:1.2}
+.texs .sw{height:54px;border-radius:11px;position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:5px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.texs .sw .wall,.texs .sw .wall svg{position:absolute;inset:0;width:100%;height:100%;display:block}.texs .sw .wall .ov{position:absolute;inset:0}
+.texs .sw svg.i{position:relative;color:var(--muted)}
+.texs div.on .sw{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}.texs div.on{color:var(--text)}
+.cols{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:6px}
+.cols button{min-height:48px;display:grid;place-items:center;background:none;border:0;cursor:pointer;padding:0}
+.cols i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(0,0,0,.18)}
+.cols button.on i{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--text)}
+.cols button.on i::after{content:"";width:10px;height:5px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
+.prev{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:6px;background:var(--bg);color:var(--text);padding:0 16px 14px}
+.prev .cta{pointer-events:none}
+.stys{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin-top:6px}
+.sty{text-align:left;color:var(--muted);background:none;border:0;padding:0;cursor:pointer}
+.sty .fr{height:112px;border-radius:12px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg)}
+.sty .fr>div{position:absolute;left:0;top:0;width:358px;transform:scale(.47);transform-origin:0 0;pointer-events:none;padding:0 16px}
+.sty b{display:block;color:var(--text);font-size:14px;margin-top:7px;line-height:1.2}
+.sty>span{font-size:12px;line-height:1.3;display:block}
+.sty.on .fr{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+html,body{touch-action:manipulation}   /* двойной тап не приближает страницу */
+.ask{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:60;padding:16px}
+.ask .box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.ask p{white-space:pre-line;margin-bottom:14px;font-size:15px}
+.ask .btn2 button{flex:1;padding:14px;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--text)}
+.ask .btn2 .yes{background:var(--gold);color:var(--on-acc);border-color:var(--gold)}.ask .btn2 .yes.red{background:#b8434a;border-color:#b8434a;color:#fff}
+.lvlprices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.lvlprices .inp{margin-top:6px}
 </style>
 </head>
 <body>
@@ -189,17 +462,43 @@ label.inp input{display:block;width:100%;margin-top:6px;padding:12px;border-radi
   <div class="toast" id="toast"></div>
 </div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="f-wood" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0032 0.11" numOctaves="4" seed="7"/><feColorMatrix type="matrix" values="0.62 0 0 0 0.07  0.38 0 0 0 0.035  0.20 0 0 0 0.015  0 0 0 0 1"/></filter>
+  <filter id="f-leather" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="3" result="n"/><feDiffuseLighting in="n" lighting-color="#5e3b27" surfaceScale="1.6" result="l"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="9" result="m"/><feColorMatrix in="m" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 0.55" result="mm"/><feComposite in="mm" in2="l" operator="over"/></filter>
+  <filter id="f-concrete" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="11" result="fine"/><feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="3" seed="5" result="big"/><feBlend in="fine" in2="big" mode="multiply"/><feColorMatrix type="matrix" values="0.85 0 0 0 0.10  0.85 0 0 0 0.10  0.82 0 0 0 0.11  0 0 0 0 1"/></filter>
+  <filter id="f-marble" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="turbulence" baseFrequency="0.0045 0.0085" numOctaves="5" seed="2"/><feColorMatrix type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/><feComponentTransfer><feFuncR type="table" tableValues="0.66 0.92 0.975 0.985 0.99"/><feFuncG type="table" tableValues="0.63 0.905 0.965 0.978 0.985"/><feFuncB type="table" tableValues="0.60 0.885 0.95 0.965 0.975"/></feComponentTransfer></filter>
+  <filter id="f-metal" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0012 0.7" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0.42 0 0 0 0.12  0.42 0 0 0 0.13  0.42 0 0 0 0.145  0 0 0 0 1"/></filter>
+  <filter id="f-linen" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.04" numOctaves="2" seed="6" result="a"/><feTurbulence type="fractalNoise" baseFrequency="0.04 0.9" numOctaves="2" seed="8" result="b"/><feBlend in="a" in2="b" mode="screen"/><feColorMatrix type="matrix" values="0.16 0 0 0 0.80  0.16 0 0 0 0.75  0.16 0 0 0 0.67  0 0 0 0 1"/></filter>
+  <filter id="f-oak" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0028 0.13" numOctaves="4" seed="12"/><feColorMatrix type="matrix" values="0.36 0 0 0 0.035  0.28 0 0 0 0.028  0.20 0 0 0 0.02  0 0 0 0 1"/></filter>
+  <filter id="f-mahog" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0036 0.10" numOctaves="4" seed="21"/><feColorMatrix type="matrix" values="0.62 0 0 0 0.07  0.22 0 0 0 0.02  0.16 0 0 0 0.015  0 0 0 0 1"/></filter>
+  <filter id="f-leather-black" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="3" result="n"/><feDiffuseLighting in="n" lighting-color="#2c2826" surfaceScale="1.6" result="l"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="9" result="m"/><feColorMatrix in="m" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 0.55" result="mm"/><feComposite in="mm" in2="l" operator="over"/></filter>
+  <filter id="f-leather-wine" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="3" result="n"/><feDiffuseLighting in="n" lighting-color="#55242a" surfaceScale="1.6" result="l"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="9" result="m"/><feColorMatrix in="m" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 0.55" result="mm"/><feComposite in="mm" in2="l" operator="over"/></filter>
+  <filter id="f-concrete-dark" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="11" result="fine"/><feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="3" seed="5" result="big"/><feBlend in="fine" in2="big" mode="multiply"/><feColorMatrix type="matrix" values="0.42 0 0 0 0.05  0.40 0 0 0 0.05  0.40 0 0 0 0.055  0 0 0 0 1"/></filter>
+  <filter id="f-marble-dark" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="turbulence" baseFrequency="0.0045 0.0085" numOctaves="5" seed="2"/><feColorMatrix type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/><feComponentTransfer><feFuncR type="table" tableValues="0.56 0.17 0.095 0.075 0.068"/><feFuncG type="table" tableValues="0.50 0.14 0.078 0.062 0.056"/><feFuncB type="table" tableValues="0.50 0.145 0.082 0.066 0.060"/></feComponentTransfer></filter>
+  <filter id="f-marble-graph" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="turbulence" baseFrequency="0.006 0.004" numOctaves="5" seed="15"/><feColorMatrix type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/><feComponentTransfer><feFuncR type="table" tableValues="0.62 0.27 0.19 0.165 0.155"/><feFuncG type="table" tableValues="0.62 0.27 0.19 0.168 0.158"/><feFuncB type="table" tableValues="0.64 0.29 0.205 0.18 0.17"/></feComponentTransfer></filter>
+  <filter id="f-paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .42  0 0 0 -.9 .5"/></filter>
+  <filter id="f-card" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 .55  0 0 0 0 .47  0 0 0 0 .38  0 0 0 -1.1 .45"/></filter>
+  <filter id="f-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs></svg>
 <script src="https://st.max.ru/js/max-web-app.js"></script>
 <script>
-const LEVELS = {
+// уровни мастеров: на сервере у каждого салона свои (setLevels); здесь — встроенные для демо без сервера
+let LEVELS = {
   top:    {name:'топ-барбер',     k:1.4,  cls:'top',    icon:'👑'},
   senior: {name:'старший барбер', k:1.2,  cls:'senior', icon:'⭐'},
   mid:    {name:'барбер',         k:1.0,  cls:'mid',    icon:'✂️'},
   junior: {name:'начинающий',     k:0.65, cls:'junior', icon:'🌱'},
 };
+let LVL_ORDER = Object.keys(LEVELS);              // сверху вниз: самый высокий уровень первым
+const LVL_CLS = ['top','senior','mid','junior','l5','l6'];
+function setLevels(list){
+  if (!list) return;
+  LEVELS = {}; list.forEach((l, i) => LEVELS[l.id] = {name: l.name, icon: esc(l.icon), cls: LVL_CLS[i] || 'mid'});   // значок вписывает хозяин — экранируем
+  LVL_ORDER = list.map(l => l.id);
+}
 let MASTERS = [
   {id:'artem',  name:'Артём',  lvl:'top',    exp:'8 лет',  rate:4.9, n:312, color:'#b5772a', off:[0]},
-  {id:'kirill', name:'Кирилл', lvl:'senior', exp:'5 лет',  rate:4.9, n:198, color:'#6a4fc4', off:[1]},
+  {id:'kirill', name:'Кирилл', lvl:'senior', exp:'5 лет',  rate:4.9, n:198, color:'#7a5c3a', off:[1]},
   {id:'denis',  name:'Денис',  lvl:'mid',    exp:'3 года', rate:4.8, n:141, color:'#2f7fb5', off:[3]},
   {id:'maxim',  name:'Максим', lvl:'junior', exp:'полгода',rate:4.7, n:37,  color:'#2f9a66', off:[5]},
 ];
@@ -242,28 +541,177 @@ const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-$
 const fromIso = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
 const dayIndex = s => Math.round((fromIso(s) - days()[0]) / 864e5);
 const guestId = (() => { try { let g = localStorage.getItem('gid'); if (!g){ g = (Math.random().toString(36) + Math.random().toString(36)).replace(/[^a-z0-9]/g,'').slice(0,24); localStorage.setItem('gid', g); } return g; } catch(e){ return 'guest' + Date.now(); } })();
+const SHOP = (location.pathname.match(/^\/s\/([a-z0-9-]{1,32})\//) || [])[1] || '';   // салон: адрес /s/<slug>/, пусто — демо
 async function api(path, opts = {}){
-  const h = {'Content-Type':'application/json'};
+  const h = {'Content-Type':'application/json', 'X-Shop': SHOP};
   if (window.WebApp && window.WebApp.initData) h['X-Max-Init-Data'] = window.WebApp.initData; else h['X-Guest-Id'] = guestId;
   const r = await fetch(path, {...opts, headers:h});
   const j = await r.json().catch(() => ({}));
   if (!r.ok){ const e = new Error(j.error || 'Нет связи с сервером'); e.status = r.status; throw e; }
   return j;
 }
+const avKey = (m, s) => m.id + '|' + (s ? s.id : '') + (st.replace ? '|r' + st.replace : '');   // при переносе своё время свободно
 const resetAvail = () => { for (const k in AV) delete AV[k]; for (const k in NEAR) delete NEAR[k]; };
-const fromServer = b => ({ id:b.id, master:b.master, service:b.service, dayIso:b.day, time:b.time, price:b.price, name:b.name });
+const fromServer = b => ({ id:b.id, master:b.master, service:b.service, dayIso:b.day, time:b.time, price:b.price, name:b.name, canChange:b.canChange, reminders:b.reminders });
 async function loadMine(){ if (ONLINE) bookings = (await api('/api/my')).items.map(fromServer); }
 async function boot(){
   try {
     const c = await api('/api/catalog');
-    MASTERS = c.masters; CATS = c.cats; SERVICES = c.services; ONLINE = true;
+    MASTERS = c.masters; CATS = c.cats; SERVICES = c.services; ONLINE = true; setLevels(c.levels);
+    if (c.shop){ BRAND = c.shop; applyTheme(c.shop.theme); setTitle(); }
+    if (c.shop && !c.shop.demo) document.body.classList.add('real');
     await loadMine().catch(() => {});
-    ROLE = (await api('/api/me').catch(() => ({role:'client'}))).role;
+    const me = await api('/api/me').catch(() => ({role:'client'}));
+    ROLE = me.role; SUPER = !!me.super;
   } catch(e){ /* сервера нет — остаёмся на встроенных демо-данных */ }
+  if (!ONLINE) applyTheme(BRAND.theme);   // без сервера — палитра стиля по умолчанию
 }
-async function reloadCatalog(){ const c = await api('/api/catalog'); MASTERS = c.masters; CATS = c.cats; SERVICES = c.services; resetAvail(); }
+function setTitle(){ if (SHOP) document.title = BRAND.name; $('.ttl b').textContent = BRAND.name; $('.logo').textContent = initial(BRAND.name); }
+async function reloadCatalog(){ const c = await api('/api/catalog'); MASTERS = c.masters; CATS = c.cats; SERVICES = c.services; setLevels(c.levels); BRAND = c.shop || BRAND; applyTheme(BRAND.theme); resetAvail(); }
 async function loadAdm(){ ADM = await api('/api/admin/data'); return ADM; }
 const post = (path, body) => api(path, {method:'POST', body: JSON.stringify(body)});
+let SUPER = false;      // владелец сервиса — видит кабинет «Мои клиенты»
+// ---------- оформление салона: стиль + цвет + стена (как mockups/imp-7-styles.html) ----------
+const COLORS = [
+  {id:'gold', name:'Золото', hex:'#C49A4A'}, {id:'copper', name:'Медь', hex:'#A8633A'}, {id:'terra', name:'Терракота', hex:'#A24F38'},
+  {id:'wine', name:'Бордо', hex:'#8A2E38'}, {id:'powder', name:'Пудра', hex:'#A8675F'}, {id:'olive', name:'Олива', hex:'#6B6E3E'},
+  {id:'emerald', name:'Изумруд', hex:'#2E6B50'}, {id:'petrol', name:'Петроль', hex:'#28626E'}, {id:'steel', name:'Сталь', hex:'#2F4E7E'},
+  {id:'graph', name:'Графит', hex:'#4A4E55'}];
+const OV = {
+  wood:'repeating-linear-gradient(180deg,transparent 0 60px,rgba(0,0,0,.55) 60px 62px,rgba(255,255,255,.06) 62px 63px),linear-gradient(90deg,rgba(0,0,0,.18),transparent 30%,transparent 70%,rgba(0,0,0,.18))',
+  leather:'radial-gradient(120% 90% at 50% 0%,rgba(255,214,170,.10),transparent 60%),linear-gradient(rgba(20,10,4,.25),rgba(20,10,4,.25))',
+  marbleDark:'linear-gradient(115deg,rgba(255,240,236,.07),transparent 42%)', marble:'linear-gradient(115deg,rgba(255,255,255,.25),transparent 40%)',
+  linen:'linear-gradient(180deg,rgba(255,255,255,.12),transparent)', concrete:'linear-gradient(180deg,rgba(255,255,255,.04),transparent 50%)',
+  metal:'linear-gradient(100deg,transparent 15%,rgba(255,255,255,.10) 42%,rgba(255,255,255,.02) 55%,transparent 75%),repeating-linear-gradient(90deg,transparent 0 129px,rgba(0,0,0,.5) 129px 130px,rgba(255,255,255,.07) 130px 131px)'};
+// стены (фильтры SVG — в <defs> выше); font — шрифт таблички в стиле «Вывеска»
+const WALLS = {
+  concrete:{name:'Бетон', f:'f-concrete', ov:OV.concrete, font:'f-cond'}, metal:{name:'Металл', f:'f-metal', ov:OV.metal, font:'f-cond'},
+  wood:{name:'Орех', f:'f-wood', ov:OV.wood, font:'f-serif'}, leather:{name:'Кожа', f:'f-leather', ov:OV.leather, font:'f-serif'},
+  marble:{name:'Мрамор', f:'f-marble', ov:OV.marble, font:'f-fine'}, linen:{name:'Лён', f:'f-linen', ov:OV.linen, font:'f-fine'},
+  oak:{name:'Морёный дуб', f:'f-oak', ov:OV.wood}, mahog:{name:'Красное дерево', f:'f-mahog', ov:OV.wood},
+  leatherBlack:{name:'Чёрная кожа', f:'f-leather-black', ov:OV.leather}, leatherWine:{name:'Бордовая кожа', f:'f-leather-wine', ov:OV.leather},
+  marbleDark:{name:'Чёрный мрамор', f:'f-marble-dark', ov:OV.marbleDark}, marbleGraph:{name:'Серый мрамор', f:'f-marble-graph', ov:OV.marbleDark},
+  concreteDark:{name:'Тёмный бетон', f:'f-concrete-dark', ov:OV.concrete}};
+// стиль = стены на выбор, табличка, шрифты, карточка «Вы записаны»; base — фон, карточки, выделение, табличка (до подкраски цветом)
+const STYLES = {
+  sign:   {name:'Вывеска', about:'стена на выбор, шрифт под стену', walls:['concrete','metal','wood','leather','marble','linen'], def:'concrete',
+           base:['#0f0f10','#1a1a1c','#202023','#161617'], text:'#f1ede6', muted:'#a09a92'},
+  club:   {name:'Клуб', about:'орех и табличка с винтами', walls:['wood','oak','mahog'], def:'wood',
+           base:['#0e0d0c','#181614','#1f1c19','#151312'], text:'#f1ebe1', muted:'#a69d90'},
+  leather:{name:'Кожа и медь', about:'кожа со строчкой, латунь', walls:['leather','leatherBlack','leatherWine'], def:'leather',
+           base:['#110d0b','#1b1613','#221b17','#1b1613'], text:'#f2ebe1', muted:'#ab9f92'},
+  studio: {name:'Студия', about:'тёмный мрамор, тонкий курсив', walls:['marbleDark','marbleGraph','concreteDark'], def:'marbleDark',
+           base:['#120e0f','#1b1617','#241d1f','#151011'], text:'#f3ebe8', muted:'#b4a6a3'}};
+const KIND_SUB = {barber:'барбершоп', nails:'студия маникюра', beauty:'салон красоты', auto:'автосервис', other:''};
+let BRAND = {name:'Барбершоп «Борода»', kind:'barber', logo:'', cover:'', theme:{}};
+const hexRgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const rgbHex = c => '#' + c.map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+const mixC = (a, b, t) => { const x = hexRgb(a), y = hexRgb(b); return rgbHex(x.map((v, i) => v * t + y[i] * (1 - t))); };   // t — доля a
+const lum = h => { const c = hexRgb(h).map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126*c[0] + .7152*c[1] + .0722*c[2]; };
+const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+// кнопка фирменного цвета: белый или тёмный текст, а если оба не читаются (≥ 4,5:1) — цвет чуть темнеет
+function btnColors(acc){
+  if (contrast('#ffffff', acc) >= 4.5) return {bg: acc, on: '#ffffff'};
+  if (contrast('#1d1608', acc) >= 4.5) return {bg: acc, on: '#1d1608'};
+  for (let k = .04; k < .5; k += .04){ const bg = mixC(acc, '#000000', 1 - k); if (contrast('#ffffff', bg) >= 4.5) return {bg, on: '#ffffff'}; }
+  return {bg: mixC(acc, '#000000', .5), on: '#ffffff'};
+}
+const lighten = (acc, against, from) => { for (let t = from; t <= 1; t += .03){ const c = mixC('#ffffff', acc, t); if (against.every(b => contrast(c, b) >= 4.5)) return c; } return '#ffffff'; };
+// тема салона с подстановкой: без стиля — «Клуб» (тёмный зал и золото, как одобренное демо), стена — из своего стиля
+function themeOf(t){
+  t = t || {};
+  const style = STYLES[t.style] ? t.style : 'club', S = STYLES[style];
+  return {...t, style, color: COLORS.some(c => c.id === t.color) ? t.color : 'gold',
+    texture: t.texture === 'photo' || S.walls.includes(t.texture) ? t.texture : S.def};
+}
+function themeVars(t){
+  const c = themeOf(t), S = STYLES[c.style], acc = COLORS.find(x => x.id === c.color).hex, tint = [.07, .09, .15, .10];
+  const [bg, card, card2, plate] = S.base.map((b, i) => mixC(acc, b, tint[i]));
+  const ink = lighten(acc, [card2, plate], .38), btn = btnColors(acc);
+  let foil = '#2a1d08';      // тиснение цветом салона на светлой бумаге карточки «Клуба»
+  for (let k = .3; k < .9; k += .04){ const x = mixC('#2a1d08', acc, k); if (contrast(x, '#f6efe1') >= 4.5){ foil = x; break; } }
+  return {'--bg': bg, '--card': card, '--card2': card2, '--line': mixC('#ffffff', card, .08), '--text': S.text, '--muted': S.muted,
+    '--gold': btn.bg, '--gold-deep': mixC(btn.bg, '#000000', .75), '--gold2': ink, '--ink': ink, '--on-acc': btn.on,
+    '--tint': mixC(acc, bg, .2), '--plate': plate, '--foil': foil};
+}
+const varsStyle = t => Object.entries(themeVars(t)).map(([k, v]) => `${k}:${v}`).join(';');
+function applyTheme(t){
+  const root = document.documentElement.style;
+  Object.entries(themeVars(t)).forEach(([k, x]) => root.setProperty(k, x));
+  document.body.classList.add('themed');
+}
+const wallHtml = id => `<div class="wall"><svg preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#${WALLS[id].f})"/></svg><div class="ov" style="background:${WALLS[id].ov}"></div></div>`;
+const initial = name => (String(name).replace(/^[^A-Za-zА-Яа-яЁё0-9]+/, '')[0] || '?').toUpperCase();
+const firstLetter = name => esc(initial(name));
+const markHtml = b => b.logo ? `<img class="mark" src="${esc(b.logo)}" alt="">` : `<div class="mark letter">${firstLetter(b.name)}</div>`;
+const subOf = b => { const t = b.theme || {}; return t.subtitle != null ? t.subtitle : (KIND_SUB[b.kind] ?? ''); };
+const plateFont = (c, b) => c.style !== 'sign' ? '' : c.texture === 'photo' && b.cover ? 'f-serif' : (WALLS[c.texture] || {}).font || 'f-serif';
+function signHtml(b){
+  const c = themeOf(b.theme), tex = c.texture === 'photo' && !b.cover ? STYLES[c.style].def : c.texture;
+  const sub = subOf(b), long = String(b.name).length > 13 ? ' long' : '', kind = sub ? `<div class="kind">${esc(sub)}</div>` : '';
+  const wall = tex === 'photo' ? `<div class="wall photo" style="background-image:url('${esc(b.cover)}')"></div>` : wallHtml(tex);
+  if (c.style === 'leather') return `<div class="sign">${wall}<div class="stitch"></div><div class="plate brass${long}">${markHtml(b)}<div class="nm engr">${esc(b.name)}</div>${kind}</div></div>`;
+  return `<div class="sign">${wall}<div class="plate ${plateFont({...c, texture: tex}, b)}${long}">${markHtml(b)}<div class="nm">${esc(b.name)}</div>${kind}</div></div>`;
+}
+const ICON = {
+  pin:'<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>', chev:'<path d="M9 5l7 7-7 7"/>',
+  user:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c1.2-3.8 4.2-5.6 7.5-5.6s6.3 1.8 7.5 5.6"/>',
+  fast:'<circle cx="13" cy="12.5" r="7.5"/><path d="M13 8.5v4l2.6 1.6M2.5 9.5h3M1.5 13h3.5M2.5 16.5h3"/>',
+  tag:'<path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3-8.7 8.7z"/><circle cx="8.3" cy="8.3" r="1.6"/>',
+  cal:'<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4M8.5 14h3"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5" style="stroke-width:2.4"/>', cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>',
+  case:'<rect x="3.5" y="7" width="17" height="12.5" rx="2.5"/><path d="M9 7V5.2A1.2 1.2 0 0 1 10.2 4h3.6A1.2 1.2 0 0 1 15 5.2V7M3.5 12.5h17"/>',
+  bell:'<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
+  noon:'<path d="M3 17.5h18M7.5 17.5a4.5 4.5 0 0 1 9 0"/><path d="M12 6.5v3M6.3 9.8l1.6 1.6M17.7 9.8l-1.6 1.6"/>',
+  moon:'<path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/>'};
+const ic = (k, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
+async function copyText(v){
+  try { await navigator.clipboard.writeText(v); }
+  catch(e){ const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  toast('Скопировано');
+}
+const plural = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
+// фото: выбрать на телефоне, сжать до 1080 px в JPEG прямо в браузере и отправить файлом
+function pickPhoto(){ return new Promise(res => { const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.onchange = () => res(i.files[0] || null); i.click(); }); }
+async function shrink(file, max = 1080, type = 'image/jpeg'){
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((ok, bad) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => bad(new Error('Не получилось открыть фото')); im.src = url; });
+    const k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+    const c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    return await new Promise(ok => c.toBlob(ok, type, 0.82));
+  } finally { URL.revokeObjectURL(url); }
+}
+async function uploadPhoto(kind, id){
+  const f = await pickPhoto(); if (!f) return null;
+  toast('Загружаю фото…');
+  const png = kind === 'logo', blob = await shrink(f, png ? 512 : 1080, png ? 'image/png' : 'image/jpeg');
+  const h = {'Content-Type': png ? 'image/png' : 'image/jpeg', 'X-Shop': SHOP};
+  if (window.WebApp && window.WebApp.initData) h['X-Max-Init-Data'] = window.WebApp.initData;
+  const r = await fetch(`/api/admin/photo?kind=${kind}&id=${encodeURIComponent(id)}`, {method:'POST', headers:h, body:blob});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || 'Фото не загрузилось');
+  return j;
+}
+function ask(text, yes = 'Да', danger = false){
+  return new Promise(res => {
+    const d = document.createElement('div'); d.className = 'ask';
+    d.innerHTML = `<div class="box"><p></p><div class="btn2"><button class="no">Нет</button><button class="yes ${danger ? 'red' : ''}"></button></div></div>`;
+    d.querySelector('p').textContent = text; d.querySelector('.yes').textContent = yes;
+    const done = v => { d.remove(); res(v); };
+    d.querySelector('.no').onclick = () => done(false); d.querySelector('.yes').onclick = () => done(true);
+    d.onclick = e => { if (e.target === d) done(false); };
+    document.body.appendChild(d);
+  });
+}
+function showPhoto(url){
+  const d = document.createElement('div'); d.className = 'lb'; d.innerHTML = `<img src="${url}" alt="">`; d.onclick = () => d.remove(); document.body.appendChild(d);
+}
 const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const WDN = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];   // для графика: 0 = понедельник
 // выбор времени списком (24 часа, шаг 30 минут) — одинаково на любом телефоне
@@ -274,12 +722,18 @@ const tsel = (v, k, canEmpty) => { v = norm(v); const opts = TIMES.includes(v) |
 const bDate = b => b.dayIso ? fromIso(b.dayIso) : days()[b.day];
 const loading = t => { app.innerHTML = `<div class="screen"><div class="empty" style="margin-top:18px">${t || 'Загружаю…'}</div></div>`; };
 
-const price = (svc, m) => Math.round(svc.base * LEVELS[m.lvl].k / 50) * 50;
+const hint = (base, lvl) => LEVELS[lvl] && LEVELS[lvl].k ? Math.round(base * LEVELS[lvl].k / 50) * 50 : base;   // демо без сервера
+const price = (svc, m) => svc.prices ? (svc.prices[m.lvl] ?? svc.base) : hint(svc.base, m.lvl);
+// клиентам — только уровни, на которых есть мастера (пустой уровень в ценах путает)
+const usedLevels = () => { const u = LVL_ORDER.filter(l => MASTERS.some(m => m.lvl === l)); return u.length ? u : LVL_ORDER; };
+const minP = svc => Math.min(...usedLevels().map(l => price(svc, {lvl: l})));
+const maxP = svc => Math.max(...usedLevels().map(l => price(svc, {lvl: l})));
+const lvlName = m => LEVELS[m.lvl] ? LEVELS[m.lvl].name : '';
 const master = id => MASTERS.find(m => m.id === id);
 const service = id => SERVICES.find(s => s.id === id);
 const fmtDay = d => `${WD[d.getDay()]}, ${d.getDate()} ${MON[d.getMonth()]}`;
 const ava = (m, sm) => `<div class="ava${sm?' sm':''}" style="background:linear-gradient(135deg,${m.color},#111)">${m.name[0]}</div>`;
-const lvl = m => `<span class="lvl ${LEVELS[m.lvl].cls}">${LEVELS[m.lvl].icon} ${LEVELS[m.lvl].name}</span>`;
+const lvl = m => LEVELS[m.lvl] ? `<span class="lvl ${LEVELS[m.lvl].cls}">${LEVELS[m.lvl].icon} ${esc(LEVELS[m.lvl].name)}</span>` : '';
 
 function days(){
   const out = [], t = new Date(); t.setHours(0,0,0,0);
@@ -288,7 +742,7 @@ function days(){
 }
 // Свободные окна: детерминированно «занятые» часы, чтобы у мастеров было по-разному
 function slots(m, d, svc){
-  if (ONLINE) return ((AV[m.id + '|' + (svc ? svc.id : '')] || {})[iso(d)]) || [];
+  if (ONLINE) return ((AV[avKey(m, svc)] || {})[iso(d)]) || [];
   if (m.off.includes(d.getDay())) return [];
   const res = [], now = new Date();
   const seed = d.getDate()*7 + m.id.length*13;
@@ -304,6 +758,24 @@ function slots(m, d, svc){
   return res;
 }
 
+const hm = m => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+const toMinJs = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+function dayRows(m, gaps){
+  const rows = m.bookings.map(b => ({at: toMinJs(b.time), html: `<div class="brow"><div class="tm">${b.time}</div>
+    <div class="who">${esc(b.name)} ${b.confirmed?'<span class="ok" style="display:inline">✓ придёт</span>':''}<span>${esc(b.serviceName)} · ${b.price} ₽${b.phone?' · <a href="tel:'+esc(b.phone)+'" style="color:var(--gold2)">'+esc(b.phone)+'</a>':''}${b.online?'':' · без MAX'}</span></div>
+    <button class="x" data-cx="${b.id}" title="Отменить">✕</button></div>`}));
+  if (gaps && m.hours){
+    const h = m.hours, busy = m.bookings.map(b => [toMinJs(b.time), toMinJs(b.time) + b.minutes]);
+    if (h.bs != null){ busy.push([h.bs, h.be]); rows.push({at: h.bs, html: `<div class="free">🍽 обед ${hm(h.bs)}–${hm(h.be)}</div>`}); }
+    busy.sort((x, y) => x[0] - y[0]);
+    let cur = h.start;
+    for (const [a, b] of [...busy, [h.end, h.end]]){
+      if (a - cur >= 30) rows.push({at: cur, html: `<div class="free">${hm(cur)}–${hm(a)} свободно</div>`});
+      cur = Math.max(cur, b);
+    }
+  }
+  return rows.sort((x, y) => x.at - y.at).map(r => r.html).join('');
+}
 function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 2200); }
 function setBottom(label, enabled, fn, hint){
   if (!label){ bottom.hidden = true; return; }
@@ -342,8 +814,8 @@ function haptic(kind){
   } catch(e){}
 }
 document.addEventListener('click', e => {
-  if (e.target.closest('#bottom button, .qbtn, .acts button')) haptic('tap');
-  else if (e.target.closest('[data-m],[data-c],[data-s],[data-t],[data-d],[data-i],.day,.slot,.mcard,.row,.pcard,.cat')) haptic('select');
+  if (e.target.closest('#bottom button, .qbtn, .qk, .cta, .acts button')) haptic('tap');
+  else if (e.target.closest('[data-m],[data-c],[data-s],[data-t],[data-d],[data-i],.day,.slot,.mcard,.row,.pcard,.cat,.li')) haptic('select');
 }, true);
 
 $('#open').onclick = () => {
@@ -356,24 +828,52 @@ $('#close').onclick = () => {
   $('#close').hidden = true; $('#back').hidden = true; $('#sub').textContent = 'бот · онлайн';
 };
 
+// главная: быстрые действия и мастера — в своём виде для каждого стиля
+function quickHtml(s){
+  const Q = [['user','Выбрать мастера','masters'], ['fast','Ближайшее время','nearest'], ['tag','Все цены','prices'],
+             ['cal', 'Мои записи' + (bookings.length ? ` (${bookings.length})` : ''), 'mine']];
+  return `<div class="quick">${Q.map(([i, t, g]) => s === 'club' ? `<button class="qk" data-go="${g}"><span class="ib2">${ic(i)}</span>${t}</button>`
+    : `<button class="qk" data-go="${g}">${ic(i)}<span>${t}</span></button>`).join('')}</div>`;
+}
+function mastersHtml(s){
+  const L = m => LEVELS[m.lvl] || {icon:'', name:''};
+  const exp = m => m.exp ? `опыт ${esc(m.exp)}` : '';
+  return `<div class="strip">${MASTERS.map(m => {
+    const l = L(m), nm = esc(m.name), a = firstLetter(m.name);
+    if (s === 'club') return `<div class="mm" data-m="${m.id}"><div class="medal"><b>${a}</b><i title="${esc(l.name)}">${l.icon}</i></div><div class="n">${nm}</div><div class="lv">${esc(l.name)}</div><div class="ex">${exp(m)}</div></div>`;
+    if (s === 'leather') return `<div class="chair" data-m="${m.id}"><div class="chback"><div class="mono">${a}</div><div class="chl" title="${esc(l.name)}">${l.icon}</div></div><div class="n">${nm}</div><div class="lv">${esc(l.name)}</div></div>`;
+    if (s === 'studio') return `<div class="mm" data-m="${m.id}"><div class="stav" style="--c:${esc(m.color)}">${a}<i class="lvb" title="${esc(l.name)}">${l.icon}</i></div><b>${nm}</b><div class="lv">${esc(l.name)}</div><div class="ex">${exp(m)}</div></div>`;
+    return `<div class="mm" data-m="${m.id}"><div class="av" style="background:linear-gradient(150deg,${esc(m.color)},#1c1a18)">${a}</div><b>${nm}</b><em>${l.icon} ${esc(l.name)}</em><span>${exp(m)}</span></div>`;
+  }).join('')}</div>`;
+}
+const MONTHS = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+// время дня: утро до 12, день до 17, вечер — как в одобренных референсах
+function slotGroups(sl, sel, attr){
+  const G = [['sun','Утро',0,720], ['noon','День',720,1020], ['moon','Вечер',1020,1440]];
+  return G.map(([i, n, a, b]) => { const xs = sl.filter(t => toMinJs(t) >= a && toMinJs(t) < b);
+    return xs.length ? `<div class="sgrp">${ic(i)}${n}</div><div class="slots">${xs.map(t => `<div class="slot ${sel === t ? 'on' : ''}" ${attr}="${t}">${t}</div>`).join('')}</div>` : ''; }).join('');
+}
+
 const SCREENS = {
   home(){
     st = {};
-    app.innerHTML = `<div class="screen">
-      ${ROLE === 'owner' ? '<button class="adminbtn" data-go="admin">⚙️ Админка — расписание, мастера, цены</button>' : ''}
-      <div class="hero"><b>Запишитесь за минуту</b><span>Ежедневно 10:00–21:00 · адрес появится у настоящего клиента</span></div>
-      <div class="quick">
-        <button class="qbtn wide" data-go="cats"><i>✂️</i>Записаться</button>
-        <button class="qbtn" data-go="masters"><i>👤</i>Выбрать мастера</button>
-        <button class="qbtn" data-go="nearest"><i>⚡</i>Ближайшее время</button>
-        <button class="qbtn" data-go="prices"><i>💰</i>Все цены</button>
-        <button class="qbtn" data-go="mine"><i>📋</i>Мои записи${bookings.length?` (${bookings.length})`:''}</button>
+    const c = themeOf(BRAND.theme), s = c.style, addr = (BRAND.theme || {}).address;
+    const cats = CATS.filter(x => SERVICES.some(v => v.cat === x.id));
+    app.innerHTML = `<div class="screen st-${s}">
+      ${signHtml(BRAND)}
+      <div class="hbody">
+        ${addr ? `<div class="where">${ic('pin')}<span>${esc(addr)}</span></div>` : ''}
+        ${!SERVICES.length || !MASTERS.length ? '<div class="empty" style="margin:0 0 12px">Салон ещё настраивает онлайн-запись — загляните чуть позже.</div>' : ''}
+        <button class="cta" data-go="cats"><span class="ci">${ic('cal')}</span><span class="tx"><b>Записаться</b><small>выбрать услугу, мастера и время</small></span>${ic('arrow')}</button>
+        ${quickHtml(s)}
+        <div class="sec"><h2>Мастера</h2><a data-go="masters">все ${MASTERS.length}</a></div>
+        ${mastersHtml(s)}
+        <div class="sec"><h2>Услуги</h2><a data-go="prices">все цены</a></div>
+        <div class="lst">${cats.map(x => { const n = SERVICES.filter(v => v.cat === x.id);
+          return `<div class="li" data-c="${x.id}"><span class="ic">${x.icon}</span><span class="tx"><b>${esc(x.name)}</b><span>${n.length} ${plural(n.length,'услуга','услуги','услуг')} · от ${Math.min(...n.map(minP))} ₽</span></span>${ic('chev','chev')}</div>`; }).join('')}</div>
+        ${SUPER || ROLE === 'owner' ? `<div class="owner">${SUPER ? `<button data-go="cab">${ic('case')}Мои клиенты</button>` : ''}${ROLE === 'owner' ? `<button data-go="admin">${ic('gear')}Админка</button>` : ''}</div>` : ''}
+        <div class="demo">Демо-пример. Название, мастера и цены выдуманы.</div>
       </div>
-      <h2>Мастера</h2>
-      <div class="hscroll">${MASTERS.map(m=>`<div class="mcard" data-m="${m.id}">${ava(m)}<b>${m.name}</b>${lvl(m)}<div class="rate">★ ${m.rate} · ${m.n} отзывов</div></div>`).join('')}</div>
-      <h2>Услуги</h2>
-      <div class="cats">${CATS.map(c=>`<div class="cat" data-c="${c.id}"><div class="ph" style="background:${c.bg}">${c.icon}</div><div><b>${c.name}</b><span>от ${Math.min(...SERVICES.filter(s=>s.cat===c.id).map(s=>price(s,{lvl:'junior'})))} ₽</span></div></div>`).join('')}</div>
-      <div class="demo">Демо-пример. Название, мастера и цены выдуманы.</div>
     </div>`;
     app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
     app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { st.master = b.dataset.m; go('masterPage'); });
@@ -381,18 +881,18 @@ const SCREENS = {
   },
   cats(){
     app.innerHTML = `<div class="screen"><h2>Что делаем?</h2>
-      <div class="cats">${CATS.map(c=>`<div class="cat" data-c="${c.id}"><div class="ph" style="background:${c.bg}">${c.icon}</div><div><b>${c.name}</b><span>${SERVICES.filter(s=>s.cat===c.id).length} услуг</span></div></div>`).join('')}</div></div>`;
+      <div class="cats">${CATS.filter(c => SERVICES.some(s => s.cat === c.id)).map(c=>`<div class="cat" data-c="${c.id}"><div class="ph" style="background:${c.bg}">${c.icon}</div><div><b>${esc(c.name)}</b><span>${SERVICES.filter(s=>s.cat===c.id).length} услуг</span></div></div>`).join('')}</div></div>`;
     app.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { st.cat = b.dataset.c; go('services'); });
   },
   services(){
     const cat = CATS.find(c=>c.id===st.cat);
     const m = st.master && master(st.master);
     const list = SERVICES.filter(s => s.cat === st.cat);
-    app.innerHTML = `<div class="screen"><h2>${cat.icon} ${cat.name}</h2><div class="list">${list.map(s=>{
-      const pr = m ? `${price(s,m)} ₽` : `${price(s,{lvl:'junior'})}–${price(s,{lvl:'top'})} ₽`;
-      const pic = s.img ? `<div class="pic" style="background-image:url('${s.img}')"><div class="cred">${s.cred}</div></div>`
-                        : `<div class="pic none" style="background:${cat.bg}">${cat.icon}<span>здесь будет фото работы</span></div>`;
-      return `<div class="pcard" data-s="${s.id}">${pic}<div class="body"><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин${m?' · у '+m.name:' · цена зависит от мастера'}</span></div><div class="price">${pr}</div></div></div>`;
+    app.innerHTML = `<div class="screen"><h2>${esc(cat.icon)} ${esc(cat.name)}</h2><div class="list">${list.map(s=>{
+      const pr = m ? `${price(s,m)} ₽` : minP(s) === maxP(s) ? `${minP(s)} ₽` : `${minP(s)}–${maxP(s)} ₽`;
+      const pic = s.img ? `<div class="pic" style="background-image:url('${s.img}')">${s.cred ? `<div class="cred">${s.cred}</div>` : ''}</div>`
+                        : `<div class="pic none" style="background:${cat.bg}">${cat.icon}<span class="demoonly">здесь будет фото работы</span></div>`;
+      return `<div class="pcard" data-s="${s.id}">${pic}<div class="body"><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин${m?' · мастер '+esc(m.name):' · цена зависит от мастера'}</span></div><div class="price">${pr}</div></div></div>`;
     }).join('')}</div></div>`;
     app.querySelectorAll('[data-s]').forEach(b => b.onclick = () => { st.service = b.dataset.s; go(st.master ? 'time' : 'pickMaster'); });
   },
@@ -400,7 +900,7 @@ const SCREENS = {
     const s = service(st.service);
     app.innerHTML = `<div class="screen"><h2>${s.name} — к кому?</h2><div class="list">
       ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${m.name} · ${m.exp}</b>${lvl(m)} <span>★ ${m.rate}</span></div><div class="price">${price(s,m)} ₽</div></div>`).join('')}
-      <div class="row" data-m="any"><div class="ph" style="background:#26262e">🎲</div><div class="info"><b>Любой свободный</b><span>подберём ближайшее окно</span></div><div class="price">от ${price(s,{lvl:'junior'})} ₽</div></div>
+      <div class="row" data-m="any"><div class="ph" style="background:#26262e">🎲</div><div class="info"><b>Любой свободный</b><span>подберём ближайшее окно</span></div><div class="price">от ${minP(s)} ₽</div></div>
     </div></div>`;
     app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => {
       if (b.dataset.m === 'any'){ go('nearest'); return; }
@@ -419,37 +919,40 @@ const SCREENS = {
     app.innerHTML = `<div class="screen" style="text-align:center">
       <div style="margin-top:18px">${ava(m)}</div><h2 style="margin:6px 0 4px">${m.name}</h2>${lvl(m)}
       <div class="rate">Опыт ${m.exp} · ★ ${m.rate} · ${m.n} отзывов</div>
-      <div class="gal">${icons.map((i,k)=>`<div style="background:linear-gradient(${k*60}deg,${m.color}55,#1a1a20)">${i}</div>`).join('')}</div>
-      <p class="demo" style="margin-top:6px">Здесь будут фото работ мастера</p>
-      <h2 style="text-align:left">Услуги у ${m.name}а</h2>
+      ${m.photos && m.photos.length ? `<div class="gal">${m.photos.map(u => `<div class="ph" data-ph="${u}" style="background-image:url('${u}')"></div>`).join('')}</div>`
+        : `<div class="gal demoonly">${icons.map((i,k)=>`<div style="background:linear-gradient(${k*60}deg,${m.color}55,#1a1a20)">${i}</div>`).join('')}</div>
+      <p class="demo" style="margin-top:6px">Здесь будут фото работ мастера</p>`}
+      <h2 style="text-align:left">Услуги и цены</h2>
       <div class="list" style="text-align:left">${SERVICES.slice(0,8).map(s=>`<div class="row" data-s="${s.id}"><div class="info"><b>${s.name}</b><span>≈ ${s.min} мин</span></div><div class="price">${price(s,m)} ₽</div></div>`).join('')}</div>
     </div>`;
     app.querySelectorAll('[data-s]').forEach(b => b.onclick = () => { st.service = b.dataset.s; st.day = null; st.time = null; go('time'); });
+    app.querySelectorAll('[data-ph]').forEach(b => b.onclick = () => showPhoto(b.dataset.ph));
   },
   time(){
     const m = master(st.master), s = service(st.service);
-    const key = m.id + '|' + s.id;
+    const key = avKey(m, s);
     if (ONLINE && !AV[key]){
       loading('Смотрю свободное время…');
-      api(`/api/availability?master=${m.id}&service=${s.id}`).then(j => { AV[key] = j.days; go('time', false); }).catch(e => toast(e.message));
+      api(`/api/availability?master=${m.id}&service=${s.id}${st.replace ? '&replace=' + st.replace : ''}`).then(j => { AV[key] = j.days; go('time', false); }).catch(e => toast(e.message));
       return;
     }
     const ds = days();
     if (st.day == null || st.day < 0){ st.day = Math.max(0, ds.findIndex(d => slots(m,d,s).length)); }
     const d = ds[st.day], sl = slots(m, d, s);
     app.innerHTML = `<div class="screen">
-      <div class="row" style="margin-top:14px;cursor:default">${ava(m,true)}<div class="info"><b>${s.name}</b><span>${m.name} · ${LEVELS[m.lvl].name} · ≈ ${s.min} мин</span></div><div class="price">${price(s,m)} ₽</div></div>
-      <h2>Когда удобно?</h2>
+      <div class="row" style="margin-top:14px;cursor:default">${ava(m,true)}<div class="info"><b>${s.name}</b><span>${m.name} · ${esc(lvlName(m))} · ≈ ${s.min} мин</span></div><div class="price">${price(s,m)} ₽</div></div>
+      <h2>Когда удобно?<span class="mon">${MONTHS[d.getMonth()]}</span></h2>
       <div class="days">${ds.map((x,i)=>{const free = slots(m,x,s).length; return `<div class="day ${i===st.day?'on':''} ${free?'':'off'}" data-d="${i}"><small>${i===0?'сег.':i===1?'завтра':WD[x.getDay()]}</small><b>${x.getDate()}</b></div>`;}).join('')}</div>
-      ${sl.length ? `<div class="slots">${sl.map(t=>`<div class="slot ${st.time===t?'on':''}" data-t="${t}">${t}</div>`).join('')}</div>`
-                  : `<div class="empty">${(m.off||[]).includes(d.getDay())?`У ${m.name}а выходной.`:ONLINE?'В этот день свободного времени нет.':'На этот день всё занято.'} Выберите другой день.</div>`}
+      ${sl.length ? slotGroups(sl, st.time, 'data-t')
+                  : `<div class="empty">${(m.off||[]).includes(d.getDay())?`${esc(m.name)} в этот день не работает.`:ONLINE?'В этот день свободного времени нет.':'На этот день всё занято.'} Выберите другой день.</div>`}
     </div>`;
     app.querySelectorAll('.day:not(.off)').forEach(b => b.onclick = () => { st.day = +b.dataset.d; st.time = null; go('time', false); });
     app.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { st.time = b.dataset.t; go('time', false); });
     setBottom(st.time ? `Дальше · ${fmtDay(d)}, ${st.time}` : 'Выберите время', !!st.time, () => go('confirm'));
   },
   nearest(){
-    const s = st.service ? service(st.service) : service('classic');
+    if (!SERVICES.length){ app.innerHTML = '<div class="screen"><div class="empty">Салон ещё не добавил услуги.</div></div>'; return; }
+    const s = service(st.service) || service(st.nearSvc) || SERVICES[0];   // услугу можно выбрать прямо здесь
     if (ONLINE && !NEAR[s.id]){
       loading('Ищу ближайшие окна…');
       api(`/api/nearest?service=${s.id}`).then(j => { NEAR[s.id] = j.items; go('nearest', false); }).catch(e => toast(e.message));
@@ -458,28 +961,34 @@ const SCREENS = {
     let opts = [];
     if (ONLINE) opts = NEAR[s.id].map(x => ({ m:master(x.master), d:fromIso(x.day), di:dayIndex(x.day), t:x.time })).filter(o => o.m);
     else days().slice(0,3).forEach((d,di) => MASTERS.forEach(m => slots(m,d,s).slice(0,2).forEach(t => opts.push({m,d,di,t}))));
-    opts.sort((a,b) => a.di-b.di || parseFloat(a.t.replace(':','.'))-parseFloat(b.t.replace(':','.')));
-    app.innerHTML = `<div class="screen"><h2>⚡ Ближайшие окна</h2>
-      <p class="rate">Услуга: ${s.name}${st.service?'':' (можно поменять на главной)'}</p>
-      <div class="list">${opts.slice(0,8).map((o,i)=>`<div class="row" data-i="${i}">${ava(o.m,true)}<div class="info"><b>${o.di===0?'Сегодня':o.di===1?'Завтра':fmtDay(o.d)}, ${o.t}</b><span>${o.m.name} · ${LEVELS[o.m.lvl].name}</span></div><div class="price">${price(s,o.m)} ₽</div></div>`).join('')}</div></div>`;
+    opts.sort((a,b) => a.di-b.di || toMinJs(a.t) - toMinJs(b.t));
+    app.innerHTML = `<div class="screen"><h2>Ближайшее время</h2>
+      ${st.service ? `<p class="rate">Услуга: ${esc(s.name)}</p>` : `<p class="note2" style="margin-top:-4px">Какая услуга?</p>
+        <div class="mchips">${SERVICES.map(x => `<div data-ns="${x.id}" class="${x.id === s.id ? 'on' : ''}">${esc(x.name)}</div>`).join('')}</div>`}
+      <div class="list" style="margin-top:8px">${opts.slice(0,8).map((o,i)=>`<div class="row" data-i="${i}">${ava(o.m,true)}<div class="info"><b>${o.di===0?'Сегодня':o.di===1?'Завтра':fmtDay(o.d)}, ${o.t}</b><span>${esc(o.m.name)} · ${esc(lvlName(o.m))}</span></div><div class="price">${price(s,o.m)} ₽</div></div>`).join('')
+        || '<div class="empty">Ближайшие дни всё занято — выберите мастера и день сами.</div>'}</div></div>`;
     const top = opts.slice(0,8);
+    app.querySelectorAll('[data-ns]').forEach(b => b.onclick = () => { st.nearSvc = b.dataset.ns; go('nearest', false); });
     app.querySelectorAll('[data-i]').forEach(b => b.onclick = () => { const o = top[+b.dataset.i]; st.service = s.id; st.master = o.m.id; st.day = o.di; st.time = o.t; go('confirm'); });
   },
   prices(){
+    const lv = usedLevels();
     app.innerHTML = `<div class="screen"><h2>Цены</h2>
       <p class="rate">Цена зависит от уровня мастера</p>
-      <div class="summary" style="margin-top:10px">
-        <div class="line" style="font-size:12px"><span>Услуга</span><span>🌱 · ✂️ · ⭐ · 👑</span></div>
-        ${SERVICES.map(s=>`<div class="line"><b style="font-weight:500">${s.name}</b><span style="white-space:nowrap">${['junior','mid','senior','top'].map(l=>price(s,{lvl:l})).join(' · ')}</span></div>`).join('')}
+      <div class="ptab" style="--n:${lv.length}">
+        <div class="prow hd"><b>Услуга</b>${lv.map(l => `<span title="${esc(LEVELS[l].name)}">${LEVELS[l].icon}</span>`).join('')}</div>
+        ${[...CATS, {id: null, name: 'Другое'}].map(c => [c, SERVICES.filter(s => c.id ? s.cat === c.id : !CATS.some(x => x.id === s.cat))]).filter(([, list]) => list.length)
+          .map(([c, list]) => `<div class="prow pcat">${esc(c.name)}</div>` + list.map(s =>
+          `<div class="prow"><b style="font-weight:600">${esc(s.name)}<small>≈ ${s.min} мин</small></b>${lv.map(l => `<span>${price(s, {lvl: l})}</span>`).join('')}</div>`).join('')).join('')}
       </div>
-      <p class="demo">🌱 начинающий · ✂️ барбер · ⭐ старший · 👑 топ</p></div>`;
+      <p class="note2" style="text-align:center">${lv.map(l => LEVELS[l].icon + ' ' + esc(LEVELS[l].name)).join(' · ')}</p></div>`;
   },
   confirm(){
     const m = master(st.master), s = service(st.service), d = days()[st.day];
     app.innerHTML = `<div class="screen"><h2>Проверьте запись</h2>
       <div class="summary">
         <div class="line"><span>Услуга</span><b>${s.name}</b></div>
-        <div class="line"><span>Мастер</span><b>${m.name}, ${LEVELS[m.lvl].name}</b></div>
+        <div class="line"><span>Мастер</span><b>${m.name}, ${esc(lvlName(m))}</b></div>
         <div class="line"><span>Когда</span><b>${fmtDay(d)}, ${st.time}</b></div>
         <div class="line"><span>Длительность</span><b>≈ ${s.min} мин</b></div>
         <div class="line"><span>Цена</span><b class="price">${price(s,m)} ₽</b></div>
@@ -508,14 +1017,37 @@ const SCREENS = {
   done(){
     const b = (st.last && bookings.find(x => x.id === st.last)) || bookings[bookings.length-1], m = master(b.master), s = service(b.service), d = bDate(b);
     hist = ['home','done']; $('#back').hidden = true;
-    app.innerHTML = `<div class="screen done">
-      <div class="big">✓</div><h2>Вы записаны!</h2>
-      <p class="rate">${s.name} · ${m.name}<br>${fmtDay(d)}, ${b.time} · ${price(s,m)} ₽</p>
-      <div class="bookcard" style="text-align:left"><b>Что дальше</b><span>Бот пришлёт напоминание за день и за 2 часа с кнопками «Приду» и «Перенести». Мастер уже видит запись.</span></div>
+    const c = themeOf(BRAND.theme), sty = c.style, l = LEVELS[m.lvl] || {icon:''};
+    const grain = {club:'f-paper', leather:'f-card', studio:'f-grain'}[sty];
+    const font = plateFont(c, BRAND) + (String(BRAND.name).length > 13 ? ' long' : '');
+    const addr = (BRAND.theme || {}).address, sub = subOf(BRAND);
+    // время записи — по часам салона: срок «за 2 часа» считаем от него, а можно ли ещё менять — говорит сервер (canChange)
+    const at = new Date(d); const [hh, mi] = b.time.split(':').map(Number); at.setHours(hh, mi, 0, 0);
+    const cut = new Date(at - 2 * 36e5), tmr = new Date(); tmr.setDate(tmr.getDate() + 1);
+    const cutDay = iso(cut) === iso(new Date()) ? 'сегодня' : iso(cut) === iso(tmr) ? 'завтра' : fmtDay(cut);
+    const canChange = ONLINE ? b.canChange !== false : at - new Date() >= 2 * 36e5;
+    const cutTxt = canChange ? `${cutDay} до ${cut.getHours()}:${String(cut.getMinutes()).padStart(2, '0')}` : 'только через салон';
+    // напоминания: онлайн — ровно те, что пришлёт сервер; в демо без сервера — по тем же правилам (26 ч / 3 ч)
+    const R = ONLINE ? (b.reminders || []) : [(at - new Date()) / 36e5 > 26 ? '24h' : '', (at - new Date()) / 36e5 > 3 ? '2h' : ''].filter(Boolean);
+    const rem = R.includes('24h') ? 'Напомним в MAX за день и за 2 часа' : R.includes('2h') ? 'Напомним в MAX за 2 часа' : '';
+    const remBtns = R.includes('24h') ? 'с кнопками «Приду» и «Перенести»' : 'с кнопкой «Приду»';
+    app.innerHTML = `<div class="screen">
+      <div class="dhead"><div class="okc">${ic('check')}</div><div><h2>Вы записаны</h2><span>Мастер уже видит запись</span></div></div>
+      <div class="cd cd-${sty} ${font}">
+        ${grain ? `<div class="grain"><svg preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#${grain})"/></svg></div>` : ''}
+        <div class="top">${markHtml(BRAND)}<div class="nm">${esc(BRAND.name)}</div><div class="kind">${esc(sub)}${addr ? `<br>${esc(addr)}` : ''}</div></div>
+        <div class="ttl">Вас ждут</div>
+        <div class="fld big"><span>Дата</span><b>${d.getDate()} ${MON[d.getMonth()]}, ${WD[d.getDay()].toLowerCase()}</b></div>
+        <div class="fld big"><span>Время</span><b>${b.time}</b></div>
+        <div class="fld"><span>Мастер</span><b>${esc(m.name)} ${l.icon}</b></div>
+        <div class="fld"><span>Услуга</span><b>${esc(s.name)}</b></div>
+        <div class="foot"><span>${price(s,m)} ₽ · оплата на месте</span><span>≈ ${s.min} мин</span></div>
+      </div>
+      ${rem ? `<div class="dnote">${ic('bell')}<div>${rem}<span>${remBtns}</span></div></div>` : ''}
+      <div class="dnote">${ic('clock')}<div>Перенести или отменить — ${cutTxt}<span>${canChange ? 'позже только через салон · «Мои записи» на главной' : 'до записи меньше 2 часов'}</span></div></div>
     </div>`;
     setBottom('Готово', true, () => { hist = []; go('home'); });
     haptic('success');
-    setTimeout(() => toast(`🔔 Мастеру ${m.name}у: новая запись на ${b.time}`), 700);
   },
   // ================= АДМИНКА (только хозяин; сервер тоже проверяет) =================
   admin(){
@@ -528,50 +1060,64 @@ const SCREENS = {
     }
     const dv = st.adayData;
     const total = dv.masters.reduce((n, m) => n + m.bookings.length, 0);
+    // мастер выбран раньше и есть в этот день — оставляем; иначе при многих мастерах первый, при 1–3 — все
+    if (st.am !== 'all' && !dv.masters.some(m => m.id === st.am)) st.am = dv.masters.length > 3 ? dv.masters[0].id : 'all';
     app.innerHTML = `<div class="screen">
       <h2>⚙️ Админка</h2>
       <div class="days">${ds.map((x,i)=>`<div class="day ${i===st.aday?'on':''}" data-ad="${i}"><small>${i===0?'сег.':i===1?'завтра':WD[x.getDay()]}</small><b>${x.getDate()}</b></div>`).join('')}</div>
       <p class="note2">${fmtDay(d)} · записей: ${total}</p>
-      ${dv.masters.map(m => `
+      <div class="mchips2"><div class="mc all ${st.am==='all'?'on':''}" data-am="all">Все <i>${total}</i></div>${dv.masters.map(m => `<div class="mc ${st.am===m.id?'on':''}" data-am="${m.id}"><span class="av" style="background:${m.color}">${esc(m.name[0])}</span>${esc(m.name)} <i>${m.status==='sick'?'🤒':m.status==='off'?'—':m.bookings.length}</i></div>`).join('')}</div>
+      ${dv.masters.filter(m => st.am === 'all' || m.id === st.am).map(m => `
         <div class="mhead"><b>${esc(m.name)}</b>
           <span class="chipst ${m.status==='sick'?'sick':m.status==='off'?'off':''}">${m.status==='sick'?'🤒 не работает'+(m.note?' · '+esc(m.note):''):m.status==='off'?'выходной':m.status}</span>
-          ${m.status!=='sick'&&m.status!=='off'?`<button class="sickbtn" data-sick="${m.id}">🤒 Заболел</button>`:''}</div>
-        ${m.bookings.length ? m.bookings.map(b => `<div class="brow"><div class="tm">${b.time}</div>
-            <div class="who">${esc(b.name)} ${b.confirmed?'<span class="ok" style="display:inline">✓ придёт</span>':''}<span>${esc(b.serviceName)} · ${b.price} ₽${b.phone?' · <a href="tel:'+esc(b.phone)+'" style="color:var(--gold2)">'+esc(b.phone)+'</a>':''}${b.online?'':' · без MAX'}</span></div>
-            <button class="x" data-cx="${b.id}" title="Отменить">✕</button></div>`).join('')
-          : `<div class="note2" style="margin:0 0 6px">Записей нет</div>`}`).join('')}
+          ${m.status==='sick' ? `<button class="sickbtn" data-back="${m.id}">✅ Вышел</button>` : m.status!=='off'?`<button class="sickbtn" data-sick="${m.id}">🤒 Заболел</button>`:''}</div>
+        ${dayRows(m, st.am !== 'all') || `<div class="note2" style="margin:0 0 6px">Записей нет</div>`}`).join('')}
       <div class="agrid">
         <button class="qbtn" data-go="aphone"><i>☎️</i>Запись по телефону</button>
         <button class="qbtn" data-go="aweek"><i>🗓</i>График и отпуска</button>
         <button class="qbtn" data-go="amasters"><i>👥</i>Мастера</button>
         <button class="qbtn" data-go="aservices"><i>💈</i>Услуги и цены</button>
+        <button class="qbtn wide2" data-go="abrand" style="grid-column:1/-1"><i>🎨</i>Оформление — название, логотип, вывеска, цвет</button>
       </div>
       <p class="demo">Это видит только хозяин. «Клиент (демо)» — выдуманные записи для вида.</p>
     </div>`;
     app.querySelectorAll('[data-ad]').forEach(b => b.onclick = () => { st.aday = +b.dataset.ad; go('admin', false); });
     app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
+    app.querySelectorAll('[data-am]').forEach(b => b.onclick = () => { st.am = b.dataset.am; go('admin', false); });
     app.querySelectorAll('[data-sick]').forEach(b => b.onclick = () => { st.amaster = b.dataset.sick; go('asick'); });
+    app.querySelectorAll('[data-back]').forEach(b => b.onclick = async () => {
+      try { const r = await post('/api/admin/back', {master: b.dataset.back, from: iso(d)});
+        resetAvail(); st.adayData = null; ADM = null; await reloadCatalog();
+        toast(r.removed ? `Снова работает — открыто дней: ${r.removed}` : 'Снова работает'); go('admin', false);
+      } catch(e){ toast(e.message); }
+    });
     app.querySelectorAll('[data-cx]').forEach(b => b.onclick = async () => {
       const bk = dv.masters.flatMap(m => m.bookings).find(x => x.id === +b.dataset.cx);
-      if (!confirm(`Отменить запись: ${bk.name}, ${bk.time}?${bk.online ? '\nКлиенту придёт сообщение в MAX.' : '\nКлиент без MAX — позвоните ему сами.'}`)) return;
+      if (!await ask(`Отменить запись: ${bk.name}, ${bk.time}?${bk.online ? '\nКлиенту придёт сообщение в MAX.' : '\nКлиент без MAX — позвоните ему сами.'}`, 'Отменить запись', true)) return;
       try { await post('/api/admin/cancel', {id: bk.id, notify: true}); toast('Запись отменена'); resetAvail(); st.adayData = null; go('admin', false); } catch(e){ toast(e.message); }
     });
   },
   asick(){
     const m = master(st.amaster) || {name:'Мастер'}, d = days()[st.aday || 0];
+    if (!st.sickN) st.sickN = 1;
+    if (!st.sickWhy) st.sickWhy = 'болеет';
+    const n = st.sickN, last = new Date(d); last.setDate(d.getDate() + n - 1);
     app.innerHTML = `<div class="screen"><h2>🤒 ${esc(m.name)} не работает</h2>
-      <p class="rate">Начиная с ${fmtDay(d)}. На сколько дней?</p>
-      <div class="quick">
-        <button class="qbtn" data-n="1"><i>1️⃣</i>Только этот день</button>
-        <button class="qbtn" data-n="3"><i>3️⃣</i>3 дня</button>
-        <button class="qbtn" data-n="7"><i>📅</i>Неделю</button>
-        <button class="qbtn" data-n="14"><i>🏖</i>2 недели (отпуск)</button>
-      </div>
-      <p class="note2">Свободное время мастера на эти дни сразу закроется. Дальше покажу, чьи записи попали под это.</p></div>`;
-    app.querySelectorAll('[data-n]').forEach(b => b.onclick = async () => {
+      <div class="chips">${[['болеет','🤒 Болеет'],['отпуск','🏖 Отпуск'],['','Другое']].map(([k,t]) => `<div data-why="${k}" class="${st.sickWhy===k?'on':''}">${t}</div>`).join('')}</div>
+      <p class="rate" style="text-align:center;margin-top:14px">Начиная с ${fmtDay(d)}. На сколько дней?</p>
+      <div class="stepper"><button id="dm" aria-label="Меньше">−</button><div><b>${n}</b><span>${plural(n,'день','дня','дней')}</span></div><button id="dp" aria-label="Больше">＋</button></div>
+      <div class="chips">${[[7,'Неделя'],[14,'2 недели']].map(([k,t]) => `<div data-n="${k}" class="${n===k?'on':''}">${t}</div>`).join('')}</div>
+      <p class="rate" style="text-align:center;margin-top:12px">${n === 1 ? 'Только ' + fmtDay(d) : 'По ' + fmtDay(last) + ' включительно'}</p>
+      <p class="note2">Свободное время мастера на эти дни сразу закроется. Вернуть раньше — кнопка «✅ Вышел» в расписании.</p></div>`;
+    const setN = v => { st.sickN = Math.max(1, Math.min(60, v)); go('asick', false); };
+    $('#dm').onclick = () => setN(n - 1);
+    $('#dp').onclick = () => setN(n + 1);
+    app.querySelectorAll('[data-n]').forEach(b => b.onclick = () => setN(+b.dataset.n));
+    app.querySelectorAll('[data-why]').forEach(b => b.onclick = () => { st.sickWhy = b.dataset.why; go('asick', false); });
+    setBottom(`Закрыть ${n} ${plural(n,'день','дня','дней')}`, true, async () => {
       try {
-        const r = await post('/api/admin/exception', {master: st.amaster, from: iso(d), days: +b.dataset.n, kind:'off', note: +b.dataset.n >= 14 ? 'отпуск' : 'болеет'});
-        st.affected = r.affected; resetAvail(); st.adayData = null; ADM = null; await reloadCatalog(); go('asickDone');
+        const r = await post('/api/admin/exception', {master: st.amaster, from: iso(d), days: n, kind:'off', note: st.sickWhy});
+        st.affected = r.affected; st.sickN = null; resetAvail(); st.adayData = null; ADM = null; await reloadCatalog(); go('asickDone');
       } catch(e){ toast(e.message); }
     });
   },
@@ -593,24 +1139,146 @@ const SCREENS = {
     if (!ADM){ loading(); loadAdm().then(() => go('amasters', false)).catch(e => toast(e.message)); return; }
     app.innerHTML = `<div class="screen"><h2>👥 Мастера</h2><div class="list">
       ${ADM.masters.map(m => `<div class="row" data-em="${m.id}">${ava(m,true)}<div class="info"><b>${esc(m.name)}${m.active?'':' · скрыт'}</b>${lvl(m)} <span>${esc(m.exp)}</span></div><div class="price">›</div></div>`).join('')}
-    </div><button class="adminbtn" id="addm">＋ Добавить мастера</button></div>`;
+    </div><button class="adminbtn" id="addm">＋ Добавить мастера</button>
+    <button class="adminbtn" data-go="alevels">🏷 Уровни мастеров — названия и сколько их</button></div>`;
+    app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
     app.querySelectorAll('[data-em]').forEach(b => b.onclick = () => { st.em = b.dataset.em; go('amasterEdit'); });
     $('#addm').onclick = () => { st.em = null; go('amasterEdit'); };
   },
   amasterEdit(){
-    const m = (ADM.masters.find(x => x.id === st.em)) || {name:'', lvl:'mid', exp:'', active:true};
+    const m = (ADM.masters.find(x => x.id === st.em)) || {name:'', lvl: LVL_ORDER[Math.floor(LVL_ORDER.length / 2)], exp:'', active:true};
     if (st.elvlFor !== (st.em || 'new')){ st.elvl = m.lvl; st.elvlFor = st.em || 'new'; }
     app.innerHTML = `<div class="screen"><h2>${st.em ? 'Мастер' : 'Новый мастер'}</h2>
       <label class="inp">Имя<input id="fn" value="${esc(m.name)}" maxlength="30"></label>
       <label class="inp">Уровень (от него зависит цена)</label>
-      <div class="lvls">${Object.entries(LEVELS).map(([k,v]) => `<div data-l="${k}" class="${st.elvl===k?'on':''}">${v.icon} ${v.name}</div>`).join('')}</div>
+      <div class="lvls">${LVL_ORDER.map(k => `<div data-l="${k}" class="${st.elvl===k?'on':''}">${LEVELS[k].icon} ${esc(LEVELS[k].name)}</div>`).join('')}</div>
       <label class="inp">Опыт<input id="fe" value="${esc(m.exp)}" placeholder="например, 3 года" maxlength="20"></label>
       <label class="check"><input type="checkbox" id="fa" ${m.active?'checked':''}> Показывать клиентам</label>
-      <p class="note2">${st.em ? '' : 'Новому мастеру поставлю график пн–сб 10:00–20:00 с обедом 14:00–14:30 — поменяете в «Графике».'}</p></div>`;
+      <p class="note2">${st.em ? '' : 'Новому мастеру поставлю график пн–сб 10:00–20:00 с обедом 14:00–14:30 — поменяете в «Графике».'}</p>
+      ${st.em ? `<label class="inp">Фото работ (${(m.photos||[]).length} из 12) — клиенты видят их на странице мастера</label>
+        <div class="gal">${(m.photos||[]).map(ph => `<div class="ph" style="background-image:url('${ph.url}')"><button class="x" data-dp="${ph.id}" aria-label="Удалить">✕</button></div>`).join('')}
+          ${(m.photos||[]).length < 12 ? '<div class="add" id="addph">＋</div>' : ''}</div>` : ''}
+      ${st.em ? (m.linked
+        ? `<p class="note2">🔗 MAX подключён — новые записи, отмены и подтверждения приходят мастеру.</p><button class="adminbtn" id="unl">Отвязать MAX</button>`
+        : `<p class="note2">Пока уведомления о записях к мастеру приходят вам. Отправьте мастеру ссылку — он нажмёт её, и бот будет писать ему.</p>
+           ${st.invite && st.invite.id === st.em
+             ? `<label class="inp">Ссылка для мастера<input id="invl" value="${esc(st.invite.link)}" readonly></label><button class="adminbtn" id="invc">📋 Скопировать ссылку</button>`
+             : `<button class="adminbtn" id="inv">🔗 Пригласить в MAX</button>`}`) : ''}</div>`;
     app.querySelectorAll('[data-l]').forEach(b => b.onclick = () => { st.elvl = b.dataset.l; app.querySelectorAll('[data-l]').forEach(x => x.classList.toggle('on', x === b)); });
+    if ($('#addph')) $('#addph').onclick = async () => {
+      try { if (await uploadPhoto('master', st.em)){ await loadAdm(); await reloadCatalog(); toast('Фото добавлено'); go('amasterEdit', false); } } catch(e){ toast(e.message); }
+    };
+    app.querySelectorAll('[data-dp]').forEach(b => b.onclick = async ev => {
+      ev.stopPropagation();
+      if (!await ask('Удалить это фото?', 'Удалить', true)) return;
+      try { await post('/api/admin/photo/delete', {id: +b.dataset.dp}); await loadAdm(); await reloadCatalog(); go('amasterEdit', false); } catch(e){ toast(e.message); }
+    });
+    if ($('#inv')) $('#inv').onclick = async () => {
+      try { st.invite = {id: st.em, ...(await post('/api/admin/master/invite', {id: st.em}))}; go('amasterEdit', false); } catch(e){ toast(e.message); }
+    };
+    if ($('#invc')) $('#invc').onclick = async () => {
+      const el = $('#invl'); el.select();
+      try { await navigator.clipboard.writeText(el.value); } catch(e){ document.execCommand('copy'); }
+      toast('Ссылка скопирована — отправьте её мастеру');
+    };
+    if ($('#unl')) $('#unl').onclick = async () => {
+      if (!await ask('Отвязать MAX мастера? Уведомления снова будут приходить вам.', 'Отвязать', true)) return;
+      try { await post('/api/admin/master/unlink', {id: st.em}); await loadAdm(); toast('Отвязано'); go('amasterEdit', false); } catch(e){ toast(e.message); }
+    };
     setBottom('Сохранить', true, async () => {
       try { await post('/api/admin/master', {id: st.em, name: $('#fn').value, lvl: st.elvl, exp: $('#fe').value, active: $('#fa').checked});
         await loadAdm(); await reloadCatalog(); st.adayData = null; st.elvlFor = null; toast('Сохранено'); goBack(); } catch(e){ toast(e.message); }
+    });
+  },
+  abrand(){
+    if (!ADM){ loading(); loadAdm().then(() => go('abrand', false)).catch(e => toast(e.message)); return; }
+    if (!st.bd){ const b = ADM.brand, t = b.theme || {}, c = themeOf(t);
+      st.bd = {name: b.name, kind: b.kind, logo: b.logo, cover: b.cover, theme: {style: c.style, color: c.color, texture: c.texture === 'photo' && !b.cover ? STYLES[c.style].def : c.texture,
+        subtitle: t.subtitle != null ? t.subtitle : (KIND_SUB[b.kind] ?? ''), address: t.address || ''}}; }
+    const d = st.bd, t = d.theme, S = STYLES[t.style];
+    const preview = x => `${signHtml(x)}<div class="hbody"><button class="cta" tabindex="-1"><span class="ci">${ic('cal')}</span><span class="tx"><b>Записаться</b><small>выбрать услугу, мастера и время</small></span>${ic('arrow')}</button></div>`;
+    const as = k => ({...t, style: k, texture: t.texture === 'photo' ? 'photo' : k === t.style ? t.texture : STYLES[k].def});
+    app.innerHTML = `<div class="screen"><h2>Оформление</h2>
+      <p class="note2" style="margin-top:-6px">Так клиенты увидят верх приложения:</p>
+      <div class="prev st-${t.style}" id="pv" style="${varsStyle(t)}">${preview(d)}</div>
+      <label class="inp">Стиль</label>
+      <div class="stys">${Object.entries(STYLES).map(([k, x]) => `<button class="sty ${k === t.style ? 'on' : ''}" data-sty="${k}">
+        <div class="fr" style="${varsStyle(as(k))}"><div class="st-${k}">${signHtml({...d, theme: as(k)})}</div></div><b>${x.name}</b><span>${x.about}</span></button>`).join('')}</div>
+      <label class="inp">Фирменный цвет</label>
+      <div class="cols">${COLORS.map(c => `<button data-cl="${c.id}" class="${t.color === c.id ? 'on' : ''}" aria-label="${c.name}" style="color:${btnColors(c.hex).on}"><i style="background:${c.hex}"></i></button>`).join('')}</div>
+      <p class="note2" style="text-align:center" id="cname">${(COLORS.find(c => c.id === t.color) || COLORS[0]).name}</p>
+      <label class="inp">Стена за табличкой</label>
+      <div class="texs"><div data-tx="photo" class="${t.texture === 'photo' ? 'on' : ''}"><div class="sw" style="${d.cover ? `background:url('${esc(d.cover)}') center/cover` : ''}">${d.cover ? '' : ic('cam')}</div>${d.cover ? 'Своё фото' : 'Фото салона'}</div>
+        ${S.walls.map(k => `<div data-tx="${k}" class="${t.texture === k ? 'on' : ''}"><div class="sw">${wallHtml(k)}</div>${WALLS[k].name}</div>`).join('')}</div>
+      ${d.cover ? '<button class="adminbtn" id="bcov">Заменить фото салона</button>' : ''}
+      <label class="inp">Название<input id="bn" value="${esc(d.name)}" maxlength="60"></label>
+      <label class="inp">Подпись под названием<input id="bs" value="${esc(t.subtitle)}" maxlength="40" placeholder="например, мужской зал (можно пусто)"></label>
+      <label class="inp">Адрес<input id="ba" value="${esc(t.address)}" maxlength="80" placeholder="улица, дом — клиенты увидят под вывеской"></label>
+      <label class="inp">Логотип — квадратная картинка, лучше PNG с прозрачным фоном</label>
+      <div class="btn2"><button class="adminbtn" id="blogo">${d.logo ? 'Заменить логотип' : 'Загрузить логотип'}</button>${d.logo ? '<button class="adminbtn red" id="blogod">Убрать</button>' : ''}</div>
+      <p class="note2">Шрифты и вид кнопок задаёт стиль — их менять не нужно.</p></div>`;
+    const keep = () => { d.name = $('#bn').value; t.subtitle = $('#bs').value; t.address = $('#ba').value; };
+    const redraw = () => { keep(); const y = app.scrollTop; go('abrand', false); app.scrollTop = y; };
+    ['#bn', '#bs'].forEach(id => $(id).oninput = () => { keep(); $('#pv').innerHTML = preview(d); });
+    app.querySelectorAll('[data-sty]').forEach(b => b.onclick = () => { const k = b.dataset.sty; if (t.texture !== 'photo') t.texture = STYLES[k].def; t.style = k; redraw(); });
+    const light = () => {      // обновить только превью и отметки — без пересборки 4 стилей и стен
+      $('#pv').style.cssText = varsStyle(t); $('#pv').innerHTML = preview(d);
+      app.querySelectorAll('[data-sty]').forEach(b => b.querySelector('.fr').style.cssText = varsStyle(as(b.dataset.sty)));
+      app.querySelectorAll('[data-cl]').forEach(b => b.classList.toggle('on', b.dataset.cl === t.color));
+      app.querySelectorAll('[data-tx]').forEach(b => b.classList.toggle('on', b.dataset.tx === t.texture));
+      $('#cname').textContent = (COLORS.find(c => c.id === t.color) || COLORS[0]).name;
+    };
+    app.querySelectorAll('[data-cl]').forEach(b => b.onclick = () => { keep(); t.color = b.dataset.cl; light(); });
+    const upCover = async () => { keep(); try { const r = await uploadPhoto('cover', ''); if (r){ d.cover = r.url; t.texture = 'photo'; ADM = null; await loadAdm(); toast('Фото загружено'); } } catch(e){ toast(e.message); } redraw(); };
+    app.querySelectorAll('[data-tx]').forEach(b => b.onclick = () => {
+      if (b.dataset.tx === 'photo' && !d.cover){ upCover(); return; }
+      keep(); t.texture = b.dataset.tx; light();
+      if (t.style === 'sign') app.querySelector('[data-sty=sign] .fr>div').innerHTML = signHtml({...d, theme: as('sign')});   // шрифт таблички зависит от стены
+    });
+    if ($('#bcov')) $('#bcov').onclick = upCover;
+    $('#blogo').onclick = async () => { keep(); try { const r = await uploadPhoto('logo', ''); if (r){ d.logo = r.url; toast('Логотип загружен'); } } catch(e){ toast(e.message); } redraw(); };
+    if ($('#blogod')) $('#blogod').onclick = () => { keep(); d.logo = ''; d.dropLogo = true; redraw(); };
+    setBottom('Сохранить', true, async () => {
+      keep();
+      try { await post('/api/admin/brand', {name: d.name, theme: t, dropLogo: !!d.dropLogo});
+        st.bd = null; ADM = null; await reloadCatalog(); setTitle();
+        toast('Сохранено — клиенты увидят новое оформление'); goBack();
+      } catch(e){ toast(e.message); }
+    });
+  },
+  alevels(){
+    if (!ADM){ loading(); loadAdm().then(() => go('alevels', false)).catch(e => toast(e.message)); return; }
+    app.innerHTML = `<div class="screen"><h2>🏷 Уровни мастеров</h2>
+      <p class="note2" style="margin-top:-6px">Сверху — самый высокий. От уровня зависит цена: у каждой услуги своя цена на каждый уровень.</p>
+      <div class="list" style="margin-top:10px">${ADM.levels.map((l, i) => `<div class="row" data-el="${l.id}"><div class="ph" style="background:var(--card2)">${esc(l.icon)}</div>
+        <div class="info"><b>${esc(l.name)}</b><span>${l.masters ? l.masters + ' ' + plural(l.masters,'мастер','мастера','мастеров') : 'мастеров нет'}</span></div><div class="price">›</div></div>`).join('')}</div>
+      ${ADM.levels.length < 6 ? '<button class="adminbtn" id="addl">＋ Добавить уровень</button>' : '<p class="note2">Больше 6 уровней не бывает.</p>'}</div>`;
+    app.querySelectorAll('[data-el]').forEach(b => b.onclick = () => { st.el = b.dataset.el; go('alevelEdit'); });
+    if ($('#addl')) $('#addl').onclick = () => { st.el = null; go('alevelEdit'); };
+  },
+  alevelEdit(){
+    const ICONS = ['👑','⭐','✂️','💈','🌱','🎓','💅','✨','🔧','🔥','💎','🏆'];
+    const all = ADM.levels, i = all.findIndex(x => x.id === st.el), l = all[i] || {name:'', icon:'✂️', masters:0};
+    if (st.elIconFor !== (st.el || 'new')){ st.elIcon = l.icon; st.elIconFor = st.el || 'new'; }
+    app.innerHTML = `<div class="screen"><h2>${st.el ? 'Уровень' : 'Новый уровень'}</h2>
+      <label class="inp">Название — так его увидят клиенты<input id="ln" value="${esc(l.name)}" maxlength="24" placeholder="например, арт-директор"></label>
+      <label class="inp">Значок</label>
+      <div class="icons">${ICONS.map(c => `<div data-ic="${c}" class="${st.elIcon===c?'on':''}">${c}</div>`).join('')}</div>
+      ${st.el ? `<div class="btn2" style="margin-top:6px">${i > 0 ? '<button class="adminbtn" data-mv="-1">↑ Выше</button>' : ''}${i < all.length - 1 ? '<button class="adminbtn" data-mv="1">↓ Ниже</button>' : ''}</div>
+        <button class="adminbtn red" id="ldel">Удалить уровень</button>
+        ${l.masters ? `<p class="note2">На этом уровне ${l.masters} ${plural(l.masters,'мастер','мастера','мастеров')} — чтобы удалить уровень, сначала переведите их на другой.</p>` : ''}`
+        : '<p class="note2">Цены нового уровня сначала будут как у самого нижнего — поправьте их в «Услугах и ценах».</p>'}</div>`;
+    app.querySelectorAll('[data-ic]').forEach(b => b.onclick = () => { st.elIcon = b.dataset.ic; app.querySelectorAll('[data-ic]').forEach(x => x.classList.toggle('on', x === b)); });
+    const after = async msg => { await loadAdm(); await reloadCatalog(); st.elIconFor = null; toast(msg); };
+    app.querySelectorAll('[data-mv]').forEach(b => b.onclick = async () => {
+      try { await post('/api/admin/level/move', {id: st.el, dir: +b.dataset.mv}); await after('Порядок изменён'); go('alevelEdit', false); } catch(e){ toast(e.message); }
+    });
+    if ($('#ldel')) $('#ldel').onclick = async () => {
+      if (!await ask(`Удалить уровень «${l.name}»?`, 'Удалить', true)) return;
+      try { await post('/api/admin/level/delete', {id: st.el}); await after('Уровень удалён'); goBack(); } catch(e){ toast(e.message); }
+    };
+    setBottom('Сохранить', true, async () => {
+      try { await post('/api/admin/level', {id: st.el, name: $('#ln').value, icon: st.elIcon}); await after('Сохранено'); goBack(); } catch(e){ toast(e.message); }
     });
   },
   aservices(){
@@ -618,7 +1286,7 @@ const SCREENS = {
     app.innerHTML = `<div class="screen"><h2>💈 Услуги и цены</h2>
       <p class="note2">Цена — для обычного барбера. Остальным считается сама: 🌱 ×0,65 · ⭐ ×1,2 · 👑 ×1,4.</p>
       ${ADM.cats.map(c => { const list = ADM.services.filter(x => x.cat === c.id); return list.length ? `<h2 style="font-size:15px">${c.icon} ${esc(c.name)}</h2><div class="list">
-        ${list.map(x => `<div class="row" data-es="${x.id}"><div class="info"><b>${esc(x.name)}${x.active?'':' · скрыта'}</b><span>≈ ${x.min} мин</span></div><div class="price">${x.base} ₽</div></div>`).join('')}</div>` : ''; }).join('')}
+        ${list.map(x => `<div class="row" data-es="${x.id}"><div class="info"><b>${esc(x.name)}${x.active?'':' · скрыта'}</b><span>≈ ${x.min} мин</span></div><div class="price">${x.prices ? (x.prices.junior === x.prices.top ? x.prices.mid : Math.min(...Object.values(x.prices)) + '–' + Math.max(...Object.values(x.prices))) : x.base} ₽</div></div>`).join('')}</div>` : ''; }).join('')}
       <button class="adminbtn" id="adds">＋ Добавить услугу</button></div>`;
     app.querySelectorAll('[data-es]').forEach(b => b.onclick = () => { st.es = b.dataset.es; go('aserviceEdit'); });
     $('#adds').onclick = () => { st.es = null; go('aserviceEdit'); };
@@ -628,14 +1296,24 @@ const SCREENS = {
     app.innerHTML = `<div class="screen"><h2>${st.es ? 'Услуга' : 'Новая услуга'}</h2>
       <label class="inp">Название<input id="sn" value="${esc(x.name)}" maxlength="60"></label>
       <label class="inp">Раздел<select id="sc">${ADM.cats.map(c => `<option value="${c.id}" ${c.id===x.cat?'selected':''}>${c.icon} ${esc(c.name)}</option>`).join('')}</select></label>
-      <label class="inp">Цена у барбера, ₽<input id="sb" type="number" inputmode="numeric" value="${x.base}"></label>
+      <label class="inp">Цена по уровню мастера, ₽</label>
+      <div class="lvlprices">${LVL_ORDER.map(l => `<label class="inp">${LEVELS[l].icon} ${esc(LEVELS[l].name)}<input data-pl="${l}" type="number" inputmode="numeric" value="${x.prices ? (x.prices[l] ?? x.base) : hint(x.base, l)}"></label>`).join('')}</div>
       <label class="inp">Длительность, минут<input id="sm" type="number" inputmode="numeric" value="${x.min}"></label>
-      <p class="note2" id="sp"></p>
-      <label class="check"><input type="checkbox" id="sa" ${x.active?'checked':''}> Показывать клиентам</label></div>`;
-    const upd = () => { const b = +$('#sb').value || 0; $('#sp').textContent = 'Цены: ' + ['junior','mid','senior','top'].map(l => LEVELS[l].icon + ' ' + Math.round(b*LEVELS[l].k/50)*50).join(' · ') + ' ₽'; };
-    $('#sb').oninput = upd; upd();
+      <p class="note2">Цены у каждого уровня свои — впишите, сколько это стоит у вас.</p>
+      <label class="check"><input type="checkbox" id="sa" ${x.active?'checked':''}> Показывать клиентам</label>
+      <label class="inp">Фото услуги — клиенты видят его в карточке</label>
+      ${st.es ? `<div class="phedit">${x.img ? `<div class="pic" style="background-image:url('${x.img}')"></div>` : `<div class="pic">фото пока нет</div>`}</div>
+        <div class="btn2"><button class="adminbtn" id="sph">📷 ${x.img ? 'Заменить' : 'Добавить фото'}</button>${x.img ? '<button class="adminbtn red" id="sphd">Убрать</button>' : ''}</div>`
+        : '<p class="note2">Фото можно добавить после сохранения услуги.</p>'}</div>`;
+    if ($('#sph')) $('#sph').onclick = async () => {
+      try { if (await uploadPhoto('service', st.es)){ await loadAdm(); await reloadCatalog(); toast('Фото сохранено'); go('aserviceEdit', false); } } catch(e){ toast(e.message); }
+    };
+    if ($('#sphd')) $('#sphd').onclick = async () => {
+      try { await post('/api/admin/photo/delete', {service: st.es}); await loadAdm(); await reloadCatalog(); toast('Фото убрано'); go('aserviceEdit', false); } catch(e){ toast(e.message); }
+    };
     setBottom('Сохранить', true, async () => {
-      try { await post('/api/admin/service', {id: st.es, name: $('#sn').value, cat: $('#sc').value, base: +$('#sb').value, min: +$('#sm').value, active: $('#sa').checked});
+      const prices = {}; app.querySelectorAll('[data-pl]').forEach(i => prices[i.dataset.pl] = +i.value || 0);
+      try { await post('/api/admin/service', {id: st.es, name: $('#sn').value, cat: $('#sc').value, prices, min: +$('#sm').value, active: $('#sa').checked});
         await loadAdm(); await reloadCatalog(); toast('Сохранено'); goBack(); } catch(e){ toast(e.message); }
     });
   },
@@ -667,7 +1345,7 @@ const SCREENS = {
   aphone(){
     const m = master(st.pm) || MASTERS[0], s = service(st.ps) || SERVICES[0];
     st.pm = m.id; st.ps = s.id;
-    const key = m.id + '|' + s.id;
+    const key = avKey(m, s);
     if (!AV[key]){ loading('Смотрю свободное время…'); api(`/api/availability?master=${m.id}&service=${s.id}`).then(j => { AV[key] = j.days; go('aphone', false); }).catch(e => toast(e.message)); return; }
     const ds = days(); if (st.pday == null) st.pday = 0;
     const sl = slots(m, ds[st.pday], s);
@@ -690,6 +1368,84 @@ const SCREENS = {
       } catch(e){ toast(e.message); }
     });
   },
+
+  // ---------- кабинет владельца сервиса ----------
+  cab(){
+    if (!st.cab){ loading(); api('/api/cabinet').then(j => { st.cab = j; go('cab', false); }).catch(e => toast(e.message)); return; }
+    const c = st.cab, MONTHS = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+    const icon = {soon:'💳', late:'⛔', off:'⏸', owner:'🔗'}, btn = {soon:'Напомнить', late:'Напомнить', off:'Открыть', owner:'Ссылка'};
+    app.innerHTML = `<div class="screen"><h2>💼 Кабинет</h2><p class="note2" style="margin-top:-6px">${MONTHS[new Date().getMonth()]}</p>
+      <div class="money"><small>Абонплата в месяц</small><div class="big">${c.income.toLocaleString('ru-RU')} ₽</div>
+        <div class="stats"><div><b>${c.count}</b>${plural(c.count,'салон','салона','салонов')}</div><div><b>${c.bookings30}</b>записей за месяц</div></div></div>
+      ${c.attention.length ? `<h2>Требуют внимания</h2>${c.attention.map((a,i) => `<div class="alert ${a.kind==='late'||a.kind==='off'?'r':''}"><i>${icon[a.kind]}</i>
+        <div><b>${esc(a.title)}</b><span>${esc(a.text)}</span></div><button data-al="${i}">${btn[a.kind]}</button></div>`).join('')}` : ''}
+      <h2>Все салоны</h2>
+      ${c.shops.length ? c.shops.map(s => {
+        const chip = !s.active ? '<span class="chip bad">выключен</span>' : s.daysLeft != null && s.daysLeft < 0 ? '<span class="chip bad">не оплачен</span>'
+          : s.daysLeft != null && s.daysLeft <= 3 ? `<span class="chip warn">💳 через ${s.daysLeft} ${plural(s.daysLeft,'день','дня','дней')}</span>` : '<span class="chip ok">работает</span>';
+        return `<div class="scard ${s.active?'':'off'}" data-sh="${s.id}"><div class="top"><div class="sava" style="background:linear-gradient(135deg,${['#b5772a','#2f7fb5','#b83a5a','#2f9a66','#7a5c3a'][s.id % 5]},#111)">${esc(s.name.replace(/^[^A-Za-zА-Яа-яЁё0-9]+/,'')[0] || '?')}</div>
+          <div><b>${esc(s.name)}</b><span>${esc(s.kindName)} · ${s.masters} ${plural(s.masters,'мастер','мастера','мастеров')}</span></div>${chip}</div>
+          <div class="nums"><div><small>Записей за месяц</small><b>${s.bookings30}</b></div><div><small>Оплачено до</small><b>${s.paidUntil ? fmtDay(fromIso(s.paidUntil)).split(', ')[1] : '—'}</b></div></div></div>`;
+      }).join('') : '<div class="empty">Салонов пока нет. Нажмите «Новый салон» внизу.</div>'}</div>`;
+    app.querySelectorAll('[data-sh]').forEach(b => b.onclick = () => { st.cs = +b.dataset.sh; go('cabShop'); });
+    app.querySelectorAll('[data-al]').forEach(b => b.onclick = async () => {
+      const a = c.attention[+b.dataset.al];
+      if (a.kind === 'soon' || a.kind === 'late'){
+        try { await post('/api/cabinet/shop/remind', {id: a.id}); toast('Напоминание отправлено хозяину салона'); } catch(e){ toast(e.message); }
+      } else { st.cs = a.id; go('cabShop'); }
+    });
+    setBottom('＋ Новый салон', true, () => go('cabNew'));
+  },
+  cabShop(){
+    if (!st.cab){ loading(); api('/api/cabinet').then(j => { st.cab = j; go('cabShop', false); }).catch(e => toast(e.message)); return; }
+    const s = st.cab.shops.find(x => x.id === st.cs);
+    if (!s){ go('cab', false); return; }
+    const refresh = async msg => { st.cab = null; if (msg) toast(msg); st.cab = await api('/api/cabinet'); go('cabShop', false); };
+    app.innerHTML = `<div class="screen"><h2>${esc(s.name)}</h2>
+      <p class="note2" style="margin-top:-6px">${esc(s.kindName)} · бот ${s.bot ? '@' + esc(s.bot) : 'ещё не на связи'}</p>
+      <div class="nums"><div><small>Записей за месяц</small><b>${s.bookings30}</b></div><div><small>Мастеров</small><b>${s.masters}</b></div></div>
+      <label class="inp">Название<input id="cn" value="${esc(s.name)}" maxlength="60"></label>
+      <label class="inp">Абонплата, ₽ в месяц<input id="cf" type="number" inputmode="numeric" value="${s.fee}"></label>
+      <label class="inp">Оплачено до<input id="cp" type="date" value="${s.paidUntil || ''}"></label>
+      <button class="adminbtn" id="cpaid">💳 Заплатил — продлить на месяц</button>
+      <h2>Ссылки</h2>
+      <label class="inp">Мини-приложение — вставить в настройках бота на business.max.ru<input id="lapp" value="${esc(s.links.app)}" readonly></label>
+      <button class="adminbtn" data-copy="lapp">📋 Скопировать</button>
+      ${s.ownerLinked ? `<p class="note2">✓ Хозяин салона подключён — у него в приложении есть «Админка».</p>` : ''}
+      ${s.links.owner ? `<label class="inp">${s.ownerLinked ? 'Новая ссылка хозяину (прежний потеряет доступ, когда новый нажмёт)' : 'Ссылка для хозяина салона — он нажмёт и станет хозяином'}<input id="lown" value="${esc(s.links.owner)}" readonly></label>
+        <button class="adminbtn" data-copy="lown">📋 Скопировать</button>`
+        : s.ownerLinked ? '<button class="adminbtn" id="cnewown">Сменить хозяина (новая ссылка)</button>' : '<p class="note2">Ссылка для хозяина появится, когда бот выйдет на связь.</p>'}
+      <h2>Управление</h2>
+      ${s.ownerLinked ? '<button class="adminbtn" id="crem">📩 Напомнить хозяину об оплате</button>' : ''}
+      <button class="adminbtn ${s.active ? 'red' : ''}" id="ctog">${s.active ? '⏸ Выключить салон' : '▶️ Включить салон'}</button>
+      <p class="note2">Выключенный салон не принимает онлайн-записи: бот отвечает, что запись временно не работает. Данные не удаляются.</p></div>`;
+    app.querySelectorAll('[data-copy]').forEach(b => b.onclick = () => copyText($('#' + b.dataset.copy).value));
+    const save = extra => post('/api/cabinet/shop/save', {id: s.id, name: $('#cn').value, fee: +$('#cf').value || 0, paidUntil: $('#cp').value || null, active: s.active, ...extra});
+    $('#cpaid').onclick = async () => { try { const r = await post('/api/cabinet/shop/paid', {id: s.id}); await refresh(`Оплачено до ${fmtDay(fromIso(r.paidUntil || s.paidUntil))}`); } catch(e){ toast(e.message); } };
+    $('#ctog').onclick = async () => {
+      if (s.active && !await ask(`Выключить ${s.name}? Клиенты не смогут записаться, пока не включите.`, 'Выключить', true)) return;
+      try { await save({active: !s.active}); await refresh(s.active ? 'Салон выключен' : 'Салон включён'); } catch(e){ toast(e.message); }
+    };
+    if ($('#crem')) $('#crem').onclick = async () => { try { await post('/api/cabinet/shop/remind', {id: s.id}); toast('Напоминание отправлено'); } catch(e){ toast(e.message); } };
+    if ($('#cnewown')) $('#cnewown').onclick = async () => { try { await post('/api/cabinet/shop/owner-invite', {id: s.id}); await refresh('Новая ссылка готова'); } catch(e){ toast(e.message); } };
+    setBottom('Сохранить', true, async () => { try { await save({}); await refresh('Сохранено'); } catch(e){ toast(e.message); } });
+  },
+  cabNew(){
+    app.innerHTML = `<div class="screen"><h2>＋ Новый салон</h2>
+      <ol class="steps"><li>Хозяин салона входит на business.max.ru (его ООО, ИП или самозанятость) и создаёт бота.</li>
+        <li>В настройках бота копирует ключ (токен) и передаёт вам.</li><li>Вставьте ключ сюда — остальное программа сделает сама.</li></ol>
+      <label class="inp">Название салона<input id="nn" maxlength="60" placeholder="например, Барбершоп «Борода»"></label>
+      <label class="inp">Вид бизнеса<select id="nk"><option value="barber">Барбершоп</option><option value="nails">Маникюр</option><option value="beauty">Салон красоты</option><option value="auto">Автосервис</option><option value="other">Другое</option></select></label>
+      <label class="inp">Ключ бота (токен)<input id="nt" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="вставьте ключ целиком"></label>
+      <label class="inp">Абонплата, ₽ в месяц<input id="nf" type="number" inputmode="numeric" placeholder="можно позже"></label>
+      <p class="note2">Первые 2 недели — бесплатно (срок оплаты можно поменять в карточке салона). Ключ — как пароль: никому не пересылайте.</p></div>`;
+    setBottom('Подключить салон', true, async () => {
+      try { toast('Проверяю ключ у MAX…');
+        const r = await post('/api/cabinet/shop/new', {name: $('#nn').value, kind: $('#nk').value, token: $('#nt').value.trim(), fee: +$('#nf').value || 0});
+        st.cab = await api('/api/cabinet'); st.cs = r.id; hist = ['home','cab']; toast('Салон подключён — отправьте хозяину ссылку'); go('cabShop');
+      } catch(e){ toast(e.message); }
+    });
+  },
   mine(){
     if (ONLINE && !st.mineLoaded){
       loading(); loadMine().then(() => { st.mineLoaded = true; go('mine', false); }).catch(e => toast(e.message));
@@ -699,10 +1455,12 @@ const SCREENS = {
     app.innerHTML = `<div class="screen"><h2>Мои записи</h2>${bookings.length ? bookings.map((b,i)=>{
       const m = master(b.master), s = service(b.service), d = bDate(b);
       return `<div class="bookcard"><b>${fmtDay(d)}, ${b.time}</b><span>${s.name} · ${m.name} · ${price(s,m)} ₽</span>
-        <div class="acts"><button data-mv="${i}">Перенести</button><button class="red" data-cn="${i}">Отменить</button></div></div>`;
+        ${b.canChange === false ? `<p class="note2">До записи меньше 2 часов — перенести или отменить можно только через салон.</p>`
+          : `<div class="acts"><button data-mv="${i}">Перенести</button><button class="red" data-cn="${i}">Отменить</button></div>`}</div>`;
     }).join('') : `<div class="empty">Пока записей нет.</div>`}</div>`;
     app.querySelectorAll('[data-cn]').forEach(b => b.onclick = async () => {
-      const x = bookings[+b.dataset.cn];
+      const x = bookings[+b.dataset.cn], xm = master(x.master);
+      if (!await ask(`Отменить запись: ${fmtDay(bDate(x))}, ${x.time}${xm ? ', мастер ' + xm.name : ''}?`, 'Отменить запись', true)) return;
       if (ONLINE){ try { await api(`/api/bookings/${x.id}/cancel`, {method:'POST'}); resetAvail(); } catch(e){ toast(e.message); return; } }
       bookings.splice(+b.dataset.cn,1); toast('Запись отменена — окно освободилось для других'); st.mineLoaded = true; go('mine', false);
     });
