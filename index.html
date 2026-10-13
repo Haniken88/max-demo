@@ -75,12 +75,6 @@ h2{font-size:18px;margin:18px 0 10px}
 .lvl.mid{background:#1d2c38;color:#8fd0ff}
 .lvl.junior{background:#1c3226;color:#8fe0b2}
 .lvl.l5{background:#33221c;color:#ffb38f}.lvl.l6{background:#2c2c2c;color:#d0d0d0}
-.mchips2{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 12px;padding:0 16px 2px;scrollbar-width:none}.mchips2::-webkit-scrollbar{display:none}
-.mchips2 .mc{flex:none;display:flex;gap:7px;align-items:center;padding:6px 12px 6px 6px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:14px;cursor:pointer}
-.mchips2 .mc.all{padding-left:12px}.mchips2 .mc i{font-style:normal;color:var(--muted);font-size:12px}
-.mchips2 .mc.on{border-color:var(--ink);background:var(--tint)}.mchips2 .mc.on i{color:var(--gold2)}
-.mchips2 .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:12px}
-.free{border:1px dashed var(--line);border-radius:12px;padding:8px 12px;margin-bottom:8px;color:var(--muted);font-size:13px}
 .icons{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:6px}
 .icons div{aspect-ratio:1;border-radius:12px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;font-size:22px;cursor:pointer}
 .icons div.on{border-color:var(--ink);background:var(--tint)}
@@ -137,7 +131,6 @@ label.inp select{display:block;width:100%;margin-top:6px;padding:12px;border-rad
 .brow .who span{display:block;font-size:12px;color:var(--muted)}
 .brow .x{border:0;background:transparent;color:var(--danger);font-size:18px;cursor:pointer;min-width:44px;min-height:44px;margin:-8px -8px -8px 0}
 .ok{color:#5fd39a;font-size:12px}
-.agrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 .wrow{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
 .wrow .wd{font-weight:800}
 .wrow .tms{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--muted)}
@@ -420,12 +413,62 @@ h2 .mon{font-size:13px;font-weight:700;color:var(--ink);margin-left:6px}
 .prev{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:6px;background:var(--bg);color:var(--text);padding:0 16px 14px}
 .prev .cta{pointer-events:none}
 .stys{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin-top:6px}
-.sty{text-align:left;color:var(--muted);background:none;border:0;padding:0;cursor:pointer}
+.sty{text-align:left;color:var(--muted);background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-start;align-self:start}
 .sty .fr{height:112px;border-radius:12px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg)}
 .sty .fr>div{position:absolute;left:0;top:0;width:358px;transform:scale(.47);transform-origin:0 0;pointer-events:none;padding:0 16px}
 .sty b{display:block;color:var(--text);font-size:14px;margin-top:7px;line-height:1.2}
 .sty>span{font-size:12px;line-height:1.3;display:block}
 .sty.on .fr{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+/* обзор дня в админке (вариант B, mockups/day-b.html): у каждого мастера своя карточка своего цвета */
+.dvsum{margin:10px 2px 12px;font-size:14px;color:var(--muted)}.dvsum b{color:var(--text)}
+.dvc{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 12px;padding:0 16px 2px;scrollbar-width:none}.dvc::-webkit-scrollbar{display:none}
+.dvc button{flex:none;height:44px;border-radius:999px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;gap:8px;
+  padding:0 14px 0 6px;font-size:15px;font-weight:600;cursor:pointer;color:var(--text)}
+.dvc button.all{padding-left:16px}.dvc em{font-style:normal;color:var(--muted);font-weight:500}
+.dvc button.on{background:var(--card2);border-color:var(--ink)}.dvc button.on em{color:var(--ink)}
+.dvdot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}
+.dvc button.away .dvdot{filter:grayscale(1) brightness(.7)}
+.dvleg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:-4px 2px 14px}
+.dvleg i{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.mcd{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:18px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.mcd-h{padding:14px 14px 12px;background:color-mix(in srgb,var(--m) 13%,var(--card));border-bottom:1px solid var(--line)}
+.mcd-r{display:flex;align-items:center;gap:12px}
+.mcd-a{width:46px;height:46px;border-radius:50%;background:var(--m);display:grid;place-items:center;font-weight:800;font-size:19px;flex:none}
+.mcd-n{flex:1;min-width:0}.mcd-n b{display:block;font-size:18px;font-weight:800;line-height:1.2}.mcd-n span{font-size:13px;color:var(--muted)}
+.mcd-t{font-size:15px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}.mcd-t span{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.dbar{position:relative;height:14px;margin:14px 0 4px;border-radius:5px;background:color-mix(in srgb,var(--m) 16%,#14110d);overflow:hidden}
+.dbar i{position:absolute;top:0;bottom:0}
+.dbar .bk{background:var(--m);border-radius:3px;box-shadow:inset -1px 0 0 rgba(0,0,0,.45)}
+.dbar .ln{background:repeating-linear-gradient(135deg,#8c8374 0 2px,transparent 2px 5px)}
+.dbar .out{background:#0f0d0a}
+.dticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.mcd-f{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.mcd-f .ld{white-space:nowrap;font-size:13.5px;color:var(--muted)}.mcd-f .ld b{color:var(--text)}
+.mact{white-space:nowrap;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;
+  padding:0 13px;font-size:14px;font-weight:600;cursor:pointer;color:var(--text)}
+.mact svg.i{width:18px;height:18px;color:var(--muted)}
+.mact.back{border-color:color-mix(in srgb,var(--ok) 45%,var(--line));color:var(--ok)}.mact.back svg.i{color:var(--ok)}
+.bl{padding:0 0 0 14px}
+.bk2{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.bl>:first-child{border-top:0}
+.bk2 .tm{width:58px;flex:none;font-size:20px;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums}
+.bk2 .tm span{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.bk2 .wh{flex:1;min-width:0;padding-top:1px}.bk2 .wh b{font-size:15px}.bk2 .wh .sv{display:block;font-size:13px;color:var(--muted);margin-top:1px}
+.mks{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.mk{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border-radius:7px;font-size:12px;font-weight:600}
+.mk svg.i{width:14px;height:14px;stroke-width:2}.mk.ok{background:rgba(143,208,162,.12);color:#8fd0a2}.mk.nomax{background:rgba(255,255,255,.06);color:var(--muted)}
+.tel{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:-6px 0 -10px;color:var(--ink);font-size:14px;font-weight:600;text-decoration:none}
+.tel svg.i{width:16px;height:16px}
+.bk2 .x2{width:44px;height:44px;margin:-4px 0;border-radius:12px;border:0;background:transparent;color:var(--danger);display:grid;place-items:center;cursor:pointer;flex:none}
+.bfree,.blunch{display:flex;align-items:center;gap:10px;min-height:44px;border-top:1px solid var(--line);padding-right:14px;font-size:14px;color:var(--muted)}
+.bfree{cursor:pointer}.bfree svg.i{width:18px;height:18px;color:var(--ink)}.bfree b{color:var(--text);font-weight:600}.bfree small,.blunch small{margin-left:auto;font-size:12px}
+.blunch svg.i{width:18px;height:18px}
+.bnone{padding:12px 14px 14px;color:var(--muted);font-size:14px}
+.mcd.away{background:color-mix(in srgb,var(--card) 70%,var(--bg));box-shadow:none}.mcd.away .mcd-h{background:transparent;border-bottom:0}
+.mcd.away .mcd-a{filter:grayscale(1) brightness(.62)}
+.tools{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:6px}
+.tools button{width:100%;display:flex;align-items:center;gap:12px;min-height:52px;padding:0 14px;border:0;border-top:1px solid var(--line);background:none;
+  color:var(--text);font-size:15px;font-weight:600;cursor:pointer;text-align:left}
+.tools button:first-child{border-top:0}.tools svg.i{color:var(--ink)}.tools .ch{margin-left:auto;color:var(--muted);width:18px;height:18px}
 html,body{touch-action:manipulation}   /* двойной тап не приближает страницу */
 .ask{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:60;padding:16px}
 .ask .box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
@@ -667,7 +710,13 @@ const ICON = {
   clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
   noon:'<path d="M3 17.5h18M7.5 17.5a4.5 4.5 0 0 1 9 0"/><path d="M12 6.5v3M6.3 9.8l1.6 1.6M17.7 9.8l-1.6 1.6"/>',
-  moon:'<path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/>'};
+  moon:'<path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.9-3.4 3.4-5 6.5-5s5.6 1.6 6.5 5M16 4.6a3.5 3.5 0 0 1 0 6.8M18 15.3c1.8.7 3 2.300 3.5 4.700"/>',
+  brush:'<path d="M14.5 4.5l5 5L10 19l-5.5.5L5 14z"/><path d="M12.5 6.5l5 5"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>', x:'<path d="M6 6l12 12M18 6 6 18"/>',
+  therm:'<path d="M10 14.5V5a2 2 0 0 1 4 0v9.5a4 4 0 1 1-4 0z"/><path d="M12 10v6"/>',
+  cup:'<path d="M4 9h12v4a6 6 0 0 1-12 0z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"/>'};
 const ic = (k, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 async function copyText(v){
   try { await navigator.clipboard.writeText(v); }
@@ -760,21 +809,58 @@ function slots(m, d, svc){
 
 const hm = m => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
 const toMinJs = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
-function dayRows(m, gaps){
-  const rows = m.bookings.map(b => ({at: toMinJs(b.time), html: `<div class="brow"><div class="tm">${b.time}</div>
-    <div class="who">${esc(b.name)} ${b.confirmed?'<span class="ok" style="display:inline">✓ придёт</span>':''}<span>${esc(b.serviceName)} · ${b.price} ₽${b.phone?' · <a href="tel:'+esc(b.phone)+'" style="color:var(--gold2)">'+esc(b.phone)+'</a>':''}${b.online?'':' · без MAX'}</span></div>
-    <button class="x" data-cx="${b.id}" title="Отменить">✕</button></div>`}));
-  if (gaps && m.hours){
-    const h = m.hours, busy = m.bookings.map(b => [toMinJs(b.time), toMinJs(b.time) + b.minutes]);
-    if (h.bs != null){ busy.push([h.bs, h.be]); rows.push({at: h.bs, html: `<div class="free">🍽 обед ${hm(h.bs)}–${hm(h.be)}</div>`}); }
-    busy.sort((x, y) => x[0] - y[0]);
-    let cur = h.start;
-    for (const [a, b] of [...busy, [h.end, h.end]]){
-      if (a - cur >= 30) rows.push({at: cur, html: `<div class="free">${hm(cur)}–${hm(a)} свободно</div>`});
-      cur = Math.max(cur, b);
-    }
+// обзор дня в админке (выбран вариант B, mockups/day-b.html): карточка на мастера, полоска дня, записи; у одного мастера — ещё свободное и обед
+const onColor = c => contrast('#ffffff', c) >= contrast('#1a140c', c) ? '#ffffff' : '#1a140c';
+const dur = n => n >= 60 ? `${Math.floor(n / 60)} ч${n % 60 ? ' ' + n % 60 + ' мин' : ''}` : `${n} мин`;
+function dayGaps(m){             // свободные промежутки ≥ 30 мин между записями и обедом
+  const h = m.hours; if (!h) return [];
+  const busy = m.bookings.map(b => [toMinJs(b.time), toMinJs(b.time) + b.minutes]);
+  if (h.bs != null) busy.push([h.bs, h.be]);
+  busy.sort((x, y) => x[0] - y[0]);
+  const out = []; let cur = h.start;
+  for (const [a, b] of [...busy, [h.end, h.end]]){ if (a - cur >= 30) out.push([cur, a]); cur = Math.max(cur, b); }
+  return out;
+}
+function dayBar(m){
+  const h = m.hours, A = Math.min(h.start, 600), B = Math.max(h.end, 1200), W = B - A, p = x => ((x - A) / W * 100).toFixed(2) + '%', w = n => (n / W * 100).toFixed(2) + '%';
+  let s = (h.start > A ? `<i class="out" style="left:0;width:${w(h.start - A)}"></i>` : '') + (h.end < B ? `<i class="out" style="left:${p(h.end)};right:0"></i>` : '');
+  if (h.bs != null) s += `<i class="ln" style="left:${p(h.bs)};width:${w(h.be - h.bs)}"></i>`;
+  m.bookings.forEach(b => s += `<i class="bk" style="left:${p(toMinJs(b.time))};width:${w(b.minutes)}"></i>`);
+  const ticks = []; for (let t = Math.ceil(A / 120) * 2; t * 60 <= B; t += 2) ticks.push(t);
+  return `<div class="dbar">${s}</div><div class="dticks">${ticks.map(t => `<span>${t}</span>`).join('')}</div>`;
+}
+function bookRow(b){
+  const end = toMinJs(b.time) + b.minutes;
+  return {at: toMinJs(b.time), html: `<div class="bk2"><div class="tm">${b.time}<span>до ${hm(end)}</span></div>
+    <div class="wh"><b>${esc(b.name)}</b><span class="sv">${esc(b.serviceName)} · ${b.price} ₽</span>
+      ${b.confirmed || !b.online ? `<div class="mks">${b.confirmed ? `<span class="mk ok">${ic('check')}придёт</span>` : ''}${b.online ? '' : '<span class="mk nomax">без MAX</span>'}</div>` : ''}
+      ${b.phone ? `<a class="tel" href="tel:${esc(b.phone)}">${ic('phone')}${esc(b.phone)}</a>` : ''}</div>
+    <button class="x2" data-cx="${b.id}" aria-label="Отменить запись ${b.time}">${ic('x')}</button></div>`};
+}
+function masterCard(m, one){
+  const lv = (master(m.id) || {}).lvl, L = LEVELS[lv], color = m.color || '#8a7a5a', st2 = m.status;
+  const head = `<div class="mcd-r"><div class="mcd-a" style="color:${onColor(color)}">${esc(initial(m.name))}</div>
+    <div class="mcd-n"><b>${esc(m.name)}</b>${L ? `<span>${L.icon} ${esc(L.name)}</span>` : ''}</div>`;
+  if (!m.hours) return `<div class="mcd away" style="--m:${esc(color)}"><div class="mcd-h">${head}
+    ${st2 === 'sick' ? `<button class="mact back" data-back="${m.id}">${ic('check')}Вышел</button>` : ''}</div>
+    <p class="note2" style="margin:-4px 0 0 58px">${st2 === 'sick' ? 'Не работает' + (m.note ? ' · ' + esc(m.note) : '') : 'Выходной'}</p></div></div>`;
+  const h = m.hours, gaps = dayGaps(m), free = gaps.reduce((n, [a, b]) => n + b - a, 0);
+  const rows = m.bookings.map(bookRow);
+  if (one){
+    gaps.forEach(([a, b]) => rows.push({at: a, html: `<div class="bfree" data-free="${m.id}|${hm(a)}|${b}">${ic('plus')}<span><b>${hm(a)}–${hm(b)}</b> свободно</span><small>${dur(b - a)}</small></div>`}));
+    if (h.bs != null) rows.push({at: h.bs, html: `<div class="blunch">${ic('cup')}<span>обед ${hm(h.bs)}–${hm(h.be)}</span></div>`});
   }
-  return rows.sort((x, y) => x.at - y.at).map(r => r.html).join('');
+  rows.sort((x, y) => x.at - y.at);
+  const n = m.bookings.length;
+  return `<div class="mcd" style="--m:${esc(color)}"><div class="mcd-h">${head}
+      <div class="mcd-t">${hm(h.start)}–${hm(h.end)}${h.bs != null ? `<span>обед ${hm(h.bs)}</span>` : ''}</div></div>
+    ${dayBar(m)}
+    <div class="mcd-f"><span class="ld"><b>${n} ${plural(n, 'запись', 'записи', 'записей')}</b> · свободно ${dur(free)}</span>
+      <button class="mact" data-sick="${m.id}">${ic('therm')}Заболел</button></div></div>
+    <div class="bl">${rows.map(r => r.html).join('') || '<div class="bnone">Записей нет</div>'}</div></div>`;
+}
+function phoneInput(el){
+  if (el) el.addEventListener('input', () => { if (/^9/.test(el.value)) el.value = '+7 ' + el.value; });
 }
 function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 2200); }
 function setBottom(label, enabled, fn, hint){
@@ -837,7 +923,7 @@ function quickHtml(s){
 }
 function mastersHtml(s){
   const L = m => LEVELS[m.lvl] || {icon:'', name:''};
-  const exp = m => m.exp ? `опыт ${esc(m.exp)}` : '';
+  const exp = m => m.exp ? `стаж ${esc(m.exp)}` : '';
   return `<div class="strip">${MASTERS.map(m => {
     const l = L(m), nm = esc(m.name), a = firstLetter(m.name);
     if (s === 'club') return `<div class="mm" data-m="${m.id}"><div class="medal"><b>${a}</b><i title="${esc(l.name)}">${l.icon}</i></div><div class="n">${nm}</div><div class="lv">${esc(l.name)}</div><div class="ex">${exp(m)}</div></div>`;
@@ -899,7 +985,7 @@ const SCREENS = {
   pickMaster(){
     const s = service(st.service);
     app.innerHTML = `<div class="screen"><h2>${s.name} — к кому?</h2><div class="list">
-      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${m.name} · ${m.exp}</b>${lvl(m)} <span>★ ${m.rate}</span></div><div class="price">${price(s,m)} ₽</div></div>`).join('')}
+      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${esc(m.name)}</b>${lvl(m)}${m.exp ? ` <span>стаж ${esc(m.exp)}</span>` : ''}</div><div class="price">${price(s,m)} ₽</div></div>`).join('')}
       <div class="row" data-m="any"><div class="ph" style="background:#26262e">🎲</div><div class="info"><b>Любой свободный</b><span>подберём ближайшее окно</span></div><div class="price">от ${minP(s)} ₽</div></div>
     </div></div>`;
     app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => {
@@ -909,7 +995,7 @@ const SCREENS = {
   },
   masters(){
     app.innerHTML = `<div class="screen"><h2>Наши мастера</h2><div class="list">
-      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${m.name} · ${m.exp}</b>${lvl(m)} <span>★ ${m.rate} · ${m.n} отзывов</span></div><div class="price">›</div></div>`).join('')}
+      ${MASTERS.map(m=>`<div class="row" data-m="${m.id}">${ava(m,true)}<div class="info"><b>${esc(m.name)}</b>${lvl(m)}${m.exp ? ` <span>стаж ${esc(m.exp)}</span>` : ''}</div><div class="price">›</div></div>`).join('')}
     </div><p class="demo">Цена у мастеров разная: топ-барбер дороже, начинающий дешевле.</p></div>`;
     app.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { st.master = b.dataset.m; go('masterPage'); });
   },
@@ -918,7 +1004,7 @@ const SCREENS = {
     const icons = ['💈','✂️','🧔','💇','🔥','⭐'];
     app.innerHTML = `<div class="screen" style="text-align:center">
       <div style="margin-top:18px">${ava(m)}</div><h2 style="margin:6px 0 4px">${m.name}</h2>${lvl(m)}
-      <div class="rate">Опыт ${m.exp} · ★ ${m.rate} · ${m.n} отзывов</div>
+      ${m.exp ? `<div class="rate">Стаж ${esc(m.exp)}</div>` : ''}
       ${m.photos && m.photos.length ? `<div class="gal">${m.photos.map(u => `<div class="ph" data-ph="${u}" style="background-image:url('${u}')"></div>`).join('')}</div>`
         : `<div class="gal demoonly">${icons.map((i,k)=>`<div style="background:linear-gradient(${k*60}deg,${m.color}55,#1a1a20)">${i}</div>`).join('')}</div>
       <p class="demo" style="margin-top:6px">Здесь будут фото работ мастера</p>`}
@@ -998,6 +1084,7 @@ const SCREENS = {
       <label class="check"><input type="checkbox" id="rem" checked> Напомнить за день и за 2 часа</label>
       <p class="demo">В настоящем приложении имя и телефон MAX подставит сам — с разрешения клиента.</p>
     </div>`;
+    phoneInput($('#ph'));
     setBottom('Записаться', true, async () => {
       const name = ($('#nm').value || 'Гость').trim();
       if (!ONLINE){ bookings.push({...st, name}); go('done'); return; }
@@ -1059,32 +1146,27 @@ const SCREENS = {
       return;
     }
     const dv = st.adayData;
-    const total = dv.masters.reduce((n, m) => n + m.bookings.length, 0);
+    const total = dv.masters.reduce((n, m) => n + m.bookings.length, 0), working = dv.masters.filter(m => m.hours).length;
     // мастер выбран раньше и есть в этот день — оставляем; иначе при многих мастерах первый, при 1–3 — все
     if (st.am !== 'all' && !dv.masters.some(m => m.id === st.am)) st.am = dv.masters.length > 3 ? dv.masters[0].id : 'all';
+    const T = [['aphone','phone','Запись по телефону'], ['aweek','cal','График и отпуска'], ['amasters','users','Мастера'], ['aservices','tag','Услуги и цены'], ['abrand','brush','Оформление']];
     app.innerHTML = `<div class="screen">
-      <h2>⚙️ Админка</h2>
+      <h2>Админка</h2>
       <div class="days">${ds.map((x,i)=>`<div class="day ${i===st.aday?'on':''}" data-ad="${i}"><small>${i===0?'сег.':i===1?'завтра':WD[x.getDay()]}</small><b>${x.getDate()}</b></div>`).join('')}</div>
-      <p class="note2">${fmtDay(d)} · записей: ${total}</p>
-      <div class="mchips2"><div class="mc all ${st.am==='all'?'on':''}" data-am="all">Все <i>${total}</i></div>${dv.masters.map(m => `<div class="mc ${st.am===m.id?'on':''}" data-am="${m.id}"><span class="av" style="background:${m.color}">${esc(m.name[0])}</span>${esc(m.name)} <i>${m.status==='sick'?'🤒':m.status==='off'?'—':m.bookings.length}</i></div>`).join('')}</div>
-      ${dv.masters.filter(m => st.am === 'all' || m.id === st.am).map(m => `
-        <div class="mhead"><b>${esc(m.name)}</b>
-          <span class="chipst ${m.status==='sick'?'sick':m.status==='off'?'off':''}">${m.status==='sick'?'🤒 не работает'+(m.note?' · '+esc(m.note):''):m.status==='off'?'выходной':m.status}</span>
-          ${m.status==='sick' ? `<button class="sickbtn" data-back="${m.id}">✅ Вышел</button>` : m.status!=='off'?`<button class="sickbtn" data-sick="${m.id}">🤒 Заболел</button>`:''}</div>
-        ${dayRows(m, st.am !== 'all') || `<div class="note2" style="margin:0 0 6px">Записей нет</div>`}`).join('')}
-      <div class="agrid">
-        <button class="qbtn" data-go="aphone"><i>☎️</i>Запись по телефону</button>
-        <button class="qbtn" data-go="aweek"><i>🗓</i>График и отпуска</button>
-        <button class="qbtn" data-go="amasters"><i>👥</i>Мастера</button>
-        <button class="qbtn" data-go="aservices"><i>💈</i>Услуги и цены</button>
-        <button class="qbtn wide2" data-go="abrand" style="grid-column:1/-1"><i>🎨</i>Оформление — название, логотип, вывеска, цвет</button>
-      </div>
+      <p class="dvsum">${fmtDay(d)} · <b>${total} ${plural(total,'запись','записи','записей')}</b> · работают ${working} из ${dv.masters.length}</p>
+      <div class="dvc"><button class="all ${st.am==='all'?'on':''}" data-am="all">Все <em>${total}</em></button>${dv.masters.map(m => `<button class="${st.am===m.id?'on':''} ${m.hours?'':'away'}" data-am="${m.id}"><span class="dvdot" style="background:${esc(m.color)};color:${onColor(m.color || '#8a7a5a')}">${esc(initial(m.name))}</span>${esc(m.name)} <em>${m.hours ? m.bookings.length : '—'}</em></button>`).join('')}</div>
+      ${st.am === 'all' ? '<div class="dvleg"><span><i style="background:var(--gold)"></i>запись</span><span><i style="background:repeating-linear-gradient(135deg,#8c8374 0 2px,transparent 2px 5px)"></i>обед</span><span><i style="background:var(--card2)"></i>свободно</span><span><i style="background:#0f0d0a;box-shadow:inset 0 0 0 1px var(--line)"></i>не работает</span></div>' : ''}
+      ${dv.masters.filter(m => st.am === 'all' || m.id === st.am).map(m => masterCard(m, st.am !== 'all')).join('')}
+      <div class="tools">${T.map(([g, i, t]) => `<button data-go="${g}">${ic(i)}${t}${ic('chev', 'ch')}</button>`).join('')}</div>
       <p class="demo">Это видит только хозяин. «Клиент (демо)» — выдуманные записи для вида.</p>
     </div>`;
     app.querySelectorAll('[data-ad]').forEach(b => b.onclick = () => { st.aday = +b.dataset.ad; go('admin', false); });
     app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
     app.querySelectorAll('[data-am]').forEach(b => b.onclick = () => { st.am = b.dataset.am; go('admin', false); });
     app.querySelectorAll('[data-sick]').forEach(b => b.onclick = () => { st.amaster = b.dataset.sick; go('asick'); });
+    app.querySelectorAll('[data-free]').forEach(b => b.onclick = () => {   // «+ свободно» — записать клиента по телефону на это время
+      const [mid, t, end] = b.dataset.free.split('|'); st.pm = mid; st.pday = st.aday; st.pt = t; st.ptEnd = +end; st.ps = null; go('aphone');
+    });
     app.querySelectorAll('[data-back]').forEach(b => b.onclick = async () => {
       try { const r = await post('/api/admin/back', {master: b.dataset.back, from: iso(d)});
         resetAvail(); st.adayData = null; ADM = null; await reloadCatalog();
@@ -1349,6 +1431,9 @@ const SCREENS = {
     if (!AV[key]){ loading('Смотрю свободное время…'); api(`/api/availability?master=${m.id}&service=${s.id}`).then(j => { AV[key] = j.days; go('aphone', false); }).catch(e => toast(e.message)); return; }
     const ds = days(); if (st.pday == null) st.pday = 0;
     const sl = slots(m, ds[st.pday], s);
+    // «+ свободно» из обзора дня: подставляем время только внутри этого промежутка; услуга не влезает — не подставляем
+    if (st.pt && !sl.includes(st.pt)) st.pt = st.ptEnd ? sl.find(t => toMinJs(t) >= toMinJs(st.pt) && toMinJs(t) < st.ptEnd) || null : null;
+    st.ptEnd = null;
     app.innerHTML = `<div class="screen"><h2>☎️ Запись по телефону</h2>
       <div class="mchips">${MASTERS.map(x => `<div data-pm="${x.id}" class="${x.id===m.id?'on':''}">${esc(x.name)}</div>`).join('')}</div>
       <label class="inp">Услуга<select id="ps">${SERVICES.map(x => `<option value="${x.id}" ${x.id===s.id?'selected':''}>${esc(x.name)} — ${price(x,m)} ₽</option>`).join('')}</select></label>
@@ -1356,6 +1441,7 @@ const SCREENS = {
       ${sl.length ? `<div class="slots">${sl.map(t => `<div class="slot ${st.pt===t?'on':''}" data-pt="${t}">${t}</div>`).join('')}</div>` : '<div class="empty">В этот день свободного времени нет</div>'}
       <label class="inp">Имя клиента<input id="pn" value="${esc(st.pname||'')}" maxlength="40"></label>
       <label class="inp">Телефон<input id="pp" value="${esc(st.pphone||'')}" inputmode="tel" placeholder="+7"></label></div>`;
+    phoneInput($('#pp'));
     const keep = () => { st.pname = $('#pn').value; st.pphone = $('#pp').value; };
     app.querySelectorAll('[data-pm]').forEach(b => b.onclick = () => { keep(); st.pm = b.dataset.pm; st.pt = null; go('aphone', false); });
     $('#ps').onchange = () => { keep(); st.ps = $('#ps').value; st.pt = null; go('aphone', false); };
